@@ -1,8 +1,7 @@
 package im.bernier.petfinder.presenter;
 
-import android.util.Log;
-
 import im.bernier.petfinder.datasource.Repository;
+import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.model.SearchResult;
 import im.bernier.petfinder.view.ResultView;
 import retrofit2.Call;
@@ -30,6 +29,10 @@ public class ResultPresenter implements Presenter {
     @Override
     public void onDetach() {
 
+    }
+
+    public void onPetClick(Pet pet) {
+        Timber.d(pet.getName());
     }
 
     private void findPet(String location) {

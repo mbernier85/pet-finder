@@ -1,7 +1,7 @@
 package im.bernier.petfinder;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -17,7 +17,7 @@ import im.bernier.petfinder.view.ResultView;
 public class ResultActivity extends AppCompatActivity implements ResultView{
 
     @BindView(R.id.result_recycler_view)
-    protected RecyclerView recyclerView;
+    RecyclerView recyclerView;
 
     private ResultPresenter presenter;
     private PetAdapter petAdapter;
@@ -35,6 +35,12 @@ public class ResultActivity extends AppCompatActivity implements ResultView{
         recyclerView.setHasFixedSize(true);
         petAdapter = new PetAdapter();
         recyclerView.setAdapter(petAdapter);
+        petAdapter.setPetClick(new PetAdapter.PetClick() {
+            @Override
+            public void onClick(Pet pet) {
+                presenter.onPetClick(pet);
+            }
+        });
     }
 
     @Override

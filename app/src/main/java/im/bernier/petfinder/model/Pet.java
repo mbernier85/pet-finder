@@ -22,6 +22,9 @@ public class Pet {
     @Element(required = false)
     private String description;
 
+    @Element(required = false)
+    private Media media;
+
     public String getId() {
         return id;
     }
@@ -52,6 +55,14 @@ public class Pet {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Media getMedia() {
+        return media;
+    }
+
+    public void setMedia(Media media) {
+        this.media = media;
     }
 
     @Override

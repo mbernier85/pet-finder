@@ -4,7 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -20,10 +23,28 @@ import im.bernier.petfinder.model.Pet;
 public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
 
     private ArrayList<Pet> pets = new ArrayList<>();
+    private PetClick petClick;
+
+    public interface PetClick {
+        void onClick(Pet pet);
+    }
+
+    public void setPetClick(PetClick petClick) {
+        this.petClick = petClick;
+    }
 
     @Override
     public PetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new PetViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pet, parent, false));
+        final PetViewHolder holder = new PetViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pet, parent, false));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (petClick != null) {
+                    petClick.onClick(holder.pet);
+                }
+            }
+        });
+        return holder;
     }
 
     @Override
@@ -44,15 +65,26 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
     static class PetViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_pet_name)
-        protected TextView petName;
+        TextView petName;
+        @BindView(R.id.item_pet_picture)
+        ImageView imageView;
 
-        public PetViewHolder(View itemView) {
+        private Pet pet;
+
+        PetViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(Pet pet) {
+        void bind(Pet pet) {
+            this.pet = pet;
             petName.setText(pet.getName());
+            String url = pet.getMedia().getThumbnail();
+            if (url != null) {
+                Picasso.with(itemView.getContext()).load(url).fit().centerCrop().into(imageView);
+            } else {
+                // FIXME: 2016-07-09 set default picture
+            }
         }
     }
 }
