@@ -68,6 +68,8 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
         TextView petName;
         @BindView(R.id.item_pet_picture)
         ImageView imageView;
+        @BindView(R.id.item_pet_breed)
+        TextView breed;
 
         private Pet pet;
 
@@ -79,11 +81,12 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
         void bind(Pet pet) {
             this.pet = pet;
             petName.setText(pet.getName());
+            breed.setText(pet.getBreed());
             String url = pet.getMedia().getThumbnail();
             if (url != null) {
                 Picasso.with(itemView.getContext()).load(url).fit().centerCrop().into(imageView);
             } else {
-                // FIXME: 2016-07-09 set default picture
+                imageView.setImageResource(R.drawable.ic_broken_image_black_24dp);
             }
         }
     }

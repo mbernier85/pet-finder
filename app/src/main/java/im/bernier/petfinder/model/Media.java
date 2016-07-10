@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @Root(name = "media", strict = false)
 public class Media {
 
-    @ElementList
+    @ElementList(required = false)
     private ArrayList<Photo> photos;
 
     public ArrayList<Photo> getPhotos() {
@@ -24,9 +24,11 @@ public class Media {
     }
 
     public String getThumbnail() {
-        for (Photo photo : photos) {
-            if (photo.getSize().equalsIgnoreCase("pn")) {
-                return photo.getValue();
+        if (photos != null) {
+            for (Photo photo : photos) {
+                if (photo.getSize().equalsIgnoreCase("pn")) {
+                    return photo.getValue();
+                }
             }
         }
         return null;
