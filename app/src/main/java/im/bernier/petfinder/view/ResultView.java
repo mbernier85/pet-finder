@@ -10,4 +10,5 @@ import im.bernier.petfinder.model.Pet;
 
 public interface ResultView {
     void updateResults(ArrayList<Pet> pets);
+    void openPet(Pet pet);
 }

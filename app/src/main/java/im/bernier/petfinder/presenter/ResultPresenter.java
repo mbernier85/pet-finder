@@ -1,6 +1,7 @@
 package im.bernier.petfinder.presenter;
 
 import im.bernier.petfinder.datasource.Repository;
+import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.model.SearchResult;
 import im.bernier.petfinder.view.ResultView;
@@ -32,7 +33,8 @@ public class ResultPresenter implements Presenter {
     }
 
     public void onPetClick(Pet pet) {
-        Timber.d(pet.getName());
+        Storage.getInstance().setPet(pet);
+        view.openPet(pet);
     }
 
     private void findPet(String location) {

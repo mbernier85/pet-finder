@@ -1,5 +1,6 @@
-package im.bernier.petfinder;
+package im.bernier.petfinder.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import im.bernier.petfinder.R;
 import im.bernier.petfinder.adapter.PetAdapter;
 import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.presenter.ResultPresenter;
@@ -41,6 +43,11 @@ public class ResultActivity extends AppCompatActivity implements ResultView{
                 presenter.onPetClick(pet);
             }
         });
+    }
+
+    @Override
+    public void openPet(Pet pet) {
+        startActivity(new Intent(this, PetActivity.class));
     }
 
     @Override

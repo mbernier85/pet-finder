@@ -12,4 +12,7 @@ import retrofit2.http.Query;
 public interface Service {
     @GET("/pet.find?key=d38cdfc784c61ba739980f34d1748ae2&format=xml&animal=dog")
     Call<SearchResult> petFind(@Query("location") String location);
+
+    @GET("/pet.get?key=d38cdfc784c61ba739980f34d1748ae2&format=xml")
+    Call<String> getPet(@Query("id") String id);
 }
