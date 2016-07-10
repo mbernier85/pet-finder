@@ -24,5 +24,6 @@ public class PetPresenter implements Presenter {
     @Override
     public void onAttach() {
         Pet pet = Storage.getInstance().getPet();
+        view.updateUi(pet);
     }
 }
