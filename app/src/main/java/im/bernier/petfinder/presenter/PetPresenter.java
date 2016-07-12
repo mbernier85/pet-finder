@@ -11,6 +11,7 @@ import im.bernier.petfinder.view.PetView;
 public class PetPresenter implements Presenter {
 
     private PetView view;
+    private Pet pet;
 
     public void setView(PetView view) {
         this.view = view;
@@ -23,7 +24,11 @@ public class PetPresenter implements Presenter {
 
     @Override
     public void onAttach() {
-        Pet pet = Storage.getInstance().getPet();
+        pet = Storage.getInstance().getPet();
         view.updateUi(pet);
+    }
+
+    public void onImageClick() {
+        view.openImageViewer(pet);
     }
 }

@@ -3,6 +3,7 @@ package im.bernier.petfinder.model;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -21,6 +22,16 @@ public class Media {
 
     public void setPhotos(ArrayList<Photo> photos) {
         this.photos = photos;
+    }
+
+    public ArrayList<Photo> getHiResPhotos() {
+        ArrayList<Photo> hiRes = new ArrayList<>();
+        for (Photo photo : photos) {
+            if (photo.getSize().equalsIgnoreCase("x")) {
+                hiRes.add(photo);
+            }
+        }
+        return hiRes;
     }
 
     public String getThumbnail() {

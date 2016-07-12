@@ -3,10 +3,9 @@ package im.bernier.petfinder.view;
 import im.bernier.petfinder.model.Pet;
 
 /**
- * Created by Michael on 2016-07-09.
+ * Created by Michael on 2016-07-12.
  */
 
-public interface PetView {
+public interface ImageViewerView {
     void updateUi(Pet pet);
-    void openImageViewer(Pet pet);
 }

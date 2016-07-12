@@ -1,5 +1,6 @@
 package im.bernier.petfinder.activity;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import im.bernier.petfinder.R;
 import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.presenter.PetPresenter;
@@ -69,5 +71,15 @@ public class PetActivity extends AppCompatActivity  implements PetView {
         if (url != null) {
             Picasso.with(this).load(url).resize(size.x, (int)height).centerCrop().into(petImageView);
         }
+    }
+
+    @OnClick(R.id.pet_image_view)
+    void onImageClick() {
+        presenter.onImageClick();
+    }
+
+    @Override
+    public void openImageViewer(Pet pet) {
+        startActivity(new Intent(this, ImageViewerActivity.class));
     }
 }
