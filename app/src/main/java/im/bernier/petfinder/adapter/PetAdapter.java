@@ -80,7 +80,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
 
         void bind(Pet pet) {
             this.pet = pet;
-            petName.setText(pet.getName());
+            petName.setText(pet.getName() + ", " + pet.getAge() + ", " + pet.getSex());
             breed.setText(pet.getBreed());
             String url = pet.getMedia().getThumbnail();
             if (url != null) {

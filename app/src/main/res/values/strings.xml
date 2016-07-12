@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PetFinder</string>
+    <string name="contact_information">Contact information</string>
 </resources>

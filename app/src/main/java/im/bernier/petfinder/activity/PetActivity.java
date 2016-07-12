@@ -28,8 +28,8 @@ public class PetActivity extends AppCompatActivity  implements PetView {
     @BindView(R.id.pet_breed)
     TextView breedTextView;
 
-    @BindView(R.id.pet_name)
-    TextView nameTextView;
+    @BindView(R.id.pet_age_sex)
+    TextView ageSexTextView;
 
     @BindView(R.id.pet_description)
     TextView descriptionTextView;
@@ -39,6 +39,18 @@ public class PetActivity extends AppCompatActivity  implements PetView {
 
     @BindView(R.id.pet_image_view)
     ImageView petImageView;
+
+    @BindView(R.id.contact_address)
+    TextView contactAddressTextView;
+
+    @BindView(R.id.contact_name)
+    TextView contactNameTextView;
+
+    @BindView(R.id.contact_email)
+    TextView contactEmailTextView;
+
+    @BindView(R.id.contact_phone)
+    TextView contactPhoneTextView;
 
     private PetPresenter presenter;
     private Point size = new Point();
@@ -64,13 +76,19 @@ public class PetActivity extends AppCompatActivity  implements PetView {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(pet.getName());
         }
-        nameTextView.setText(pet.getName());
+        ageSexTextView.setText(pet.getAge() + ", " + pet.getSex());
         breedTextView.setText(pet.getBreed());
         descriptionTextView.setText(pet.getDescription());
         String url = pet.getMedia().getThumbnail();
         if (url != null) {
             Picasso.with(this).load(url).resize(size.x, (int)height).centerCrop().into(petImageView);
         }
+
+        contactNameTextView.setText(pet.getContact().getName());
+        contactAddressTextView.setText(pet.getContact().getAddress());
+        contactEmailTextView.setText(pet.getContact().getEmail());
+        contactPhoneTextView.setText(pet.getContact().getPhone());
+
     }
 
     @OnClick(R.id.pet_image_view)

@@ -22,11 +22,17 @@ public class Pet {
     @Element
     private String age;
 
+    @Element
+    private String sex;
+
     @Element(required = false)
     private String description;
 
     @Element(required = false)
     private Media media;
+
+    @Element
+    private Contact contact;
 
     @ElementList(required = false)
     private ArrayList<String> breeds;
@@ -77,6 +83,22 @@ public class Pet {
 
     public void setBreeds(ArrayList<String> breeds) {
         this.breeds = breeds;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getBreed() {
