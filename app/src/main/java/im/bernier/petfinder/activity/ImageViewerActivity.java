@@ -43,8 +43,8 @@ public class ImageViewerActivity extends AppCompatActivity implements ImageViewe
 
     @Override
     public void updateUi(Pet pet) {
-        if (pet.getMedia().getPhotos().size() > 0) {
-            Picasso.with(this).load(pet.getMedia().getThumbnail()).into(imageView, new Callback() {
+        if (pet.getMedia().getHiResPhotos().size() > 0) {
+            Picasso.with(this).load(pet.getMedia().getHiResPhotos().get(0).getValue()).into(imageView, new Callback() {
                 @Override
                 public void onSuccess() {
                     photoViewAttacher.update();

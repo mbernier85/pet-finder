@@ -26,9 +26,11 @@ public class Media {
 
     public ArrayList<Photo> getHiResPhotos() {
         ArrayList<Photo> hiRes = new ArrayList<>();
-        for (Photo photo : photos) {
-            if (photo.getSize().equalsIgnoreCase("x")) {
-                hiRes.add(photo);
+        if (photos != null) {
+            for (Photo photo : photos) {
+                if (photo.getSize().equalsIgnoreCase("x")) {
+                    hiRes.add(photo);
+                }
             }
         }
         return hiRes;
