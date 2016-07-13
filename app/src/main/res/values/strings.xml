@@ -1,5 +1,17 @@
 <resources>
-    <string name="app_name">PetFinder</string>
+    <string name="app_name">Animal Finder</string>
     <string name="contact_information">Contact information</string>
     <string name="location_search">ZIP/postal code or city and state</string>
+    <string name="search">Search</string>
+
+    <string name="any">Any</string>
+    <string name="cat">Cat</string>
+    <string name="dog">Dog</string>
+    <string name="rabbit">Rabbit</string>
+    <string name="smallfurry">"Small &amp; Furry"</string>
+    <string name="horse">Horse</string>
+    <string name="bird">Bird</string>
+    <string name="reptile">Scales, Fins &amp; Others</string>
+    <string name="pig">Pig</string>
+    <string name="barnyard">Barnyard</string>
 </resources>

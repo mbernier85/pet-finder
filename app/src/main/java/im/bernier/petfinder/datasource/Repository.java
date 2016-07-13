@@ -37,8 +37,8 @@ public class Repository {
         service = retrofit.create(Service.class);
     }
 
-    public Call<SearchResult> petFind(String location) {
-        return service.petFind(location);
+    public Call<SearchResult> petFind(String location, String animal) {
+        return service.petFind(location, animal);
     }
 
 }

@@ -5,4 +5,6 @@ package im.bernier.petfinder.view;
  */
 
 public interface SearchView {
+    void setAnimalsSpinner(String[] animals);
+    void showResults();
 }

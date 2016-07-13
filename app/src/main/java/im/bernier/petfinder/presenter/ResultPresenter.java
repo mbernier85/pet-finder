@@ -3,6 +3,7 @@ package im.bernier.petfinder.presenter;
 import im.bernier.petfinder.datasource.Repository;
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.Pet;
+import im.bernier.petfinder.model.Search;
 import im.bernier.petfinder.model.SearchResult;
 import im.bernier.petfinder.view.ResultView;
 import retrofit2.Call;
@@ -17,10 +18,12 @@ import timber.log.Timber;
 public class ResultPresenter implements Presenter {
 
     private ResultView view;
+    private Search search;
 
     @Override
     public void onAttach() {
-        findPet("H3E1B7");
+        search = Storage.getInstance().getSearch();
+        findPet(search.getLocation(), search.getAnimal().getKey());
     }
 
     public void setView(ResultView view) {
@@ -37,8 +40,8 @@ public class ResultPresenter implements Presenter {
         view.openPet(pet);
     }
 
-    private void findPet(String location) {
-        Call<SearchResult> searchResultCall = Repository.getInstance().petFind(location);
+    private void findPet(String location, String animal) {
+        Call<SearchResult> searchResultCall = Repository.getInstance().petFind(location, animal);
         searchResultCall.enqueue(new Callback<SearchResult>() {
             @Override
             public void onResponse(Call<SearchResult> call, Response<SearchResult> response) {
