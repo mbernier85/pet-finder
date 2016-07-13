@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">PetFinder</string>
     <string name="contact_information">Contact information</string>
+    <string name="location_search">ZIP/postal code or city and state</string>
 </resources>
