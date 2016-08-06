@@ -18,12 +18,11 @@ import timber.log.Timber;
 public class ResultPresenter implements Presenter {
 
     private ResultView view;
-    private Search search;
 
     @Override
     public void onAttach() {
-        search = Storage.getInstance().getSearch();
-        findPet(search.getLocation(), search.getAnimal().getKey());
+        Search search = Storage.getInstance().getSearch();
+        findPet(search);
     }
 
     public void setView(ResultView view) {
@@ -40,8 +39,8 @@ public class ResultPresenter implements Presenter {
         view.openPet(pet);
     }
 
-    private void findPet(String location, String animal) {
-        Call<SearchResult> searchResultCall = Repository.getInstance().petFind(location, animal);
+    private void findPet(Search search) {
+        Call<SearchResult> searchResultCall = Repository.getInstance().petFind(search);
         searchResultCall.enqueue(new Callback<SearchResult>() {
             @Override
             public void onResponse(Call<SearchResult> call, Response<SearchResult> response) {

@@ -8,6 +8,9 @@ public class Search {
 
     private String location;
     private Animal animal;
+    private String breed = null;
+    private String age = null;
+    private String sex = null;
 
     public String getLocation() {
         return location;
@@ -23,5 +26,30 @@ public class Search {
 
     public void setAnimal(Animal animal) {
         this.animal = animal;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getAge() {
+
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 }

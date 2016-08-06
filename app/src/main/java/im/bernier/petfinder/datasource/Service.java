@@ -1,5 +1,7 @@
 package im.bernier.petfinder.datasource;
 
+import im.bernier.petfinder.model.Breeds;
+import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.model.SearchResult;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -11,8 +13,11 @@ import retrofit2.http.Query;
 
 public interface Service {
     @GET("/pet.find?key=d38cdfc784c61ba739980f34d1748ae2&format=xml")
-    Call<SearchResult> petFind(@Query("location") String location, @Query("animal") String animal);
+    Call<SearchResult> petFind(@Query("location") String location, @Query("animal") String animal, @Query("breed") String breed, @Query("sex") String sex, @Query("age") String age);
 
     @GET("/pet.get?key=d38cdfc784c61ba739980f34d1748ae2&format=xml")
-    Call<String> getPet(@Query("id") String id);
+    Call<Pet> getPet(@Query("id") String id);
+
+    @GET("/breed.list?key=d38cdfc784c61ba739980f34d1748ae2&format=xml")
+    Call<Breeds> getBreeds(@Query("animal") String animal);
 }

@@ -1,5 +1,7 @@
 package im.bernier.petfinder.datasource;
 
+import im.bernier.petfinder.model.Breeds;
+import im.bernier.petfinder.model.Search;
 import im.bernier.petfinder.model.SearchResult;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -37,8 +39,12 @@ public class Repository {
         service = retrofit.create(Service.class);
     }
 
-    public Call<SearchResult> petFind(String location, String animal) {
-        return service.petFind(location, animal);
+    public Call<SearchResult> petFind(Search search) {
+        return service.petFind(search.getLocation(), search.getAnimal() != null ? search.getAnimal().getKey() : null, search.getBreed(), search.getSex(), search.getAge());
+    }
+
+    public Call<Breeds> loadBreeds(String animal) {
+        return service.getBreeds(animal);
     }
 
 }
