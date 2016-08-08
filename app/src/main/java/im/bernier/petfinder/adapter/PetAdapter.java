@@ -1,5 +1,6 @@
 package im.bernier.petfinder.adapter;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
     @Override
     public PetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final PetViewHolder holder = new PetViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pet, parent, false));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (petClick != null) {
@@ -66,10 +67,15 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
 
         @BindView(R.id.item_pet_name)
         TextView petName;
+
         @BindView(R.id.item_pet_picture)
         ImageView imageView;
+
         @BindView(R.id.item_pet_breed)
         TextView breed;
+
+        @BindView(R.id.item_pet_card_view)
+        CardView cardView;
 
         private Pet pet;
 
