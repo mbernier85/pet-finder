@@ -2,6 +2,7 @@ package im.bernier.petfinder.presenter;
 
 import java.util.ArrayList;
 
+import im.bernier.petfinder.R;
 import im.bernier.petfinder.datasource.Repository;
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.Breeds;
@@ -36,8 +37,12 @@ public class SearchPresenter implements Presenter {
     }
 
     public void search(Search search) {
-        Storage.getInstance().setSearch(search);
-        view.showResults();
+        if (search.getLocation().length() > 4) {
+            Storage.getInstance().setSearch(search);
+            view.showResults();
+        } else {
+            view.showError(R.string.empty_zip_error);
+        }
     }
 
     public void loadBreed(String animal) {
@@ -45,12 +50,16 @@ public class SearchPresenter implements Presenter {
         call.enqueue(new Callback<Breeds>() {
             @Override
             public void onResponse(Call<Breeds> call, Response<Breeds> response) {
-                view.updateBreeds(response.body().getBreeds());
+                if (response.isSuccessful() && response.body().getHeader().getStatus().getCode() == 100) {
+                    view.updateBreeds(response.body().getBreeds());
+                } else if (response.body().getHeader().getStatus().getCode() != 200){
+                    view.showError(response.body().getHeader().getStatus().getMessage());
+                }
             }
 
             @Override
             public void onFailure(Call<Breeds> call, Throwable t) {
-
+                Timber.e(t, "");
             }
         });
     }

@@ -14,4 +14,6 @@
     <string name="reptile">Scales, Fins &amp; Others</string>
     <string name="pig">Pig</string>
     <string name="barnyard">Barnyard</string>
+
+    <string name="empty_zip_error">You must enter a ZIP code or postal code!</string>
 </resources>

@@ -4,8 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,6 +22,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnEditorAction;
 import butterknife.OnItemSelected;
 import im.bernier.petfinder.R;
 import im.bernier.petfinder.model.Animal;
@@ -89,6 +95,27 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
         sexAdapter = new StringAdapter(this, Arrays.asList(sexes));
         sexSpinner.setAdapter(sexAdapter);
+    }
+
+    @OnEditorAction(value = R.id.search_location_text_view)
+    public boolean onSearchTextView(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            searchClick();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void showError(String message) {
+        Snackbar.make(searchLocation, message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showError(@StringRes int stringId) {
+        showError(getString(stringId));
     }
 
     @Override

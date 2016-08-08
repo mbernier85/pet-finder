@@ -44,7 +44,11 @@ public class ResultPresenter implements Presenter {
         searchResultCall.enqueue(new Callback<SearchResult>() {
             @Override
             public void onResponse(Call<SearchResult> call, Response<SearchResult> response) {
-                view.updateResults(response.body().getPets());
+                if (response.isSuccessful() && response.body().getHeader().getStatus().getCode() == 100) {
+                    view.updateResults(response.body().getPets());
+                } else {
+                    view.showError(response.body().getHeader().getStatus().getMessage());
+                }
             }
 
             @Override

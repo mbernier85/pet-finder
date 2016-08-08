@@ -2,6 +2,7 @@ package im.bernier.petfinder.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,6 +44,11 @@ public class ResultActivity extends AppCompatActivity implements ResultView{
                 presenter.onPetClick(pet);
             }
         });
+    }
+
+    @Override
+    public void showError(String error) {
+        Snackbar.make(recyclerView, error, Snackbar.LENGTH_LONG).show();
     }
 
     @Override

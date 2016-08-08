@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by micha on 2016-07-09.
+ * Created by Michael on 2016-07-09.
  */
 
 @Root(name = "petfinder", strict = false)
@@ -20,8 +20,19 @@ public class SearchResult {
     @Namespace(reference = "http://www.w3.org/2001/XMLSchema-instance", prefix = "xsi")
     private String noNamespaceSchemaLocation;
 
-    @ElementList
+    @ElementList(required = false)
     private ArrayList<Pet> pets;
+
+    @Element
+    private ErrorHeader header;
+
+    public ErrorHeader getHeader() {
+        return header;
+    }
+
+    public void setHeader(ErrorHeader header) {
+        this.header = header;
+    }
 
     public ArrayList<Pet> getPets() {
         return pets;
