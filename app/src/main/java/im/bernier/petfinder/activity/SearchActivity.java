@@ -44,6 +44,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
     String[] ages = {"Any", "baby", "young", "adult", "senior"};
     String[] sexes = {"Any", "M", "F"};
+    String[] breed = {"Any"};
 
     @BindView(R.id.search_toolbar)
     Toolbar toolbar;
@@ -87,7 +88,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
         animalAdapter = new AnimalAdapter(this, animalArrayList);
         animalSpinner.setAdapter(animalAdapter);
 
-        breedAdapter = new StringAdapter(this, new ArrayList<String>());
+        breedAdapter = new StringAdapter(this, Arrays.asList(breed));
         breedSpinner.setAdapter(breedAdapter);
 
         ageAdapter = new StringAdapter(this, Arrays.asList(ages));

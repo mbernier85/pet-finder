@@ -16,4 +16,9 @@
     <string name="barnyard">Barnyard</string>
 
     <string name="empty_zip_error">You must enter a ZIP code or postal code!</string>
+
+    <string name="animal">Animal</string>
+    <string name="breed">Breed</string>
+    <string name="sex">Sex</string>
+    <string name="age">Age</string>
 </resources>
