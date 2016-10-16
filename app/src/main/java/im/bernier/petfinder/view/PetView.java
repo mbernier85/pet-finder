@@ -9,4 +9,7 @@ import im.bernier.petfinder.model.Pet;
 public interface PetView {
     void updateUi(Pet pet);
     void openImageViewer(Pet pet);
+    void openEmail(Pet pet);
+    void openDialer(Pet pet);
+    void openMap(Pet pet);
 }

@@ -31,4 +31,16 @@ public class PetPresenter implements Presenter {
     public void onImageClick() {
         view.openImageViewer(pet);
     }
+
+    public void phoneClick() {
+        view.openDialer(pet);
+    }
+
+    public void emailClick() {
+        view.openEmail(pet);
+    }
+
+    public void addressClick() {
+        view.openMap(pet);
+    }
 }

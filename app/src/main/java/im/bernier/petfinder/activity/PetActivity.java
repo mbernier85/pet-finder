@@ -2,6 +2,7 @@ package im.bernier.petfinder.activity;
 
 import android.content.Intent;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -88,7 +89,40 @@ public class PetActivity extends AppCompatActivity  implements PetView {
         contactAddressTextView.setText(pet.getContact().getAddress());
         contactEmailTextView.setText(pet.getContact().getEmail());
         contactPhoneTextView.setText(pet.getContact().getPhone());
+    }
 
+    @OnClick(R.id.contact_email)
+    void emailClick() {
+        presenter.emailClick();
+    }
+
+    @Override
+    public void openMap(Pet pet) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("geo:0,0?q=%s", pet.getContact().getAddress())));
+        startActivity(intent);
+    }
+
+    @Override
+    public void openDialer(Pet pet) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(String.format("tel:%s", pet.getContact().getPhone())));
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.contact_phone)
+    void phoneClick() {
+        presenter.phoneClick();
+    }
+
+    @OnClick(R.id.contact_address)
+    void addressClick() {
+        presenter.addressClick();
+    }
+
+    @Override
+    public void openEmail(Pet pet) {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", pet.getContact().getEmail(), null));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, String.format("About : %s", pet.getName()));
+        startActivity(Intent.createChooser(emailIntent, "Send email..."));
     }
 
     @OnClick(R.id.pet_image_view)

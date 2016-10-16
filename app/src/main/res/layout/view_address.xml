@@ -15,25 +15,34 @@
         android:id="@+id/contact_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:lineSpacingExtra="4dp"
-        android:textIsSelectable="true"
-        tools:text="123 example road\nMontrea, QC\nA2A2A2" />
+        android:background="?attr/selectableItemBackground"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:textColor="@color/accent"
+        android:textSize="18sp"
+        tools:text="123 example road\nMontreal, QC\nA2A2A2" />
 
     <TextView
         android:id="@+id/contact_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textIsSelectable="true"
+        android:background="?attr/selectableItemBackground"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:textColor="@color/accent"
+        android:textSize="18sp"
         tools:text="555 555-5555" />
 
     <TextView
         android:id="@+id/contact_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textIsSelectable="true"
+        android:background="?attr/selectableItemBackground"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:textColor="@color/accent"
+        android:textSize="18sp"
         tools:text="example@example.com" />
 
 </merge>
