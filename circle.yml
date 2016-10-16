@@ -12,5 +12,5 @@ machine:
     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx1024m -XX:+HeapDumpOnOutOfMemoryError"'
 test:
   override:
-    - ./gradlew assembleRelease
+    - ./gradlew assembleProdRelease
     - cp -r ~/pet-finder/app/build/outputs $CIRCLE_ARTIFACTS

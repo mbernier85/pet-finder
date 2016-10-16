@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
         applicationId "im.bernier.petfinder"
-        minSdkVersion 21
+        minSdkVersion 17
         targetSdkVersion 24
         versionCode 1
         versionName "${productVersion}"
@@ -47,6 +47,16 @@ android {
             debuggable true
         }
     }
+    productFlavors {
+        dev {
+            minSdkVersion 21
+            versionCode 9000
+        }
+        prod {
+            versionCode 'git rev-list HEAD --count --no-merges'.execute().text.trim().toInteger()
+        }
+    }
+
     lintOptions {
         disable "InvalidPackage"
     }

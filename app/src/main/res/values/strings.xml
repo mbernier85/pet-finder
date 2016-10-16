@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Animal Finder</string>
+    <string name="app_name">Pet Finder</string>
     <string name="contact_information">Contact information</string>
     <string name="location_search">ZIP/postal code or city and state</string>
     <string name="search">Search</string>
