@@ -46,22 +46,26 @@ public class SearchPresenter implements Presenter {
     }
 
     public void loadBreed(String animal) {
-        Call<Breeds> call = Repository.getInstance().loadBreeds(animal);
-        call.enqueue(new Callback<Breeds>() {
-            @Override
-            public void onResponse(Call<Breeds> call, Response<Breeds> response) {
-                if (response.isSuccessful() && response.body().getHeader().getStatus().getCode() == 100) {
-                    view.updateBreeds(response.body().getBreeds());
-                } else if (response.body().getHeader().getStatus().getCode() != 200){
-                    view.showError(response.body().getHeader().getStatus().getMessage());
+        if (animal == null ) {
+            view.updateBreeds(new ArrayList<String>());
+        } else {
+            Call<Breeds> call = Repository.getInstance().loadBreeds(animal);
+            call.enqueue(new Callback<Breeds>() {
+                @Override
+                public void onResponse(Call<Breeds> call, Response<Breeds> response) {
+                    if (response.isSuccessful() && response.body().getHeader().getStatus().getCode() == 100) {
+                        view.updateBreeds(response.body().getBreeds());
+                    } else if (response.body().getHeader().getStatus().getCode() != 200){
+                        view.showError(response.body().getHeader().getStatus().getMessage());
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Breeds> call, Throwable t) {
-                Timber.e(t, "");
-            }
-        });
+                @Override
+                public void onFailure(Call<Breeds> call, Throwable t) {
+                    Timber.e(t, "");
+                }
+            });
+        }
     }
 
 }

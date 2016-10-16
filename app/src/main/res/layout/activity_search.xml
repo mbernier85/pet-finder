@@ -18,7 +18,7 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -58,10 +58,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/breed" />
 
-            <Spinner
-                android:id="@+id/search_breed_spinner"
+            <AutoCompleteTextView
+                android:id="@+id/search_breed_auto_complete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/any"
                 android:layout_marginBottom="8dp" />
 
             <TextView
@@ -91,6 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
                 android:text="@string/search" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

@@ -1,5 +1,4 @@
 apply plugin: "com.android.application"
-apply plugin: "android-apt"
 
 def supportVersion = "24.2.1";
 def firebaseVersion = "9.4.0"
@@ -69,7 +68,7 @@ dependencies {
     compile "com.jakewharton:butterknife:8.4.0"
     compile "com.squareup.picasso:picasso:2.5.2"
     compile "com.github.chrisbanes:PhotoView:1.2.6"
-    apt "com.jakewharton:butterknife-compiler:8.4.0"
+    annotationProcessor "com.jakewharton:butterknife-compiler:8.4.0"
     compile ("com.squareup.retrofit2:converter-simplexml:2.1.0", {
         exclude module: "stax"
         exclude module: "stax-api"

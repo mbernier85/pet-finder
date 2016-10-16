@@ -12,12 +12,11 @@ import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,9 +37,9 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
     private SearchPresenter presenter;
     private AnimalAdapter animalAdapter;
-    private StringAdapter breedAdapter;
-    private StringAdapter ageAdapter;
-    private StringAdapter sexAdapter;
+    private ArrayAdapter<String> breedAdapter;
+    private ArrayAdapter<String> ageAdapter;
+    private ArrayAdapter<String> sexAdapter;
 
     String[] ages = {"Any", "baby", "young", "adult", "senior"};
     String[] sexes = {"Any", "M", "F"};
@@ -55,8 +54,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     @BindView(R.id.search_location_text_view)
     TextView searchLocation;
 
-    @BindView(R.id.search_breed_spinner)
-    Spinner breedSpinner;
+    @BindView(R.id.search_breed_auto_complete)
+    AutoCompleteTextView breedAutoComplete;
 
     @BindView(R.id.search_age_spinner)
     Spinner ageSpinner;
@@ -88,13 +87,14 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
         animalAdapter = new AnimalAdapter(this, animalArrayList);
         animalSpinner.setAdapter(animalAdapter);
 
-        breedAdapter = new StringAdapter(this, Arrays.asList(breed));
-        breedSpinner.setAdapter(breedAdapter);
+        breedAdapter = new ArrayAdapter<>(this, android.support.design.R.layout.support_simple_spinner_dropdown_item , breed);
+        breedAutoComplete.setAdapter(breedAdapter);
+        breedAutoComplete.setThreshold(1);
 
-        ageAdapter = new StringAdapter(this, Arrays.asList(ages));
+        ageAdapter = new ArrayAdapter<>(this, android.support.design.R.layout.support_simple_spinner_dropdown_item, ages);
         ageSpinner.setAdapter(ageAdapter);
 
-        sexAdapter = new StringAdapter(this, Arrays.asList(sexes));
+        sexAdapter = new ArrayAdapter<>(this, android.support.design.R.layout.support_simple_spinner_dropdown_item, sexes);
         sexSpinner.setAdapter(sexAdapter);
     }
 
@@ -122,7 +122,30 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     @Override
     public void updateBreeds(ArrayList<String> breeds) {
         breeds.add(0, "Any");
-        breedAdapter.setStrings(breeds);
+        breedAdapter = new ArrayAdapter<>(this, android.support.design.R.layout.support_simple_spinner_dropdown_item, breeds);
+        breedAutoComplete.setAdapter(breedAdapter);
+        breedAutoComplete.setText("");
+        breedAutoComplete.setValidator(new AutoCompleteTextView.Validator() {
+            @Override
+            public boolean isValid(CharSequence charSequence) {
+                for (int i = 0 ; i < breedAdapter.getCount(); i ++) {
+                    if (breedAdapter.getItem(i).equals(charSequence.toString())) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public CharSequence fixText(CharSequence charSequence) {
+                return getString(R.string.any);
+            }
+        });
+    }
+
+    @OnClick(R.id.search_breed_auto_complete)
+    void breedClick() {
+        breedAutoComplete.showDropDown();
     }
 
     @OnClick(R.id.search_submit)
@@ -137,11 +160,11 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
             search.setAnimal(null);
         }
 
-        int breedPosition = breedSpinner.getSelectedItemPosition();
-        if (breedPosition > 0) {
-            search.setBreed(breedAdapter.getItem(breedPosition));
-        } else {
+        String breedStr = breedAutoComplete.getText().toString().trim();
+        if (breedStr.isEmpty() || breedStr.equalsIgnoreCase("any")) {
             search.setBreed(null);
+        } else {
+            search.setBreed(breedStr);
         }
 
         int agePosition = ageSpinner.getSelectedItemPosition();
@@ -184,31 +207,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
         @Override
         public int getCount() {
             return animals.size();
-        }
-    }
-
-    public class StringAdapter extends ArrayAdapter<String> {
-
-        private List<String> strings;
-
-        StringAdapter(Context context, List<String> strings) {
-            super(context, R.layout.support_simple_spinner_dropdown_item, strings);
-            this.strings = strings;
-        }
-
-        void setStrings(ArrayList<String> strings) {
-            this.strings = strings;
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public String getItem(int position) {
-            return strings.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return strings.size();
         }
     }
 }
