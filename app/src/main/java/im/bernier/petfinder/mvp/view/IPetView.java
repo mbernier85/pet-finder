@@ -6,7 +6,7 @@ import im.bernier.petfinder.model.Pet;
  * Created by Michael on 2016-07-09.
  */
 
-public interface PetView {
+public interface IPetView {
     void updateUi(Pet pet);
     void openImageViewer(Pet pet);
     void openEmail(Pet pet);

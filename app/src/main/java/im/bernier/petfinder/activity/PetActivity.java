@@ -18,13 +18,13 @@ import butterknife.OnClick;
 import im.bernier.petfinder.R;
 import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.mvp.presenter.PetPresenter;
-import im.bernier.petfinder.mvp.view.PetView;
+import im.bernier.petfinder.mvp.view.IPetView;
 
 /**
  * Created by Michael on 2016-07-09.
  */
 
-public class PetActivity extends AppCompatActivity  implements PetView {
+public class PetActivity extends AppCompatActivity  implements IPetView {
 
     @BindView(R.id.pet_breed)
     TextView breedTextView;

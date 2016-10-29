@@ -2,7 +2,7 @@ package im.bernier.petfinder.mvp.presenter;
 
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.Pet;
-import im.bernier.petfinder.mvp.view.ImageViewerView;
+import im.bernier.petfinder.mvp.view.IImageViewerView;
 
 /**
  * Created by Michael on 2016-07-12.
@@ -10,9 +10,9 @@ import im.bernier.petfinder.mvp.view.ImageViewerView;
 
 public class ImageViewerPresenter implements Presenter {
 
-    private ImageViewerView view;
+    private IImageViewerView view;
 
-    public void setView(ImageViewerView view) {
+    public void setView(IImageViewerView view) {
         this.view = view;
     }
 

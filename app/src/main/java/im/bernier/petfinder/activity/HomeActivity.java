@@ -13,8 +13,10 @@ import android.widget.FrameLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import im.bernier.petfinder.R;
-import im.bernier.petfinder.view.SearchCustomView;
+import im.bernier.petfinder.view.PetSearchView;
+import im.bernier.petfinder.view.ShelterSearchView;
 
+import static im.bernier.petfinder.R.id.action_shelter;
 import static im.bernier.petfinder.R.id.action_search;
 
 /**
@@ -38,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         viewGroups = new SparseArray<>();
-        viewGroups.append(action_search, new SearchCustomView(HomeActivity.this));
+        viewGroups.append(action_search, new PetSearchView(HomeActivity.this));
         content.addView(viewGroups.get(action_search));
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -48,9 +50,17 @@ public class HomeActivity extends AppCompatActivity {
                     case action_search:
                         content.removeAllViews();
                         if (viewGroups.get(action_search) == null) {
-                            viewGroups.append(action_search, new SearchCustomView(HomeActivity.this));
+                            viewGroups.append(action_search, new PetSearchView(HomeActivity.this));
                         }
                         content.addView(viewGroups.get(action_search));
+                        break;
+                    case action_shelter:
+                        content.removeAllViews();
+                        if (viewGroups.get(action_shelter) == null) {
+                            viewGroups.append(action_shelter, new ShelterSearchView(HomeActivity.this));
+                        }
+                        content.addView(viewGroups.get(action_shelter));
+                        break;
                 }
                 return true;
             }

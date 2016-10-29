@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by Michael on 2016-07-12.
  */
 
-public interface SearchView {
+public interface IPetSearchView {
     void setAnimalsSpinner(String[] animals);
     void showResults();
     void updateBreeds(ArrayList<String> breeds);

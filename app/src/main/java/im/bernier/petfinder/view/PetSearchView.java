@@ -25,13 +25,13 @@ import im.bernier.petfinder.activity.ResultActivity;
 import im.bernier.petfinder.model.Animal;
 import im.bernier.petfinder.model.Search;
 import im.bernier.petfinder.mvp.presenter.SearchPresenter;
-import im.bernier.petfinder.mvp.view.SearchView;
+import im.bernier.petfinder.mvp.view.IPetSearchView;
 
 /**
  * Created by Michael on 2016-07-12.
  */
 
-public class SearchCustomView extends FrameLayout implements SearchView {
+public class PetSearchView extends FrameLayout implements IPetSearchView {
 
     private SearchPresenter presenter;
     private AnimalAdapter animalAdapter;
@@ -67,7 +67,7 @@ public class SearchCustomView extends FrameLayout implements SearchView {
         presenter.onAttach();
     }
 
-    public SearchCustomView(Context context) {
+    public PetSearchView(Context context) {
         super(context);
         init();
     }

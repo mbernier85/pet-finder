@@ -15,9 +15,9 @@ import im.bernier.petfinder.R;
 import im.bernier.petfinder.adapter.PetAdapter;
 import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.mvp.presenter.ResultPresenter;
-import im.bernier.petfinder.mvp.view.ResultView;
+import im.bernier.petfinder.mvp.view.IResultView;
 
-public class ResultActivity extends AppCompatActivity implements ResultView{
+public class ResultActivity extends AppCompatActivity implements IResultView {
 
     @BindView(R.id.result_recycler_view)
     RecyclerView recyclerView;

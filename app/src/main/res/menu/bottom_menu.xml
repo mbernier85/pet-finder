@@ -8,10 +8,10 @@
         android:title="@string/search"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_refuge"
+        android:id="@+id/action_shelter"
         android:enabled="true"
         android:icon="@drawable/ic_pets_black_24dp"
-        android:title="@string/refuge"
+        android:title="@string/shelter"
         app:showAsAction="ifRoom" />
 
     <item

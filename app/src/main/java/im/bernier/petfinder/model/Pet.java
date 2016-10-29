@@ -116,7 +116,11 @@ public class Pet {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age='" + age + '\'' +
+                ", sex='" + sex + '\'' +
                 ", description='" + description + '\'' +
+                ", media=" + media +
+                ", contact=" + contact +
+                ", breeds=" + breeds +
                 '}';
     }
 }
