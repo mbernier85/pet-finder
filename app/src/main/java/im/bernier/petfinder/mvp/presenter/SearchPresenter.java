@@ -1,4 +1,4 @@
-package im.bernier.petfinder.presenter;
+package im.bernier.petfinder.mvp.presenter;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import im.bernier.petfinder.datasource.Repository;
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.Breeds;
 import im.bernier.petfinder.model.Search;
-import im.bernier.petfinder.view.SearchView;
+import im.bernier.petfinder.mvp.view.SearchView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -1,11 +1,11 @@
-package im.bernier.petfinder.presenter;
+package im.bernier.petfinder.mvp.presenter;
 
 import im.bernier.petfinder.datasource.Repository;
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.model.Search;
 import im.bernier.petfinder.model.SearchResult;
-import im.bernier.petfinder.view.ResultView;
+import im.bernier.petfinder.mvp.view.ResultView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

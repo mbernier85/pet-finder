@@ -1,4 +1,4 @@
-package im.bernier.petfinder.view;
+package im.bernier.petfinder.mvp.view;
 
 import android.support.annotation.StringRes;
 

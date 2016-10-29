@@ -1,0 +1,59 @@
+package im.bernier.petfinder.activity;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.util.SparseArray;
+import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import im.bernier.petfinder.R;
+import im.bernier.petfinder.view.SearchCustomView;
+
+import static im.bernier.petfinder.R.id.action_search;
+
+/**
+ * Created by Michael on 2016-10-22.
+ */
+
+public class HomeActivity extends AppCompatActivity {
+
+    @BindView(R.id.bottom_navigation)
+    BottomNavigationView bottomNavigationView;
+
+    @BindView(R.id.content)
+    FrameLayout content;
+
+    private SparseArray<ViewGroup> viewGroups;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+        ButterKnife.bind(this);
+
+        viewGroups = new SparseArray<>();
+        viewGroups.append(action_search, new SearchCustomView(HomeActivity.this));
+        content.addView(viewGroups.get(action_search));
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case action_search:
+                        content.removeAllViews();
+                        if (viewGroups.get(action_search) == null) {
+                            viewGroups.append(action_search, new SearchCustomView(HomeActivity.this));
+                        }
+                        content.addView(viewGroups.get(action_search));
+                }
+                return true;
+            }
+        });
+    }
+}

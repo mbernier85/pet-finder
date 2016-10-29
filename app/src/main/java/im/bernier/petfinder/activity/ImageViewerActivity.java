@@ -12,8 +12,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import im.bernier.petfinder.R;
 import im.bernier.petfinder.model.Pet;
-import im.bernier.petfinder.presenter.ImageViewerPresenter;
-import im.bernier.petfinder.view.ImageViewerView;
+import im.bernier.petfinder.mvp.presenter.ImageViewerPresenter;
+import im.bernier.petfinder.mvp.view.ImageViewerView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**

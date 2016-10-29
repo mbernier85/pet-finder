@@ -1,8 +1,8 @@
-package im.bernier.petfinder.presenter;
+package im.bernier.petfinder.mvp.presenter;
 
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.Pet;
-import im.bernier.petfinder.view.PetView;
+import im.bernier.petfinder.mvp.view.PetView;
 
 /**
  * Created by Michael on 2016-07-09.

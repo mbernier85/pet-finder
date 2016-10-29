@@ -14,8 +14,8 @@ import butterknife.ButterKnife;
 import im.bernier.petfinder.R;
 import im.bernier.petfinder.adapter.PetAdapter;
 import im.bernier.petfinder.model.Pet;
-import im.bernier.petfinder.presenter.ResultPresenter;
-import im.bernier.petfinder.view.ResultView;
+import im.bernier.petfinder.mvp.presenter.ResultPresenter;
+import im.bernier.petfinder.mvp.view.ResultView;
 
 public class ResultActivity extends AppCompatActivity implements ResultView{
 

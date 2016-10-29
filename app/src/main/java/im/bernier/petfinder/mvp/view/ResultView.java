@@ -1,4 +1,4 @@
-package im.bernier.petfinder.view;
+package im.bernier.petfinder.mvp.view;
 
 import java.util.ArrayList;
 

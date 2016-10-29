@@ -17,8 +17,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import im.bernier.petfinder.R;
 import im.bernier.petfinder.model.Pet;
-import im.bernier.petfinder.presenter.PetPresenter;
-import im.bernier.petfinder.view.PetView;
+import im.bernier.petfinder.mvp.presenter.PetPresenter;
+import im.bernier.petfinder.mvp.view.PetView;
 
 /**
  * Created by Michael on 2016-07-09.

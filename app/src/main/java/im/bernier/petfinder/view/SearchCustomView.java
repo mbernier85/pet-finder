@@ -1,18 +1,15 @@
-package im.bernier.petfinder.activity;
+package im.bernier.petfinder.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -24,16 +21,17 @@ import butterknife.OnClick;
 import butterknife.OnEditorAction;
 import butterknife.OnItemSelected;
 import im.bernier.petfinder.R;
+import im.bernier.petfinder.activity.ResultActivity;
 import im.bernier.petfinder.model.Animal;
 import im.bernier.petfinder.model.Search;
-import im.bernier.petfinder.presenter.SearchPresenter;
-import im.bernier.petfinder.view.SearchView;
+import im.bernier.petfinder.mvp.presenter.SearchPresenter;
+import im.bernier.petfinder.mvp.view.SearchView;
 
 /**
  * Created by Michael on 2016-07-12.
  */
 
-public class SearchActivity extends AppCompatActivity implements SearchView {
+public class SearchCustomView extends FrameLayout implements SearchView {
 
     private SearchPresenter presenter;
     private AnimalAdapter animalAdapter;
@@ -44,9 +42,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     String[] ages = {"Any", "baby", "young", "adult", "senior"};
     String[] sexes = {"Any", "M", "F"};
     String[] breed = {"Any"};
-
-    @BindView(R.id.search_toolbar)
-    Toolbar toolbar;
 
     @BindView(R.id.search_animal_spinner)
     Spinner animalSpinner;
@@ -63,45 +58,46 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     @BindView(R.id.search_sex_spinner)
     Spinner sexSpinner;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+    protected void init() {
+        inflate(getContext(), R.layout.view_search, this);
         ButterKnife.bind(this);
 
         presenter = new SearchPresenter();
         presenter.setView(this);
         presenter.onAttach();
+    }
 
-        setSupportActionBar(toolbar);
+    public SearchCustomView(Context context) {
+        super(context);
+        init();
     }
 
     @Override
     public void setAnimalsSpinner(String[] animals) {
         ArrayList<Animal> animalArrayList = new ArrayList<>(animals.length);
-        animalArrayList.add(new Animal(getString(R.string.any), null));
+        animalArrayList.add(new Animal(getContext().getString(R.string.any), null));
         for (int i = 0; i < animals.length; i++) {
-            int id = getResources().getIdentifier(animals[i], "string", getPackageName());
-            animalArrayList.add(new Animal(getString(id), animals[i]));
+            int id = getResources().getIdentifier(animals[i], "string", getContext().getPackageName());
+            animalArrayList.add(new Animal(getContext().getString(id), animals[i]));
         }
-        animalAdapter = new AnimalAdapter(this, animalArrayList);
+        animalAdapter = new AnimalAdapter(getContext(), animalArrayList);
         animalSpinner.setAdapter(animalAdapter);
 
-        breedAdapter = new ArrayAdapter<>(this, android.support.design.R.layout.support_simple_spinner_dropdown_item , breed);
+        breedAdapter = new ArrayAdapter<>(getContext(), android.support.design.R.layout.support_simple_spinner_dropdown_item , breed);
         breedAutoComplete.setAdapter(breedAdapter);
         breedAutoComplete.setThreshold(1);
 
-        ageAdapter = new ArrayAdapter<>(this, android.support.design.R.layout.support_simple_spinner_dropdown_item, ages);
+        ageAdapter = new ArrayAdapter<>(getContext(), android.support.design.R.layout.support_simple_spinner_dropdown_item, ages);
         ageSpinner.setAdapter(ageAdapter);
 
-        sexAdapter = new ArrayAdapter<>(this, android.support.design.R.layout.support_simple_spinner_dropdown_item, sexes);
+        sexAdapter = new ArrayAdapter<>(getContext(), android.support.design.R.layout.support_simple_spinner_dropdown_item, sexes);
         sexSpinner.setAdapter(sexAdapter);
     }
 
     @OnEditorAction(value = R.id.search_location_text_view)
     public boolean onSearchTextView(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             searchClick();
             return true;
@@ -116,13 +112,13 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
     @Override
     public void showError(@StringRes int stringId) {
-        showError(getString(stringId));
+        showError(getContext().getString(stringId));
     }
 
     @Override
     public void updateBreeds(ArrayList<String> breeds) {
         breeds.add(0, "Any");
-        breedAdapter = new ArrayAdapter<>(this, android.support.design.R.layout.support_simple_spinner_dropdown_item, breeds);
+        breedAdapter = new ArrayAdapter<>(getContext(), android.support.design.R.layout.support_simple_spinner_dropdown_item, breeds);
         breedAutoComplete.setAdapter(breedAdapter);
         breedAutoComplete.setText("");
         breedAutoComplete.setValidator(new AutoCompleteTextView.Validator() {
@@ -138,7 +134,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
             @Override
             public CharSequence fixText(CharSequence charSequence) {
-                return getString(R.string.any);
+                return getContext().getString(R.string.any);
             }
         });
     }
@@ -192,7 +188,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
     @Override
     public void showResults() {
-        startActivity(new Intent(this, ResultActivity.class));
+        getContext().startActivity(new Intent(getContext(), ResultActivity.class));
     }
 
     public class AnimalAdapter extends ArrayAdapter<Animal> {

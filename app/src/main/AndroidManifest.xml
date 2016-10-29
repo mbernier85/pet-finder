@@ -12,17 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.SearchActivity"
-            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activity.ResultActivity" />
         <activity android:name=".activity.PetActivity" />
         <activity android:name=".activity.ImageViewerActivity" />
+        <activity android:name=".activity.HomeActivity"
+            android:windowSoftInputMode="adjustResize"/>
 
         <activity-alias
             android:enabled="true"
             android:exported="true"
             android:name=".activity.launch"
-            android:targetActivity=".activity.SearchActivity" >
+            android:targetActivity=".activity.HomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

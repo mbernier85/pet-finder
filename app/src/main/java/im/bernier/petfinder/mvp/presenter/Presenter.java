@@ -1,4 +1,4 @@
-package im.bernier.petfinder.presenter;
+package im.bernier.petfinder.mvp.presenter;
 
 /**
  * Created by micha on 2016-07-09.
