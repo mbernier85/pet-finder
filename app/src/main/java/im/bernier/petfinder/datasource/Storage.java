@@ -2,6 +2,7 @@ package im.bernier.petfinder.datasource;
 
 import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.model.Search;
+import im.bernier.petfinder.model.ShelterSearch;
 
 /**
  * Created by Michael on 2016-07-09.
@@ -13,16 +14,13 @@ public class Storage {
 
     private Pet pet;
     private Search search;
+    private ShelterSearch shelterSearch;
 
     public static Storage getInstance() {
         if (instance == null) {
             instance =  new Storage();
         }
         return instance;
-    }
-
-    public static void setInstance(Storage instance) {
-        Storage.instance = instance;
     }
 
     public Pet getPet() {
@@ -39,6 +37,14 @@ public class Storage {
 
     public void setSearch(Search search) {
         this.search = search;
+    }
+
+    public ShelterSearch getShelterSearch() {
+        return shelterSearch;
+    }
+
+    public void setShelterSearch(ShelterSearch shelterSearch) {
+        this.shelterSearch = shelterSearch;
     }
 
     private Storage() {

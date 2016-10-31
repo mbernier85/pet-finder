@@ -4,6 +4,7 @@ import im.bernier.petfinder.model.Breeds;
 import im.bernier.petfinder.model.Search;
 import im.bernier.petfinder.model.SearchResult;
 import im.bernier.petfinder.model.ShelterResult;
+import im.bernier.petfinder.model.ShelterSearch;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -48,8 +49,8 @@ public class Repository {
         return service.getBreeds(animal);
     }
 
-    public Call<ShelterResult> shelterFind(String location, String name) {
-        return service.shelterFind(location, name.isEmpty() ? null : name);
+    public Call<ShelterResult> shelterFind(ShelterSearch shelterSearch) {
+        return service.shelterFind(shelterSearch.getLocation(), shelterSearch.getName().isEmpty() ? null : shelterSearch.getName());
     }
 
 }

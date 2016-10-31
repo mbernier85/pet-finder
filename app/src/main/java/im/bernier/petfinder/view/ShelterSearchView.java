@@ -1,6 +1,7 @@
 package im.bernier.petfinder.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -10,6 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import im.bernier.petfinder.R;
+import im.bernier.petfinder.activity.ShelterResultActivity;
 import im.bernier.petfinder.mvp.presenter.ShelterSearchPresenter;
 import im.bernier.petfinder.mvp.view.IShelterSearchView;
 
@@ -63,6 +65,7 @@ public class ShelterSearchView extends FrameLayout implements IShelterSearchView
 
     @Override
     public void openShelter() {
-
+        Intent intent = ShelterResultActivity.getIntent(this.getContext(), 0);
+        getContext().startActivity(intent);
     }
 }

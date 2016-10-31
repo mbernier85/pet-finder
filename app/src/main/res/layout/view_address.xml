@@ -20,7 +20,7 @@
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
         android:textColor="@color/accent"
-        android:textSize="18sp"
+        android:textSize="@dimen/title"
         tools:text="123 example road\nMontreal, QC\nA2A2A2" />
 
     <TextView
@@ -31,7 +31,7 @@
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
         android:textColor="@color/accent"
-        android:textSize="18sp"
+        android:textSize="@dimen/title"
         tools:text="555 555-5555" />
 
     <TextView
@@ -42,7 +42,7 @@
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
         android:textColor="@color/accent"
-        android:textSize="18sp"
+        android:textSize="@dimen/title"
         tools:text="example@example.com" />
 
 </merge>
