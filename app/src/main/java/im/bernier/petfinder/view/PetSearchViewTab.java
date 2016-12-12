@@ -24,16 +24,15 @@ import im.bernier.petfinder.R;
 import im.bernier.petfinder.activity.ResultActivity;
 import im.bernier.petfinder.model.Animal;
 import im.bernier.petfinder.model.Search;
-import im.bernier.petfinder.mvp.presenter.SearchPresenter;
-import im.bernier.petfinder.mvp.view.IPetSearchView;
+import im.bernier.petfinder.mvp.presenter.PetSearchPresenter;
 
 /**
  * Created by Michael on 2016-07-12.
  */
 
-public class PetSearchView extends FrameLayout implements IPetSearchView {
+public class PetSearchViewTab extends FrameLayout implements im.bernier.petfinder.mvp.view.PetSearchView {
 
-    private SearchPresenter presenter;
+    private PetSearchPresenter presenter;
     private AnimalAdapter animalAdapter;
     private ArrayAdapter<String> breedAdapter;
     private ArrayAdapter<String> ageAdapter;
@@ -62,12 +61,12 @@ public class PetSearchView extends FrameLayout implements IPetSearchView {
         inflate(getContext(), R.layout.view_search, this);
         ButterKnife.bind(this);
 
-        presenter = new SearchPresenter();
+        presenter = new PetSearchPresenter();
         presenter.setView(this);
         presenter.onAttach();
     }
 
-    public PetSearchView(Context context) {
+    public PetSearchViewTab(Context context) {
         super(context);
         init();
     }

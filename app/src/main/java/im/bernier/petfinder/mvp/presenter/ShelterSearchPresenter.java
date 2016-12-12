@@ -2,7 +2,7 @@ package im.bernier.petfinder.mvp.presenter;
 
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.ShelterSearch;
-import im.bernier.petfinder.mvp.view.IShelterSearchView;
+import im.bernier.petfinder.mvp.view.ShelterSearchView;
 
 /**
  * Created by Michael on 2016-10-29.
@@ -10,18 +10,19 @@ import im.bernier.petfinder.mvp.view.IShelterSearchView;
 
 public class ShelterSearchPresenter implements Presenter {
 
-    private IShelterSearchView view;
+    private ShelterSearchView view;
 
-    public ShelterSearchPresenter() {
-    }
-
-    public void setView(IShelterSearchView view) {
+    public ShelterSearchPresenter(ShelterSearchView view) {
         this.view = view;
     }
 
     public void submit(String location, String name) {
-        Storage.getInstance().setShelterSearch(new ShelterSearch(location, name));
-        view.openShelter();
+        if (location.length() > 3) {
+            Storage.getInstance().setShelterSearch(new ShelterSearch(location, name));
+            view.openShelter();
+        } else {
+            view.showLocationEmpty();
+        }
     }
 
     @Override

@@ -7,7 +7,7 @@ import im.bernier.petfinder.datasource.Repository;
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.Breeds;
 import im.bernier.petfinder.model.Search;
-import im.bernier.petfinder.mvp.view.IPetSearchView;
+import im.bernier.petfinder.mvp.view.PetSearchView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,12 +17,12 @@ import timber.log.Timber;
  * Created by Michael on 2016-07-12.
  */
 
-public class SearchPresenter implements Presenter {
+public class PetSearchPresenter implements Presenter {
 
-    private IPetSearchView view;
+    private PetSearchView view;
     private final String[] animals = new String[]{"cat", "dog", "rabbit", "smallfurry", "horse", "bird", "reptile", "pig", "barnyard"};
 
-    public void setView(IPetSearchView view) {
+    public void setView(PetSearchView view) {
         this.view = view;
     }
 

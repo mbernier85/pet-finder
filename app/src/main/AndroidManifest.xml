@@ -18,7 +18,7 @@
         <activity android:name=".activity.ShelterResultActivity" />
         <activity
             android:name=".activity.HomeActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity-alias
             android:name=".activity.launch"

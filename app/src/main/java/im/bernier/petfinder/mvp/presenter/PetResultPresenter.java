@@ -5,7 +5,7 @@ import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.model.Search;
 import im.bernier.petfinder.model.SearchResult;
-import im.bernier.petfinder.mvp.view.IResultView;
+import im.bernier.petfinder.mvp.view.ResultView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,9 +15,9 @@ import timber.log.Timber;
  * Created by Michael on 2016-07-09.
  */
 
-public class ResultPresenter implements Presenter {
+public class PetResultPresenter implements Presenter {
 
-    private IResultView view;
+    private ResultView view;
 
     @Override
     public void onAttach() {
@@ -25,7 +25,7 @@ public class ResultPresenter implements Presenter {
         findPet(search);
     }
 
-    public void setView(IResultView view) {
+    public void setView(ResultView view) {
         this.view = view;
     }
 

@@ -14,15 +14,15 @@ import butterknife.ButterKnife;
 import im.bernier.petfinder.R;
 import im.bernier.petfinder.adapter.PetAdapter;
 import im.bernier.petfinder.model.Pet;
-import im.bernier.petfinder.mvp.presenter.ResultPresenter;
-import im.bernier.petfinder.mvp.view.IResultView;
+import im.bernier.petfinder.mvp.presenter.PetResultPresenter;
+import im.bernier.petfinder.mvp.view.ResultView;
 
-public class ResultActivity extends AppCompatActivity implements IResultView {
+public class ResultActivity extends AppCompatActivity implements ResultView {
 
     @BindView(R.id.result_recycler_view)
     RecyclerView recyclerView;
 
-    private ResultPresenter presenter;
+    private PetResultPresenter presenter;
     private PetAdapter petAdapter;
 
     @Override
@@ -30,7 +30,7 @@ public class ResultActivity extends AppCompatActivity implements IResultView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         ButterKnife.bind(this);
-        presenter = new ResultPresenter();
+        presenter = new PetResultPresenter();
         presenter.setView(this);
         presenter.onAttach();
 

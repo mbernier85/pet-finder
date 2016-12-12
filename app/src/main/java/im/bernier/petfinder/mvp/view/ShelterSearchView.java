@@ -4,6 +4,7 @@ package im.bernier.petfinder.mvp.view;
  * Created by Michael on 2016-10-29.
  */
 
-public interface IShelterSearchView {
+public interface ShelterSearchView {
     void openShelter();
+    void showLocationEmpty();
 }

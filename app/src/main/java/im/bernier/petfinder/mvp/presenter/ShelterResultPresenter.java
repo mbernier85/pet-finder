@@ -4,7 +4,7 @@ import im.bernier.petfinder.datasource.Repository;
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.ShelterResult;
 import im.bernier.petfinder.model.ShelterSearch;
-import im.bernier.petfinder.mvp.view.IShelterResultView;
+import im.bernier.petfinder.mvp.view.ShelterResultView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -16,9 +16,9 @@ import timber.log.Timber;
 
 public class ShelterResultPresenter implements Presenter {
 
-    private IShelterResultView view;
+    private ShelterResultView view;
 
-    public void setView(IShelterResultView view) {
+    public ShelterResultPresenter(ShelterResultView view) {
         this.view = view;
     }
 
@@ -29,6 +29,7 @@ public class ShelterResultPresenter implements Presenter {
     }
 
     private void getShelters(ShelterSearch shelterSearch) {
+        view.showProgress();
         Repository.getInstance().shelterFind(shelterSearch).enqueue(new Callback<ShelterResult>() {
             @Override
             public void onResponse(Call<ShelterResult> call, Response<ShelterResult> response) {

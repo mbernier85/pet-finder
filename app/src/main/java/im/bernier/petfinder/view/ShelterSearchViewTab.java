@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -13,36 +13,36 @@ import butterknife.OnClick;
 import im.bernier.petfinder.R;
 import im.bernier.petfinder.activity.ShelterResultActivity;
 import im.bernier.petfinder.mvp.presenter.ShelterSearchPresenter;
-import im.bernier.petfinder.mvp.view.IShelterSearchView;
+import im.bernier.petfinder.mvp.view.ShelterSearchView;
 
 /**
  * Created by Michael on 2016-10-29.
  */
 
-public class ShelterSearchView extends FrameLayout implements IShelterSearchView {
+public class ShelterSearchViewTab extends FrameLayout implements ShelterSearchView {
 
-    @BindView(R.id.search_shelter_location_text_view)
-    TextView searchTextView;
+    @BindView(R.id.search_shelter_location_edit_text)
+    EditText locationEditText;
 
-    @BindView(R.id.search_shelter_name_text_view)
-    TextView groupNameTextView;
+    @BindView(R.id.search_shelter_name_edit_text)
+    EditText nameEditText;
 
     @BindView(R.id.search_shelter_button_submit)
     Button submitButton;
 
     private ShelterSearchPresenter presenter;
 
-    public ShelterSearchView(Context context) {
+    public ShelterSearchViewTab(Context context) {
         super(context);
         init();
     }
 
-    public ShelterSearchView(Context context, AttributeSet attrs) {
+    public ShelterSearchViewTab(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public ShelterSearchView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ShelterSearchViewTab(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -51,15 +51,30 @@ public class ShelterSearchView extends FrameLayout implements IShelterSearchView
         inflate(getContext(), R.layout.view_shelter_search, this);
         ButterKnife.bind(this);
 
-        presenter = new ShelterSearchPresenter();
-        presenter.setView(this);
+        presenter = new ShelterSearchPresenter(this);
+    }
+
+    @Override
+    public void showLocationEmpty() {
+        locationEditText.setError(getContext().getString(R.string.empty_zip_error));
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
         presenter.onAttach();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        presenter.onDetach();
+        super.onDetachedFromWindow();
     }
 
     @OnClick(R.id.search_shelter_button_submit)
     void submitClick() {
-        String location = searchTextView.getText().toString().trim();
-        String name = groupNameTextView.getText().toString().trim();
+        String location = locationEditText.getText().toString().trim();
+        String name = nameEditText.getText().toString().trim();
         presenter.submit(location, name);
     }
 

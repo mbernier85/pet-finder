@@ -13,14 +13,14 @@ import butterknife.ButterKnife;
 import im.bernier.petfinder.R;
 import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.mvp.presenter.ImageViewerPresenter;
-import im.bernier.petfinder.mvp.view.IImageViewerView;
+import im.bernier.petfinder.mvp.view.ImageViewerView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Created by Michael on 2016-07-12.
  */
 
-public class ImageViewerActivity extends AppCompatActivity implements IImageViewerView {
+public class ImageViewerActivity extends AppCompatActivity implements ImageViewerView {
 
     @BindView(R.id.image_viewer_image_view)
     ImageView imageView;
