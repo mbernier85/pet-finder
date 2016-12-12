@@ -1,12 +1,14 @@
 apply plugin: "com.android.application"
 
-def supportVersion = "25.0.0";
+def supportVersion = "25.0.1";
 def firebaseVersion = "9.6.1"
 def productVersion = "1.0.0"
+def butterKnifeVersion = "8.4.0"
+def okHttpVersion = "3.5.0"
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "25.0.1"
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
@@ -71,13 +73,18 @@ dependencies {
     compile "com.google.firebase:firebase-crash:${firebaseVersion}"
 
     compile "com.squareup.retrofit2:retrofit:2.1.0"
-    compile "com.squareup.okhttp3:okhttp:3.4.1"
-    compile "com.squareup.okhttp3:logging-interceptor:3.4.1"
-    compile "com.jakewharton.timber:timber:4.1.2"
-    compile "com.jakewharton:butterknife:8.4.0"
-    compile "com.squareup.picasso:picasso:2.5.2"
+    compile "com.squareup.okhttp3:okhttp:${okHttpVersion}"
+    compile "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}"
+
+    compile "com.jakewharton.timber:timber:4.4.0"
+
+    compile "com.jakewharton:butterknife:${butterKnifeVersion}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterKnifeVersion}"
+
+    compile "com.squareup.picasso:picasso:2.6.0-SNAPSHOT"
+
     compile "com.github.chrisbanes:PhotoView:1.2.6"
-    annotationProcessor "com.jakewharton:butterknife-compiler:8.4.0"
+
     compile ("com.squareup.retrofit2:converter-simplexml:2.1.0", {
         exclude module: "stax"
         exclude module: "stax-api"
