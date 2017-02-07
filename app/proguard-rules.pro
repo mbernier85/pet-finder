@@ -74,7 +74,7 @@
 -keepclasseswithmembers class * {
     @retrofit2.http.* <methods>;
 }
--dontwarn javax.xml.stream.events.**
+-dontwarn javax.xml.stream.**
 
 -keep public class org.simpleframework.** { *; }
 -keep class org.simpleframework.xml.** { *; }
