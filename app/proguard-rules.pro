@@ -17,7 +17,7 @@
 #}
 
 -dontpreverify
--optimizations !code/simplification/arithmetic
+-dontobfuscate
 -keepattributes Exceptions,InnerClasses,Signature,LineNumberTable,*Annotation*,ElementList,Root
 
 -keep public class * extends android.app.Activity
