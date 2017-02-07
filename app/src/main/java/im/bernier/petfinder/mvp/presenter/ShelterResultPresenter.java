@@ -44,7 +44,7 @@ public class ShelterResultPresenter implements Presenter {
 
             @Override
             public void onFailure(Call<ShelterResult> call, Throwable t) {
-                Timber.e(t, "");
+                Timber.e(t);
             }
         });
     }

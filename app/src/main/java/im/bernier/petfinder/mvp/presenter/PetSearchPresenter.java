@@ -62,7 +62,7 @@ public class PetSearchPresenter implements Presenter {
 
                 @Override
                 public void onFailure(Call<Breeds> call, Throwable t) {
-                    Timber.e(t, "");
+                    Timber.e(t);
                 }
             });
         }
