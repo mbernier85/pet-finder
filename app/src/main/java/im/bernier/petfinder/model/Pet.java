@@ -1,5 +1,9 @@
 package im.bernier.petfinder.model;
 
+import android.os.Bundle;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
@@ -122,5 +126,13 @@ public class Pet {
                 ", contact=" + contact +
                 ", breeds=" + breeds +
                 '}';
+    }
+
+    public Bundle toBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
+        bundle.putString("breed", getBreed());
+        return bundle;
     }
 }

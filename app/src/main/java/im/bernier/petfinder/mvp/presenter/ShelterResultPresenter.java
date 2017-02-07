@@ -1,5 +1,8 @@
 package im.bernier.petfinder.mvp.presenter;
 
+import android.os.Bundle;
+
+import im.bernier.petfinder.Analytics;
 import im.bernier.petfinder.datasource.Repository;
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.ShelterResult;
@@ -17,6 +20,7 @@ import timber.log.Timber;
 public class ShelterResultPresenter implements Presenter {
 
     private ShelterResultView view;
+    private Analytics analytics = Analytics.getInstance();
 
     public ShelterResultPresenter(ShelterResultView view) {
         this.view = view;
@@ -33,12 +37,20 @@ public class ShelterResultPresenter implements Presenter {
         Repository.getInstance().shelterFind(shelterSearch).enqueue(new Callback<ShelterResult>() {
             @Override
             public void onResponse(Call<ShelterResult> call, Response<ShelterResult> response) {
+                Bundle bundle = new Bundle();
                 if (response.isSuccessful() && response.body().getShelters() != null) {
                     view.showResults(response.body().getShelters());
+
+                    bundle.putInt("number_of_results", response.body().getShelters().size());
+                    analytics.track("shelter_search_result", bundle);
                 } else if (response.isSuccessful()) {
                     view.showError(response.body().getHeader().getStatus().getMessage());
+                    bundle.putString("error", response.body().getHeader().getStatus().getMessage());
+                    analytics.track("shelter_search_result", bundle);
                 } else {
                     view.showError(response.message());
+                    bundle.putString("error", response.message());
+                    analytics.track("shelter_search_result", bundle);
                 }
             }
 

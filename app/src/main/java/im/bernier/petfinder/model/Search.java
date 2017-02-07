@@ -1,5 +1,7 @@
 package im.bernier.petfinder.model;
 
+import android.os.Bundle;
+
 /**
  * Created by Michael on 2016-07-13.
  */
@@ -51,5 +53,15 @@ public class Search {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public Bundle getBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putString("pet_search_location", location);
+        bundle.putString("pet_search_animal", animal.getName());
+        bundle.putString("pet_search_breed", breed);
+        bundle.putString("pet_search_age", age);
+        bundle.putString("pet_search_sex", sex);
+        return bundle;
     }
 }

@@ -16,6 +16,7 @@ import com.mikepenz.aboutlibraries.ui.LibsSupportFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import im.bernier.petfinder.Analytics;
 import im.bernier.petfinder.R;
 import im.bernier.petfinder.view.PetSearchViewTab;
 import im.bernier.petfinder.view.ShelterSearchViewTab;
@@ -37,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     FrameLayout content;
 
     private SparseArray<ViewGroup> viewGroups;
+    private Analytics analytics = Analytics.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class HomeActivity extends AppCompatActivity {
                         }
                         content.addView(viewGroups.get(action_search));
                         content.requestLayout();
+
+                        analytics.track("home_pet_search_click");
                         break;
                     case action_shelter:
                         content.removeAllViews();
@@ -67,6 +71,7 @@ public class HomeActivity extends AppCompatActivity {
                         }
                         content.addView(viewGroups.get(action_shelter));
                         content.requestLayout();
+                        analytics.track("home_shelter_search_click");
                         break;
                     case action_about:
                         content.removeAllViews();
@@ -78,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
 
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.add(R.id.content, fragment).commit();
-
+                        analytics.track("home_about_click");
                         break;
                 }
                 return true;

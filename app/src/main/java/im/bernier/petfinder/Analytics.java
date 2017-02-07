@@ -23,10 +23,13 @@ public class Analytics {
     }
 
     public void track(@NonNull String key) {
+        track(key, new Bundle());
+    }
+
+    public void track(@NonNull String key, @NonNull Bundle bundle) {
         if (firebaseAnalytics == null) {
             throw new RuntimeException("Analytics not initialized");
         }
-        Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent(key, bundle);
     }
 

@@ -1,5 +1,6 @@
 package im.bernier.petfinder.mvp.presenter;
 
+import im.bernier.petfinder.Analytics;
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.mvp.view.PetView;
@@ -12,6 +13,7 @@ public class PetPresenter implements Presenter {
 
     private PetView view;
     private Pet pet;
+    private Analytics analytics = Analytics.getInstance();
 
     public void setView(PetView view) {
         this.view = view;
@@ -30,17 +32,21 @@ public class PetPresenter implements Presenter {
 
     public void onImageClick() {
         view.openImageViewer(pet);
+        analytics.track("pet_image_click", pet.toBundle());
     }
 
     public void phoneClick() {
         view.openDialer(pet);
+        analytics.track("pet_phone_click", pet.toBundle());
     }
 
     public void emailClick() {
         view.openEmail(pet);
+        analytics.track("pet_email_click", pet.toBundle());
     }
 
     public void addressClick() {
         view.openMap(pet);
+        analytics.track("pet_address_click", pet.toBundle());
     }
 }

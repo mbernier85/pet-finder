@@ -2,6 +2,7 @@ package im.bernier.petfinder.mvp.presenter;
 
 import java.util.ArrayList;
 
+import im.bernier.petfinder.Analytics;
 import im.bernier.petfinder.R;
 import im.bernier.petfinder.datasource.Repository;
 import im.bernier.petfinder.datasource.Storage;
@@ -20,6 +21,7 @@ import timber.log.Timber;
 public class PetSearchPresenter implements Presenter {
 
     private PetSearchView view;
+    private Analytics analytics = Analytics.getInstance();
     private final String[] animals = new String[]{"cat", "dog", "rabbit", "smallfurry", "horse", "bird", "reptile", "pig", "barnyard"};
 
     public void setView(PetSearchView view) {
@@ -40,6 +42,7 @@ public class PetSearchPresenter implements Presenter {
         if (search.getLocation().length() > 4) {
             Storage.getInstance().setSearch(search);
             view.showResults();
+            analytics.track("pet_search_click", search.getBundle());
         } else {
             view.showError(R.string.empty_zip_error);
         }

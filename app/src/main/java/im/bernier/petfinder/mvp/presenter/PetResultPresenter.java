@@ -1,5 +1,8 @@
 package im.bernier.petfinder.mvp.presenter;
 
+import android.os.Bundle;
+
+import im.bernier.petfinder.Analytics;
 import im.bernier.petfinder.datasource.Repository;
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.Pet;
@@ -18,6 +21,7 @@ import timber.log.Timber;
 public class PetResultPresenter implements Presenter {
 
     private ResultView view;
+    private Analytics analytics = Analytics.getInstance();
 
     @Override
     public void onAttach() {
@@ -44,10 +48,20 @@ public class PetResultPresenter implements Presenter {
         searchResultCall.enqueue(new Callback<SearchResult>() {
             @Override
             public void onResponse(Call<SearchResult> call, Response<SearchResult> response) {
+                Bundle bundle = new Bundle();
                 if (response.isSuccessful() && response.body().getHeader().getStatus().getCode() == 100) {
                     view.updateResults(response.body().getPets());
-                } else {
+
+                    bundle.putInt("number_of_results", response.body().getPets().size());
+                    analytics.track("pet_search_result", bundle);
+                } else if (response.isSuccessful()) {
                     view.showError(response.body().getHeader().getStatus().getMessage());
+                    bundle.putString("error", response.body().getHeader().getStatus().getMessage());
+                    analytics.track("pet_search_result", bundle);
+                } else {
+                    view.showError(response.message());
+                    bundle.putString("error", response.message());
+                    analytics.track("pet_search_result", bundle);
                 }
             }
 
