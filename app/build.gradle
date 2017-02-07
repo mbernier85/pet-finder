@@ -70,7 +70,7 @@ dependencies {
     compile "com.android.support:design:${supportVersion}"
 
     compile "com.google.firebase:firebase-core:${firebaseVersion}"
-    compile "com.google.firebase:firebase-crash:${firebaseVersion}"
+    releaseCompile "com.google.firebase:firebase-crash:${firebaseVersion}"
 
     compile "com.squareup.retrofit2:retrofit:2.1.0"
     compile "com.squareup.okhttp3:okhttp:${okHttpVersion}"
