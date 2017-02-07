@@ -37,8 +37,14 @@
 
     <!--Shelter search-->
     <string name="group_name">Group name</string>
+    <string name="send_mail">Send mail…</string>
 
     <!--Shelter results-->
     <string name="no_results">No results</string>
+
+    <!-- Shelter item-->
+    <string name="directions">Directions</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
 
 </resources>

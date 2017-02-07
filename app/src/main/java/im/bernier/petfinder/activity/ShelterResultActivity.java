@@ -2,6 +2,7 @@ package im.bernier.petfinder.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -53,7 +54,37 @@ public class ShelterResultActivity extends AppCompatActivity implements ShelterR
         ButterKnife.bind(this);
 
         shelterRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ShelterAdapter();
+        adapter = new ShelterAdapter(new ShelterAdapter.ShelterItemListener() {
+            @Override
+            public void itemClick(Shelter shelter) {
+
+            }
+
+            @Override
+            public void phoneClick(Shelter shelter) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse(String.format("tel:%s", shelter.getPhone())));
+                startActivity(intent);
+            }
+
+            @Override
+            public void emailClick(Shelter shelter) {
+                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+                emailIntent.setType("plain/text");
+                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{shelter.getEmail()});
+
+                startActivity(Intent.createChooser(emailIntent, getString(R.string.send_mail)));
+            }
+
+            @Override
+            public void directionClick(Shelter shelter) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse(String.format("http://maps.google.com/maps?daddr=%s, %s", shelter.getCity(), shelter.getZip())));
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                startActivity(intent);
+            }
+        });
         shelterRecyclerView.setAdapter(adapter);
 
         presenter = new ShelterResultPresenter(this);
