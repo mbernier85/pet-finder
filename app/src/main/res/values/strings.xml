@@ -1,6 +1,7 @@
 <resources>
     <!--App global-->
     <string name="app_name">Pet Finder</string>
+    <string name="app_description">Pet finder</string>
 
     <!--Error messages-->
     <string name="empty_zip_error">You must enter a ZIP code or postal code!</string>
@@ -8,7 +9,7 @@
     <!--Home screen-->
     <string name="search">Search</string>
     <string name="shelter">Shelter</string>
-    <string name="settings">Settings</string>
+    <string name="about">About</string>
 
     <!--Pet search-->
     <string name="location_search">ZIP/postal code or city and state</string>

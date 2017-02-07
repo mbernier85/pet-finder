@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import com.mikepenz.aboutlibraries.LibsBuilder;
+import com.mikepenz.aboutlibraries.ui.LibsSupportFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,8 +20,9 @@ import im.bernier.petfinder.R;
 import im.bernier.petfinder.view.PetSearchViewTab;
 import im.bernier.petfinder.view.ShelterSearchViewTab;
 
-import static im.bernier.petfinder.R.id.action_shelter;
+import static im.bernier.petfinder.R.id.action_about;
 import static im.bernier.petfinder.R.id.action_search;
+import static im.bernier.petfinder.R.id.action_shelter;
 
 /**
  * Created by Michael on 2016-10-22.
@@ -62,6 +67,18 @@ public class HomeActivity extends AppCompatActivity {
                         }
                         content.addView(viewGroups.get(action_shelter));
                         content.requestLayout();
+                        break;
+                    case action_about:
+                        content.removeAllViews();
+                        LibsSupportFragment fragment = new LibsBuilder()
+                                .withAboutIconShown(true)
+                                .withAboutVersionShown(true)
+                                .withAboutDescription(getString(R.string.app_description))
+                                .supportFragment();
+
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.add(R.id.content, fragment).commit();
+
                         break;
                 }
                 return true;
