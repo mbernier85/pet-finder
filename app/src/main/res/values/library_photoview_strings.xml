@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-	<string name="define_photoview"></string>
-	<!-- Author section -->
-	<string name="library_photoview_author">Chris Banes</string>
-	<string name="library_photoview_authorWebsite">https://github.com/chrisbanes</string>
-	<!-- Library section -->
-	<string name="library_photoview_libraryName">PhotoView</string>
-	<string name="library_photoview_libraryDescription">Implementation of ImageView for Android that supports zooming, by various touch gestures.</string>
-	<string name="library_photoview_libraryWebsite">https://github.com/chrisbanes/PhotoView</string>
-	<string name="library_photoview_libraryVersion">1.3.1</string>
-	<!-- OpenSource section -->
-	<string name="library_photoview_isOpenSource">true</string>
-	<string name="library_photoview_repositoryLink">https://github.com/chrisbanes/PhotoView</string>
-	<!-- ClassPath for autoDetect section -->
-	<string name="library_photoview_classPath">uk.co.senab.photoview</string>
-	<!-- License section -->
-	<string name="library_photoview_licenseId">apache_2_0</string>
-	<!-- Custom variables section -->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
+    <string name="define_photoview"></string>
+    <!-- Author section -->
+    <string name="library_photoview_author">Chris Banes</string>
+    <string name="library_photoview_authorWebsite">https://github.com/chrisbanes</string>
+    <!-- Library section -->
+    <string name="library_photoview_libraryName">PhotoView</string>
+    <string name="library_photoview_libraryDescription">Implementation of ImageView for Android that supports zooming, by various touch gestures.</string>
+    <string name="library_photoview_libraryWebsite">https://github.com/chrisbanes/PhotoView</string>
+    <string name="library_photoview_libraryVersion">1.3.1</string>
+    <!-- OpenSource section -->
+    <string name="library_photoview_isOpenSource">true</string>
+    <string name="library_photoview_repositoryLink">https://github.com/chrisbanes/PhotoView</string>
+    <!-- ClassPath for autoDetect section -->
+    <string name="library_photoview_classPath">uk.co.senab.photoview</string>
+    <!-- License section -->
+    <string name="library_photoview_licenseId">apache_2_0</string>
+    <!-- Custom variables section -->
 </resources>

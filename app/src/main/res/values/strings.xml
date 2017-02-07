@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!--App global-->
     <string name="app_name">Pet Finder</string>
     <string name="app_description">Pet finder</string>
@@ -19,16 +19,16 @@
     <string name="sex">Sex</string>
     <string name="age">Age</string>
 
-    <string name="any">Any</string>
-    <string name="cat">Cat</string>
-    <string name="dog">Dog</string>
-    <string name="rabbit">Rabbit</string>
-    <string name="smallfurry">"Small &amp; Furry"</string>
-    <string name="horse">Horse</string>
-    <string name="bird">Bird</string>
-    <string name="reptile">Scales, Fins &amp; Others</string>
-    <string name="pig">Pig</string>
-    <string name="barnyard">Barnyard</string>
+    <string name="any" tools:ignore="UnusedResources">Any</string>
+    <string name="cat" tools:ignore="UnusedResources">Cat</string>
+    <string name="dog" tools:ignore="UnusedResources">Dog</string>
+    <string name="rabbit" tools:ignore="UnusedResources">Rabbit</string>
+    <string name="smallfurry" tools:ignore="UnusedResources">"Small &amp; Furry"</string>
+    <string name="horse" tools:ignore="UnusedResources">Horse</string>
+    <string name="bird" tools:ignore="UnusedResources">Bird</string>
+    <string name="reptile" tools:ignore="UnusedResources">Scales, Fins &amp; Others</string>
+    <string name="pig" tools:ignore="UnusedResources">Pig</string>
+    <string name="barnyard" tools:ignore="UnusedResources">Barnyard</string>
 
     <!--Pet result-->
 
