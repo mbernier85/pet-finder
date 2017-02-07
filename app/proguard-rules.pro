@@ -17,7 +17,7 @@
 #}
 
 -dontpreverify
--dontobfuscate
+-optimizations !code/simplification/arithmetic
 -keepattributes Exceptions,InnerClasses,Signature,LineNumberTable,*Annotation*,ElementList,Root
 
 -keep public class * extends android.app.Activity
@@ -74,7 +74,7 @@
 -keepclasseswithmembers class * {
     @retrofit2.http.* <methods>;
 }
--dontwarn javax.xml.stream.**
+-dontwarn javax.xml.stream.events.**
 
 -keep public class org.simpleframework.** { *; }
 -keep class org.simpleframework.xml.** { *; }

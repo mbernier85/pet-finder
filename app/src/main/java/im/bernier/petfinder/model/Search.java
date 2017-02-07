@@ -58,7 +58,7 @@ public class Search {
     public Bundle getBundle() {
         Bundle bundle = new Bundle();
         bundle.putString("pet_search_location", location);
-        bundle.putString("pet_search_animal", animal.getName());
+        bundle.putString("pet_search_animal", animal != null ? animal.getName() : null);
         bundle.putString("pet_search_breed", breed);
         bundle.putString("pet_search_age", age);
         bundle.putString("pet_search_sex", sex);
