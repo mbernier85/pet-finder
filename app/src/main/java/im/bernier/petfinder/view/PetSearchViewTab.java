@@ -2,29 +2,38 @@ package im.bernier.petfinder.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
-import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnEditorAction;
 import butterknife.OnItemSelected;
 import im.bernier.petfinder.R;
 import im.bernier.petfinder.activity.ResultActivity;
 import im.bernier.petfinder.model.Animal;
 import im.bernier.petfinder.model.Search;
 import im.bernier.petfinder.mvp.presenter.PetSearchPresenter;
+import timber.log.Timber;
 
 /**
  * Created by Michael on 2016-07-12.
@@ -45,9 +54,6 @@ public class PetSearchViewTab extends FrameLayout implements im.bernier.petfinde
     @BindView(R.id.search_animal_spinner)
     Spinner animalSpinner;
 
-    @BindView(R.id.search_location_text_view)
-    TextView searchLocation;
-
     @BindView(R.id.search_breed_auto_complete)
     AutoCompleteTextView breedAutoComplete;
 
@@ -57,9 +63,55 @@ public class PetSearchViewTab extends FrameLayout implements im.bernier.petfinde
     @BindView(R.id.search_sex_spinner)
     Spinner sexSpinner;
 
+    private PlaceAutocompleteFragment placeAutocompleteFragment;
+    private Geocoder geocoder;
+    private String postalCode = "";
+
     protected void init() {
         inflate(getContext(), R.layout.view_search, this);
         ButterKnife.bind(this);
+
+        geocoder = new Geocoder(getContext());
+        AutocompleteFilter autocompleteFilter = new AutocompleteFilter.Builder()
+                .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS | AutocompleteFilter.TYPE_FILTER_REGIONS)
+                .build();
+
+        placeAutocompleteFragment = (PlaceAutocompleteFragment)((FragmentActivity)getContext()).getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        placeAutocompleteFragment.setFilter(autocompleteFilter);
+        placeAutocompleteFragment.setHint(getContext().getString(R.string.location_search));
+        placeAutocompleteFragment.getView().findViewById(R.id.place_autocomplete_clear_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postalCode = "";
+                ((EditText) placeAutocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_input)).setText("");
+                view.setVisibility(View.GONE);
+            }
+        });
+        placeAutocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(place.getLatLng().latitude, place.getLatLng().longitude, 5);
+                    for (Address address: addresses) {
+                        if (address.getPostalCode() != null && address.getPostalCode().length() > 3) {
+                            postalCode = address.getPostalCode();
+                            return;
+                        }
+                    }
+                    if (postalCode == null || postalCode.length() < 4) {
+                        showError(getContext().getString(R.string.empty_zip_error));
+                    }
+                } catch (IOException e) {
+                    showError(e.getMessage());
+                    Timber.e(e);
+                }
+            }
+
+            @Override
+            public void onError(Status status) {
+                Timber.e(status.getStatusMessage());
+            }
+        });
 
         presenter = new PetSearchPresenter();
         presenter.setView(this);
@@ -93,20 +145,9 @@ public class PetSearchViewTab extends FrameLayout implements im.bernier.petfinde
         sexSpinner.setAdapter(sexAdapter);
     }
 
-    @OnEditorAction(value = R.id.search_location_text_view)
-    public boolean onSearchTextView(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-            InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-            searchClick();
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public void showError(String message) {
-        Snackbar.make(searchLocation, message, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(animalSpinner, message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -146,7 +187,7 @@ public class PetSearchViewTab extends FrameLayout implements im.bernier.petfinde
     @OnClick(R.id.search_submit)
     void searchClick() {
         Search search = new Search();
-        search.setLocation(searchLocation.getText().toString().trim());
+        search.setLocation(postalCode);
 
         int animalPosition = animalSpinner.getSelectedItemPosition();
         if (animalPosition > 0) {
