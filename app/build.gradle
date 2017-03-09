@@ -21,9 +21,9 @@ android {
             keyAlias System.getenv("KEY_ALIAS")
             keyPassword System.getenv("KEY_PASSWORD")
         }
-        if(new File("../project.properties").exists()) {
+        if(file("../project.properties").exists()) {
             Properties props = new Properties()
-            props.load(new FileInputStream("../project.properties"))
+            props.load(new FileInputStream(file("../project.properties")))
 
             debug {
                 storeFile file("../debug_keystore.jks")
