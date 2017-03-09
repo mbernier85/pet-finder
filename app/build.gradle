@@ -21,6 +21,17 @@ android {
             keyAlias System.getenv("KEY_ALIAS")
             keyPassword System.getenv("KEY_PASSWORD")
         }
+        if(new File("../project.properties").exists()) {
+            Properties props = new Properties()
+            props.load(new FileInputStream("../project.properties"))
+
+            debug {
+                storeFile file("../debug_keystore.jks")
+                storePassword props['keyPassword']
+                keyAlias props['keyAlias']
+                keyPassword props['keyPassword']
+            }
+        }
     }
 
     defaultConfig {
@@ -45,6 +56,7 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
         debug {
+            signingConfig signingConfigs.debug
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
             debuggable true

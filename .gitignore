@@ -50,3 +50,4 @@ captures/
 .idea/encodings.xml
 .idea/gradle.xml
 .idea/misc.xml
+project.properties
