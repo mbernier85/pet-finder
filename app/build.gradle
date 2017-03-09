@@ -1,9 +1,9 @@
 apply plugin: "com.android.application"
 apply plugin: "com.google.firebase.firebase-crash"
 
-def supportVersion = "25.1.1";
-def firebaseVersion = "9.6.1"
-def productVersion = "1.0.0"
+def supportVersion = "25.2.0";
+def firebaseVersion = "10.2.0"
+def productVersion = "1.1.0"
 def butterKnifeVersion = "8.5.1"
 def okHttpVersion = "3.6.0"
 
@@ -70,6 +70,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:${supportVersion}"
     compile "com.android.support:design:${supportVersion}"
 
+    compile "com.google.android.gms:play-services-places:${firebaseVersion}"
     compile "com.google.firebase:firebase-core:${firebaseVersion}"
     releaseCompile "com.google.firebase:firebase-crash:${firebaseVersion}"
 
