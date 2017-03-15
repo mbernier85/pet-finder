@@ -25,4 +25,5 @@ public interface PetView {
     void openEmail(Pet pet);
     void openDialer(Pet pet);
     void openMap(Pet pet);
+    void doFinish();
 }
