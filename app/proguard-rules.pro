@@ -18,7 +18,10 @@
 
 -dontpreverify
 -optimizations !code/simplification/arithmetic
--keepattributes Exceptions,InnerClasses,Signature,LineNumberTable,*Annotation*,ElementList,Root
+-keepattributes Exceptions,InnerClasses,Signature,*Annotation*,ElementList,Root
+
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
 
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
