@@ -21,4 +21,5 @@ import im.bernier.petfinder.model.Pet;
 
 public interface ImageViewerView {
     void updateUi(Pet pet);
+    void doFinish();
 }

@@ -53,6 +53,10 @@ public class PetResultPresenter implements Presenter {
 
     public void onPetClick(Pet pet) {
         Storage.getInstance().setPet(pet);
+        if (pet == null) {
+            view.doFinish();
+            return;
+        }
         view.openPet(pet);
     }
 

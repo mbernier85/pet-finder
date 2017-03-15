@@ -56,6 +56,11 @@ public class ImageViewerActivity extends AppCompatActivity implements ImageViewe
     }
 
     @Override
+    public void doFinish() {
+        finish();
+    }
+
+    @Override
     public void updateUi(Pet pet) {
         imageViewAdapter.update(pet.getMedia().getHiResPhotos());
     }

@@ -60,6 +60,11 @@ public class ResultActivity extends AppCompatActivity implements ResultView {
     }
 
     @Override
+    public void doFinish() {
+        finish();
+    }
+
+    @Override
     public void showError(String error) {
         Snackbar.make(recyclerView, error, Snackbar.LENGTH_LONG).show();
     }

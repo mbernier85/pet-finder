@@ -25,4 +25,5 @@ public interface ShelterResultView {
     void showResults(List<Shelter> shelters);
     void showError(String error);
     void showProgress();
+    void doFinish();
 }

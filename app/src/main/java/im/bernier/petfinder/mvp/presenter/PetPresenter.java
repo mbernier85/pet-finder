@@ -40,6 +40,10 @@ public class PetPresenter implements Presenter {
     @Override
     public void onAttach() {
         pet = Storage.getInstance().getPet();
+        if (pet == null) {
+            view.doFinish();
+            return;
+        }
         view.updateUi(pet);
     }
 

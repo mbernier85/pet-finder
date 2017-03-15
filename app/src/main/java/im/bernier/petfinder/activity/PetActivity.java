@@ -104,6 +104,11 @@ public class PetActivity extends AppCompatActivity  implements PetView {
         contactPhoneTextView.setText(pet.getContact().getPhone());
     }
 
+    @Override
+    public void doFinish() {
+        finish();
+    }
+
     @OnClick(R.id.contact_email)
     void emailClick() {
         presenter.emailClick();

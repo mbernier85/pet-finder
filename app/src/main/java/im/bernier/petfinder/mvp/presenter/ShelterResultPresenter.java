@@ -42,6 +42,10 @@ public class ShelterResultPresenter implements Presenter {
     @Override
     public void onAttach() {
         ShelterSearch shelterSearch = Storage.getInstance().getShelterSearch();
+        if (shelterSearch == null) {
+            view.doFinish();
+            return;
+        }
         getShelters(shelterSearch);
     }
 

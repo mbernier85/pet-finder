@@ -32,6 +32,10 @@ public class ImageViewerPresenter implements Presenter {
     @Override
     public void onAttach() {
         Pet pet = Storage.getInstance().getPet();
+        if (pet == null) {
+            view.doFinish();
+            return;
+        }
         view.updateUi(pet);
     }
 
