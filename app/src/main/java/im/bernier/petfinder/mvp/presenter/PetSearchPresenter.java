@@ -13,6 +13,8 @@
 
 package im.bernier.petfinder.mvp.presenter;
 
+import com.google.android.gms.location.places.Place;
+
 import java.util.ArrayList;
 
 import im.bernier.petfinder.Analytics;
@@ -59,6 +61,10 @@ public class PetSearchPresenter implements Presenter {
         } else {
             view.showError(R.string.empty_zip_error);
         }
+    }
+
+    public void placeSelected(Place place) {
+        analytics.track("shelter_place_selected", Analytics.PlaceToBundle(place));
     }
 
     public void loadBreed(String animal) {

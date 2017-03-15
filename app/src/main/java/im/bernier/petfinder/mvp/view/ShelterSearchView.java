@@ -19,5 +19,5 @@ package im.bernier.petfinder.mvp.view;
 
 public interface ShelterSearchView {
     void openShelter();
-    void showLocationEmpty();
+    void showError(int id);
 }

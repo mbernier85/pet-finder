@@ -4,7 +4,7 @@
     <string name="app_description">Pet finder</string>
 
     <!--Error messages-->
-    <string name="empty_zip_error">You must enter a ZIP code or postal code!</string>
+    <string name="empty_zip_error">You must search for a location</string>
 
     <!--Home screen-->
     <string name="search">Search</string>
@@ -12,7 +12,7 @@
     <string name="about">About</string>
 
     <!--Pet search-->
-    <string name="location_search">ZIP/postal code or city and state</string>
+    <string name="location_search">Search address or region</string>
 
     <string name="animal">Animal</string>
     <string name="breed">Breed</string>

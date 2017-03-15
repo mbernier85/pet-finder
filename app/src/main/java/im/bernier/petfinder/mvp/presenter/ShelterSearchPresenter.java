@@ -15,7 +15,10 @@ package im.bernier.petfinder.mvp.presenter;
 
 import android.os.Bundle;
 
+import com.google.android.gms.location.places.Place;
+
 import im.bernier.petfinder.Analytics;
+import im.bernier.petfinder.R;
 import im.bernier.petfinder.datasource.Storage;
 import im.bernier.petfinder.model.ShelterSearch;
 import im.bernier.petfinder.mvp.view.ShelterSearchView;
@@ -43,8 +46,12 @@ public class ShelterSearchPresenter implements Presenter {
             bundle.putString("shelter_name", name);
             analytics.track("search_shelter_click",bundle );
         } else {
-            view.showLocationEmpty();
+            view.showError(R.string.empty_zip_error);
         }
+    }
+
+    public void placeSelected(Place place) {
+        analytics.track("shelter_place_selected", Analytics.PlaceToBundle(place));
     }
 
     @Override
