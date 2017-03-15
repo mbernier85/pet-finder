@@ -104,6 +104,7 @@ public class PetSearchViewTab extends FrameLayout implements im.bernier.petfinde
             @Override
             public void onPlaceSelected(Place place) {
                 try {
+                    presenter.placeSelected(place);
                     List<Address> addresses = geocoder.getFromLocation(place.getLatLng().latitude, place.getLatLng().longitude, 5);
                     for (Address address: addresses) {
                         if (address.getPostalCode() != null && address.getPostalCode().length() > 3) {

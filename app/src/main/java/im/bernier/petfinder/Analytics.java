@@ -16,6 +16,7 @@ package im.bernier.petfinder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.google.android.gms.location.places.Place;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
@@ -48,6 +49,13 @@ public class Analytics {
 
     void init(@NonNull FirebaseAnalytics firebaseAnalytics) {
         this.firebaseAnalytics = firebaseAnalytics;
+    }
+
+    public static Bundle PlaceToBundle(Place place) {
+        Bundle bundle = new Bundle();
+        bundle.putString("place_address", place.getAddress().toString());
+        bundle.putString("place_name", place.getName().toString());
+        return bundle;
     }
 
     private Analytics() {
