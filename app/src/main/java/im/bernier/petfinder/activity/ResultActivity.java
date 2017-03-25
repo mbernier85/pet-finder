@@ -16,7 +16,7 @@ package im.bernier.petfinder.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -30,7 +30,7 @@ import im.bernier.petfinder.model.Pet;
 import im.bernier.petfinder.mvp.presenter.PetResultPresenter;
 import im.bernier.petfinder.mvp.view.ResultView;
 
-public class ResultActivity extends AppCompatActivity implements ResultView {
+public class ResultActivity extends BaseActivity implements ResultView {
 
     @BindView(R.id.result_recycler_view)
     RecyclerView recyclerView;
@@ -47,7 +47,11 @@ public class ResultActivity extends AppCompatActivity implements ResultView {
         presenter.setView(this);
         presenter.onAttach();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (isTablet()) {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false));
+        } else {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        }
         recyclerView.setHasFixedSize(true);
         petAdapter = new PetAdapter();
         recyclerView.setAdapter(petAdapter);
@@ -58,6 +62,8 @@ public class ResultActivity extends AppCompatActivity implements ResultView {
             }
         });
     }
+
+
 
     @Override
     public void doFinish() {

@@ -18,7 +18,6 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,7 +36,7 @@ import im.bernier.petfinder.mvp.view.PetView;
  * Created by Michael on 2016-07-09.
  */
 
-public class PetActivity extends AppCompatActivity  implements PetView {
+public class PetActivity extends BaseActivity  implements PetView {
 
     @BindView(R.id.pet_breed)
     TextView breedTextView;
