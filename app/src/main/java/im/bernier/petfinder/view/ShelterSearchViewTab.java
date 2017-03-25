@@ -17,10 +17,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -59,16 +60,6 @@ public class ShelterSearchViewTab extends FrameLayout implements ShelterSearchVi
 
     public ShelterSearchViewTab(Context context) {
         super(context);
-        init();
-    }
-
-    public ShelterSearchViewTab(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
-
-    public ShelterSearchViewTab(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
         init();
     }
 
@@ -119,7 +110,62 @@ public class ShelterSearchViewTab extends FrameLayout implements ShelterSearchVi
             }
         });
 
+        setId(R.id.shelter_search_view);
+        setSaveEnabled(true);
+
         presenter = new ShelterSearchPresenter(this);
+    }
+
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable parcelable = super.onSaveInstanceState();
+        ViewState viewState = new ViewState(parcelable);
+        viewState.postalCode = this.postalCode;
+        return viewState;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        //begin boilerplate code so parent classes can restore state
+        if(!(state instanceof ViewState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
+        ViewState viewState = (ViewState)state;
+        super.onRestoreInstanceState(viewState.getSuperState());
+
+        this.postalCode = viewState.postalCode;
+    }
+
+    static class ViewState extends BaseSavedState {
+        private String postalCode;
+
+        ViewState(Parcel source) {
+            super(source);
+            postalCode = source.readString();
+        }
+
+        ViewState(Parcelable superState) {
+            super(superState);
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeString(postalCode);
+        }
+
+        public static final Parcelable.Creator<ViewState> CREATOR =
+                new Parcelable.Creator<ViewState>() {
+                    public ViewState createFromParcel(Parcel in) {
+                        return new ViewState(in);
+                    }
+                    public ViewState[] newArray(int size) {
+                        return new ViewState[size];
+                    }
+                };
     }
 
     @Override

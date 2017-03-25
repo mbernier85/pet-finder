@@ -16,7 +16,6 @@ package im.bernier.petfinder.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -33,7 +32,7 @@ import im.bernier.petfinder.mvp.view.ImageViewerView;
  * Created by Michael on 2016-07-12.
  */
 
-public class ImageViewerActivity extends AppCompatActivity implements ImageViewerView {
+public class ImageViewerActivity extends BaseActivity implements ImageViewerView {
 
     @BindView(R.id.activity_image_view_pager)
     ViewPager viewPager;

@@ -19,7 +19,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -40,7 +40,7 @@ import im.bernier.petfinder.mvp.view.ShelterResultView;
  * Created by Michael on 2016-10-30.
  */
 
-public class ShelterResultActivity extends AppCompatActivity implements ShelterResultView {
+public class ShelterResultActivity extends BaseActivity implements ShelterResultView {
 
     @BindView(R.id.activity_shelter_recycler_view)
     RecyclerView shelterRecyclerView;
@@ -71,7 +71,11 @@ public class ShelterResultActivity extends AppCompatActivity implements ShelterR
         setContentView(R.layout.activity_shelter_result);
         ButterKnife.bind(this);
 
-        shelterRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (isTablet()) {
+            shelterRecyclerView.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false));
+        } else {
+            shelterRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        }
         adapter = new ShelterAdapter(new ShelterAdapter.ShelterItemListener() {
             @Override
             public void itemClick(Shelter shelter) {

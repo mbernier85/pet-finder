@@ -1,9 +1,9 @@
 apply plugin: "com.android.application"
 apply plugin: "com.google.firebase.firebase-crash"
 
-def supportVersion = "25.2.0";
-def firebaseVersion = "10.2.0"
-def productVersion = "1.1.0"
+def supportVersion = "25.3.0";
+def firebaseVersion = "10.2.1"
+def productVersion = "1.2.0"
 def butterKnifeVersion = "8.5.1"
 def okHttpVersion = "3.6.0"
 
