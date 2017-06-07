@@ -69,7 +69,7 @@ public class PetSearchPresenter implements Presenter {
 
     public void loadBreed(String animal) {
         if (animal == null ) {
-            view.updateBreeds(new ArrayList<String>());
+            view.updateBreeds(new ArrayList<>());
         } else {
             Call<Breeds> call = Repository.getInstance().loadBreeds(animal);
             call.enqueue(new Callback<Breeds>() {

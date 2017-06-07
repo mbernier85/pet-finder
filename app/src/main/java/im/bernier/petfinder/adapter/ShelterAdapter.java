@@ -59,38 +59,26 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ShelterV
     public ShelterAdapter.ShelterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_shelter, parent, false);
         final ShelterViewHolder holder = new ShelterViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.itemClick(shelters.get(holder.getAdapterPosition()));
-                }
+        view.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.itemClick(shelters.get(holder.getAdapterPosition()));
             }
         });
-        holder.directionsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.directionClick(shelters.get(holder.getAdapterPosition()));
-                }
+        holder.directionsButton.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.directionClick(shelters.get(holder.getAdapterPosition()));
             }
         });
 
-        holder.emailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.emailClick(shelters.get(holder.getAdapterPosition()));
-                }
+        holder.emailButton.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.emailClick(shelters.get(holder.getAdapterPosition()));
             }
         });
 
-        holder.phoneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.phoneClick(shelters.get(holder.getAdapterPosition()));
-                }
+        holder.phoneButton.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.phoneClick(shelters.get(holder.getAdapterPosition()));
             }
         });
 

@@ -75,13 +75,10 @@ public class ShelterSearchViewTab extends FrameLayout implements ShelterSearchVi
         placeAutocompleteFragment = (PlaceAutocompleteFragment)((FragmentActivity)getContext()).getFragmentManager().findFragmentById(R.id.shelter_place_autocomplete_fragment);
         placeAutocompleteFragment.setFilter(autocompleteFilter);
         placeAutocompleteFragment.setHint(getContext().getString(R.string.location_search));
-        placeAutocompleteFragment.getView().findViewById(R.id.place_autocomplete_clear_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                postalCode = "";
-                ((EditText) placeAutocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_input)).setText("");
-                view.setVisibility(View.GONE);
-            }
+        placeAutocompleteFragment.getView().findViewById(R.id.place_autocomplete_clear_button).setOnClickListener(view -> {
+            postalCode = "";
+            ((EditText) placeAutocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_input)).setText("");
+            view.setVisibility(View.GONE);
         });
         placeAutocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override

@@ -46,7 +46,7 @@ public class ImageViewerActivity extends BaseActivity implements ImageViewerView
         setContentView(R.layout.activity_image_view);
         ButterKnife.bind(this);
 
-        imageViewAdapter = new ImageViewAdapter(this, new ArrayList<Photo>());
+        imageViewAdapter = new ImageViewAdapter(this, new ArrayList<>());
         viewPager.setAdapter(imageViewAdapter);
 
         presenter = new ImageViewerPresenter();

@@ -50,12 +50,9 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
     @Override
     public PetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final PetViewHolder holder = new PetViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pet, parent, false));
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (petClick != null) {
-                    petClick.onClick(holder.pet);
-                }
+        holder.cardView.setOnClickListener(view -> {
+            if (petClick != null) {
+                petClick.onClick(holder.pet);
             }
         });
         return holder;
@@ -99,7 +96,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
 
         void bind(Pet pet) {
             this.pet = pet;
-            petName.setText(pet.getName() + ", " + pet.getAge() + ", " + pet.getSex());
+            petName.setText(String.format("%s, %s, %s", pet.getName(), pet.getAge(), pet.getSex()));
             breed.setText(pet.getBreed());
             String url = pet.getMedia().getThumbnail();
             if (url != null) {

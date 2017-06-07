@@ -1,18 +1,18 @@
 apply plugin: "com.android.application"
 apply plugin: "com.google.firebase.firebase-crash"
 
-def supportVersion = "25.3.0";
-def firebaseVersion = "10.2.1"
+def supportVersion = "25.3.1"
+def firebaseVersion = "10.2.6"
 def productVersion = "1.2.0"
 def butterKnifeVersion = "8.5.1"
 def okHttpVersion = "3.6.0"
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "26.0.0-rc2"
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     signingConfigs {
         release {
@@ -41,13 +41,8 @@ android {
         versionCode 9000
         versionName "${productVersion}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        android.applicationVariants.all { variant ->
-            variant.outputs.each { output ->
-                def file = output.outputFile
-                output.outputFile = new File(file.parent, file.name.replace(".apk", "-" + productVersion + ".apk"))
-            }
-        }
     }
+
     buildTypes {
         release {
             signingConfig signingConfigs.release
@@ -62,11 +57,16 @@ android {
             debuggable true
         }
     }
+
+    flavorDimensions "store"
+
     productFlavors {
         dev {
+            dimension "store"
             minSdkVersion 24
         }
         prod {
+            dimension "store"
             versionCode 'git rev-list HEAD --count --no-merges'.execute().text.trim().toInteger()
         }
     }

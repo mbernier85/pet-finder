@@ -55,12 +55,7 @@ public class ResultActivity extends BaseActivity implements ResultView {
         recyclerView.setHasFixedSize(true);
         petAdapter = new PetAdapter();
         recyclerView.setAdapter(petAdapter);
-        petAdapter.setPetClick(new PetAdapter.PetClick() {
-            @Override
-            public void onClick(Pet pet) {
-                presenter.onPetClick(pet);
-            }
-        });
+        petAdapter.setPetClick(pet -> presenter.onPetClick(pet));
     }
 
 

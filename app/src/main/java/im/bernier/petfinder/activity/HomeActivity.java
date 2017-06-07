@@ -62,44 +62,41 @@ public class HomeActivity extends BaseActivity {
         viewGroups.append(action_search, new PetSearchViewTab(HomeActivity.this));
         content.addView(viewGroups.get(action_search));
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case action_search:
-                        content.removeAllViews();
-                        if (viewGroups.get(action_search) == null) {
-                            viewGroups.append(action_search, new PetSearchViewTab(HomeActivity.this));
-                        }
-                        content.addView(viewGroups.get(action_search));
-                        content.requestLayout();
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case action_search:
+                    content.removeAllViews();
+                    if (viewGroups.get(action_search) == null) {
+                        viewGroups.append(action_search, new PetSearchViewTab(HomeActivity.this));
+                    }
+                    content.addView(viewGroups.get(action_search));
+                    content.requestLayout();
 
-                        analytics.track("home_pet_search_click");
-                        break;
-                    case action_shelter:
-                        content.removeAllViews();
-                        if (viewGroups.get(action_shelter) == null) {
-                            viewGroups.append(action_shelter, new ShelterSearchViewTab(HomeActivity.this));
-                        }
-                        content.addView(viewGroups.get(action_shelter));
-                        content.requestLayout();
-                        analytics.track("home_shelter_search_click");
-                        break;
-                    case action_about:
-                        content.removeAllViews();
-                        LibsSupportFragment fragment = new LibsBuilder()
-                                .withAboutIconShown(true)
-                                .withAboutVersionShown(true)
-                                .withAboutDescription(getString(R.string.app_description))
-                                .supportFragment();
+                    analytics.track("home_pet_search_click");
+                    break;
+                case action_shelter:
+                    content.removeAllViews();
+                    if (viewGroups.get(action_shelter) == null) {
+                        viewGroups.append(action_shelter, new ShelterSearchViewTab(HomeActivity.this));
+                    }
+                    content.addView(viewGroups.get(action_shelter));
+                    content.requestLayout();
+                    analytics.track("home_shelter_search_click");
+                    break;
+                case action_about:
+                    content.removeAllViews();
+                    LibsSupportFragment fragment = new LibsBuilder()
+                            .withAboutIconShown(true)
+                            .withAboutVersionShown(true)
+                            .withAboutDescription(getString(R.string.app_description))
+                            .supportFragment();
 
-                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.add(R.id.content, fragment).commit();
-                        analytics.track("home_about_click");
-                        break;
-                }
-                return true;
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.add(R.id.content, fragment).commit();
+                    analytics.track("home_about_click");
+                    break;
             }
+            return true;
         });
     }
 }
