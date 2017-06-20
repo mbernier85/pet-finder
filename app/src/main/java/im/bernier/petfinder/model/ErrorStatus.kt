@@ -13,12 +13,12 @@
 
 package im.bernier.petfinder.model
 
+import org.simpleframework.xml.Element
+import org.simpleframework.xml.Root
+
 /**
- * Created by Michael on 2016-07-12.
+ * Created by micha on 2016-08-08.
  */
 
-data class Animal(var name: String? = "", var key: String? = "") {
-    override fun toString(): String {
-        return name.orEmpty()
-    }
-}
+@Root(name = "status", strict = false)
+data class ErrorStatus(@field:Element(required = false) var message: String? = null, @field:Element var code: Int = 0)

@@ -1,14 +1,14 @@
 apply plugin: "com.android.application"
 apply plugin: 'kotlin-android'
 
-def supportVersion = "25.3.1"
+def supportVersion = "26.0.0-beta2"
 def firebaseVersion = "10.2.6"
 def productVersion = "1.2.0"
 def butterKnifeVersion = "8.6.0"
-def okHttpVersion = "3.6.0"
+def okHttpVersion = "3.8.1"
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion "26.0.0-rc2"
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -37,7 +37,7 @@ android {
     defaultConfig {
         applicationId "im.bernier.petfinder"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 9000
         versionName "${productVersion}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -63,7 +63,6 @@ android {
     productFlavors {
         dev {
             dimension "store"
-            minSdkVersion 24
         }
         prod {
             dimension "store"
@@ -86,7 +85,7 @@ dependencies {
     implementation "com.google.firebase:firebase-core:${firebaseVersion}"
     releaseImplementation "com.google.firebase:firebase-crash:${firebaseVersion}"
 
-    implementation "com.squareup.retrofit2:retrofit:2.1.0"
+    implementation "com.squareup.retrofit2:retrofit:2.3.0"
     implementation "com.squareup.okhttp3:okhttp:${okHttpVersion}"
     implementation "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}"
 

@@ -11,26 +11,16 @@
  * You may add additional accurate notices of copyright ownership.
  */
 
-package im.bernier.petfinder.model;
+package im.bernier.petfinder.model
 
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
+import org.simpleframework.xml.Attribute
+import org.simpleframework.xml.Element
+import org.simpleframework.xml.Root
+import org.simpleframework.xml.Text
 
 /**
- * Created by micha on 2016-08-08.
+ * Created by micha on 2016-07-09.
  */
 
-@Root(name = "header", strict = false)
-public class ErrorHeader {
-
-    @Element
-    private ErrorStatus status;
-
-    public ErrorStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ErrorStatus status) {
-        this.status = status;
-    }
-}
+@Root(name = "photo", strict = false)
+data class Photo(@field:Attribute var id: Int = 0, @field:Attribute var size: String? = "", @field:Text var value: String? = "")
