@@ -94,10 +94,10 @@ class PetActivity : BaseActivity(), PetView {
             Picasso.with(this).load(url).resize(size.x, height.toInt()).centerCrop().into(petImageView)
         }
 
-        contactNameTextView.text = pet.contact!!.name
-        contactAddressTextView.text = pet.contact!!.address
-        contactEmailTextView.text = pet.contact!!.email
-        contactPhoneTextView.text = pet.contact!!.phone
+        contactNameTextView.text = pet.contact?.name
+        contactAddressTextView.text = pet.contact?.address
+        contactEmailTextView.text = pet.contact?.email
+        contactPhoneTextView.text = pet.contact?.phone
     }
 
     override fun doFinish() {

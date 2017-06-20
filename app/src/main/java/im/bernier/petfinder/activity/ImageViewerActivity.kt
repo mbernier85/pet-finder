@@ -57,6 +57,6 @@ class ImageViewerActivity : BaseActivity(), ImageViewerView {
     }
 
     override fun updateUi(pet: Pet) {
-        imageViewAdapter.update(pet.media?.hiResPhotos)
+        pet.media?.hiResPhotos?.let { imageViewAdapter.update(it) }
     }
 }

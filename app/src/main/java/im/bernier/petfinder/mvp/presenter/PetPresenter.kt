@@ -24,9 +24,10 @@ import im.bernier.petfinder.mvp.view.PetView
 
 class PetPresenter : Presenter {
 
-    private var view: PetView? = null
     lateinit var pet: Pet
     private val analytics = Analytics.instance
+
+    private var view: PetView? = null
 
     fun setView(view: PetView) {
         this.view = view
@@ -37,7 +38,8 @@ class PetPresenter : Presenter {
     }
 
     override fun onAttach() {
-        pet = Storage.instance.pet!!
+        pet = Storage.instance.pet.takeIf { it != null } ?: Pet()
+
         view?.updateUi(pet)
     }
 

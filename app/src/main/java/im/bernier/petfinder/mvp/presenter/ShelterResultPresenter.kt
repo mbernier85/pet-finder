@@ -47,14 +47,14 @@ class ShelterResultPresenter(private val view: ShelterResultView) : Presenter {
         Repository.instance.shelterFind(shelterSearch).enqueue(object : Callback<ShelterResult> {
             override fun onResponse(call: Call<ShelterResult>, response: Response<ShelterResult>) {
                 val bundle = Bundle()
-                if (response.isSuccessful && response.body()!!.shelters != null) {
-                    view.showResults(response.body()!!.shelters!!)
+                if (response.isSuccessful && response.body()?.shelters != null) {
+                    view.showResults(response.body()?.shelters.orEmpty())
 
-                    bundle.putInt("number_of_results", response.body()!!.shelters!!.size)
+                    response.body()?.shelters?.size?.let { bundle.putInt("number_of_results", it) }
                     analytics.track("shelter_search_result", bundle)
                 } else if (response.isSuccessful) {
-                    view.showError(response.body()!!.header!!.status!!.message!!)
-                    bundle.putString("error", response.body()!!.header!!.status!!.message)
+                    response.body()?.header?.status?.message?.let { view.showError(it) }
+                    bundle.putString("error", response.body()?.header?.status?.message)
                     analytics.track("shelter_search_result", bundle)
                 } else {
                     view.showError(response.message())

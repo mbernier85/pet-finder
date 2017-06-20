@@ -33,7 +33,7 @@ data class Pet(@field:Element var id: String? = null, @field:Element var name: S
     val breed: String
         get() {
             val stringBuilder = StringBuilder()
-            for (i in breeds!!.indices) {
+            breeds?.indices?.forEach { i ->
                 stringBuilder.append(breeds!![i])
                 stringBuilder.append(" ")
             }

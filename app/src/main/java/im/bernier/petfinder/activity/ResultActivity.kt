@@ -54,7 +54,12 @@ class ResultActivity : BaseActivity(), ResultView {
         recyclerView.setHasFixedSize(true)
         petAdapter = PetAdapter()
         recyclerView.adapter = petAdapter
-        petAdapter.setPetClick { pet -> presenter.onPetClick(pet) }
+        petAdapter.setPetClick(object: PetAdapter.PetClick {
+            override fun onClick(pet: Pet) {
+                presenter.onPetClick(pet)
+            }
+
+        })
     }
 
 
