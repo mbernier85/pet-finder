@@ -11,13 +11,17 @@
  * You may add additional accurate notices of copyright ownership.
  */
 
-package im.bernier.petfinder.mvp.view;
+package im.bernier.petfinder.mvp.view
+
+import im.bernier.petfinder.model.Shelter
 
 /**
- * Created by Michael on 2016-10-29.
+ * Created by Michael on 2016-10-30.
  */
 
-public interface ShelterSearchView {
-    void openShelter();
-    void showError(int id);
+interface ShelterResultView {
+    fun showResults(shelters: List<Shelter>)
+    fun showError(error: String)
+    fun showProgress()
+    fun doFinish()
 }

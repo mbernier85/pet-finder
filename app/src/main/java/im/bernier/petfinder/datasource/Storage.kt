@@ -11,19 +11,25 @@
  * You may add additional accurate notices of copyright ownership.
  */
 
-package im.bernier.petfinder.mvp.view;
+package im.bernier.petfinder.datasource
 
-import im.bernier.petfinder.model.Pet;
+import im.bernier.petfinder.model.Pet
+import im.bernier.petfinder.model.Search
+import im.bernier.petfinder.model.ShelterSearch
 
 /**
  * Created by Michael on 2016-07-09.
  */
 
-public interface PetView {
-    void updateUi(Pet pet);
-    void openImageViewer(Pet pet);
-    void openEmail(Pet pet);
-    void openDialer(Pet pet);
-    void openMap(Pet pet);
-    void doFinish();
+class Storage private constructor() {
+
+    private object Holder { val INSTANCE = Storage() }
+
+    var pet: Pet? = null
+    var search: Search? = null
+    var shelterSearch: ShelterSearch? = null
+
+    companion object {
+        val instance: Storage by lazy { Holder.INSTANCE }
+    }
 }

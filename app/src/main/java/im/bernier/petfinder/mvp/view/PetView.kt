@@ -11,15 +11,19 @@
  * You may add additional accurate notices of copyright ownership.
  */
 
-package im.bernier.petfinder.mvp.view;
+package im.bernier.petfinder.mvp.view
 
-import im.bernier.petfinder.model.Pet;
+import im.bernier.petfinder.model.Pet
 
 /**
- * Created by Michael on 2016-07-12.
+ * Created by Michael on 2016-07-09.
  */
 
-public interface ImageViewerView {
-    void updateUi(Pet pet);
-    void doFinish();
+interface PetView {
+    fun updateUi(pet: Pet)
+    fun openImageViewer()
+    fun openEmail(pet: Pet)
+    fun openDialer(pet: Pet)
+    fun openMap(pet: Pet)
+    fun doFinish()
 }

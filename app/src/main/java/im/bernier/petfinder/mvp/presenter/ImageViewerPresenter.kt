@@ -11,36 +11,34 @@
  * You may add additional accurate notices of copyright ownership.
  */
 
-package im.bernier.petfinder.mvp.presenter;
+package im.bernier.petfinder.mvp.presenter
 
-import im.bernier.petfinder.datasource.Storage;
-import im.bernier.petfinder.model.Pet;
-import im.bernier.petfinder.mvp.view.ImageViewerView;
+import im.bernier.petfinder.datasource.Storage
+import im.bernier.petfinder.model.Pet
+import im.bernier.petfinder.mvp.view.ImageViewerView
 
 /**
  * Created by Michael on 2016-07-12.
  */
 
-public class ImageViewerPresenter implements Presenter {
+class ImageViewerPresenter : Presenter {
 
-    private ImageViewerView view;
+    private var view: ImageViewerView? = null
 
-    public void setView(ImageViewerView view) {
-        this.view = view;
+    fun setView(view: ImageViewerView) {
+        this.view = view
     }
 
-    @Override
-    public void onAttach() {
-        Pet pet = Storage.getInstance().getPet();
+    override fun onAttach() {
+        val pet = Storage.instance.pet
         if (pet == null) {
-            view.doFinish();
-            return;
+            view!!.doFinish()
+            return
         }
-        view.updateUi(pet);
+        view!!.updateUi(pet)
     }
 
-    @Override
-    public void onDetach() {
+    override fun onDetach() {
 
     }
 }

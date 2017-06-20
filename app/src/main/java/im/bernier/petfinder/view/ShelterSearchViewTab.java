@@ -194,7 +194,7 @@ public class ShelterSearchViewTab extends FrameLayout implements ShelterSearchVi
 
     @Override
     public void openShelter() {
-        Intent intent = ShelterResultActivity.getIntent(this.getContext(), 0);
+        Intent intent = ShelterResultActivity.Companion.getIntent(this.getContext(), 0);
         getContext().startActivity(intent);
     }
 }

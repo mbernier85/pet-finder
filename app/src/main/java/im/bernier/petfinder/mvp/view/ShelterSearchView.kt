@@ -11,13 +11,13 @@
  * You may add additional accurate notices of copyright ownership.
  */
 
-package im.bernier.petfinder.mvp.presenter;
+package im.bernier.petfinder.mvp.view
 
 /**
- * Created by Michael on 2016-07-09.
+ * Created by Michael on 2016-10-29.
  */
 
-public interface Presenter {
-    void onAttach();
-    void onDetach();
+interface ShelterSearchView {
+    fun openShelter()
+    fun showError(id: Int)
 }

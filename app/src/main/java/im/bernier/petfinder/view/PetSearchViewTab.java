@@ -35,6 +35,8 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -223,7 +225,7 @@ public class PetSearchViewTab extends FrameLayout implements im.bernier.petfinde
     }
 
     @Override
-    public void updateBreeds(ArrayList<String> breeds) {
+    public void updateBreeds(@Nullable ArrayList<String> breeds) {
         breeds.add(0, "Any");
         breedAdapter = new ArrayAdapter<>(getContext(), android.support.design.R.layout.support_simple_spinner_dropdown_item, breeds);
         breedAutoComplete.setAdapter(breedAdapter);

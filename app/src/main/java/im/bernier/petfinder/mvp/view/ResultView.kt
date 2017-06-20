@@ -11,19 +11,19 @@
  * You may add additional accurate notices of copyright ownership.
  */
 
-package im.bernier.petfinder.mvp.view;
+package im.bernier.petfinder.mvp.view
 
-import java.util.List;
+import java.util.ArrayList
 
-import im.bernier.petfinder.model.Shelter;
+import im.bernier.petfinder.model.Pet
 
 /**
- * Created by Michael on 2016-10-30.
+ * Created by Michael on 2016-07-09.
  */
 
-public interface ShelterResultView {
-    void showResults(List<Shelter> shelters);
-    void showError(String error);
-    void showProgress();
-    void doFinish();
+interface ResultView {
+    fun updateResults(pets: ArrayList<Pet>)
+    fun openPet(pet: Pet)
+    fun showError(error: String)
+    fun doFinish()
 }

@@ -11,20 +11,25 @@
  * You may add additional accurate notices of copyright ownership.
  */
 
-package im.bernier.petfinder.mvp.view;
+package im.bernier.petfinder
 
-import android.support.annotation.StringRes;
+import android.app.Application
 
-import java.util.ArrayList;
+import com.google.firebase.analytics.FirebaseAnalytics
+
+import timber.log.Timber
 
 /**
- * Created by Michael on 2016-07-12.
+ * Created by Michael on 2016-07-09.
  */
 
-public interface PetSearchView {
-    void setAnimalsSpinner(String[] animals);
-    void showResults();
-    void updateBreeds(ArrayList<String> breeds);
-    void showError(@StringRes int stringId);
-    void showError(String message);
+class BaseApplication : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+        Analytics.instance.init(FirebaseAnalytics.getInstance(this))
+    }
 }
