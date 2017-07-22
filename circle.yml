@@ -1,7 +1,6 @@
 dependencies:
   pre:
     - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
-    - echo y | sdkmanager "build-tools;26.0.0-rc2" "platforms;android-25"
     - chmod +x gradlew
   post:
     - echo $FirebaseServiceAccountFilePath > ${HOME}/firebase_secret.json
