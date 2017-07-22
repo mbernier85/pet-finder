@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
-apply plugin: 'kotlin-android'
+apply plugin: "kotlin-android"
+apply plugin: "com.google.firebase.firebase-crash"
 
 def supportVersion = "26.0.0-beta2"
 def firebaseVersion = "11.0.2"
@@ -27,9 +28,9 @@ android {
 
             debug {
                 storeFile file("../debug_keystore.jks")
-                storePassword props['keyPassword']
-                keyAlias props['keyAlias']
-                keyPassword props['keyPassword']
+                storePassword props["keyPassword"]
+                keyAlias props["keyAlias"]
+                keyPassword props["keyPassword"]
             }
         } else {
             println("missing project.properties")
@@ -68,7 +69,7 @@ android {
         }
         prod {
             dimension "store"
-            versionCode 'git rev-list HEAD --count --no-merges'.execute().text.trim().toInteger()
+            versionCode "git rev-list HEAD --count --no-merges".execute().text.trim().toInteger()
         }
     }
 
@@ -100,7 +101,7 @@ dependencies {
 
     implementation "com.github.chrisbanes:PhotoView:1.3.1"
 
-    implementation('com.mikepenz:aboutlibraries:5.9.1@aar') {
+    implementation("com.mikepenz:aboutlibraries:5.9.1@aar") {
         transitive = true
     }
 
