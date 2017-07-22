@@ -30,8 +30,8 @@ import timber.log.Timber
 import uk.co.senab.photoview.PhotoViewAttacher
 
 /**
- * Created by Michael on 2017-02-06.
- */
+* Created by Michael Bernier on 2017-02-06.
+*/
 
 class ImageViewAdapter(private val context: Context, private var photos: List<Photo>) : PagerAdapter() {
     private val sparseIntArray = SparseArray<PhotoViewAttacher>()
@@ -56,7 +56,7 @@ class ImageViewAdapter(private val context: Context, private var photos: List<Ph
                 Timber.e("onBitmapFailed")
             }
 
-            override fun onPrepareLoad(placeHolderDrawable: Drawable) {
+            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
 
             }
         })

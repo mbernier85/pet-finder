@@ -15,8 +15,6 @@ package im.bernier.petfinder.mvp.view
 
 import android.support.annotation.StringRes
 
-import java.util.ArrayList
-
 /**
  * Created by Michael on 2016-07-12.
  */
@@ -24,7 +22,7 @@ import java.util.ArrayList
 interface PetSearchView {
     fun setAnimalsSpinner(animals: Array<String>)
     fun showResults()
-    fun updateBreeds(breeds: ArrayList<String>?)
-    fun showError(@StringRes stringId: Int)
-    fun showError(message: String?)
+    fun updateBreeds(breeds: List<String>)
+    fun showError(@StringRes id: Int)
+    fun showError(message: String)
 }

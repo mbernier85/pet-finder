@@ -46,5 +46,6 @@
     <string name="directions">Directions</string>
     <string name="phone">Phone</string>
     <string name="email">Email</string>
+    <string name="no_dialer_found">Sorry, your device doesn\'t support phone calls</string>
 
 </resources>

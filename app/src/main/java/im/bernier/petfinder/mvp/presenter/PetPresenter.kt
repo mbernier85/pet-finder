@@ -19,8 +19,8 @@ import im.bernier.petfinder.model.Pet
 import im.bernier.petfinder.mvp.view.PetView
 
 /**
- * Created by Michael on 2016-07-09.
- */
+* Created by Michael Bernier on 2016-07-09.
+*/
 
 class PetPresenter : Presenter {
 
@@ -44,22 +44,22 @@ class PetPresenter : Presenter {
     }
 
     fun onImageClick() {
-        view?.openImageViewer()
         analytics.track("pet_image_click", pet.toBundle())
+        view?.openImageViewer()
     }
 
     fun phoneClick() {
-        view?.openDialer(pet)
         analytics.track("pet_phone_click", pet.toBundle())
+        view?.openDialer(pet)
     }
 
     fun emailClick() {
-        view?.openEmail(pet)
         analytics.track("pet_email_click", pet.toBundle())
+        view?.openEmail(pet)
     }
 
     fun addressClick() {
-        view?.openMap(pet)
         analytics.track("pet_address_click", pet.toBundle())
+        view?.openMap(pet)
     }
 }

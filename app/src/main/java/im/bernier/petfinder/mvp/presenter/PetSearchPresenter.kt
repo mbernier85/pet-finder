@@ -14,9 +14,6 @@
 package im.bernier.petfinder.mvp.presenter
 
 import com.google.android.gms.location.places.Place
-
-import java.util.ArrayList
-
 import im.bernier.petfinder.Analytics
 import im.bernier.petfinder.R
 import im.bernier.petfinder.datasource.Repository
@@ -28,10 +25,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
+import java.util.*
 
 /**
- * Created by Michael on 2016-07-12.
- */
+* Created by Michael Bernier on 2016-07-12.
+*/
 
 class PetSearchPresenter : Presenter {
 
@@ -73,9 +71,9 @@ class PetSearchPresenter : Presenter {
             call.enqueue(object : Callback<Breeds> {
                 override fun onResponse(call: Call<Breeds>, response: Response<Breeds>) {
                     if (response.isSuccessful && response.body()?.header?.status?.code == 100) {
-                        view?.updateBreeds(response.body()?.breeds)
+                        view?.updateBreeds(response.body()?.breeds.orEmpty())
                     } else if (response.body()?.header?.status?.code != 200) {
-                        view?.showError(response.body()?.header?.status?.message)
+                        view?.showError(response.body()?.header?.status?.message.orEmpty())
                     }
                 }
 
@@ -85,5 +83,4 @@ class PetSearchPresenter : Presenter {
             })
         }
     }
-
 }

@@ -13,6 +13,7 @@
 
 package im.bernier.petfinder.model
 
+import android.os.Bundle
 import android.text.TextUtils
 
 import org.simpleframework.xml.Element
@@ -39,4 +40,13 @@ data class Contact(@field:Element(required = false) var name: String? = null, @f
             return address
         }
 
+    fun toBundle(): Bundle {
+        val bundle: Bundle = Bundle()
+        bundle.putString("name", name)
+        bundle.putString("address", address)
+        bundle.putString("email", email)
+        bundle.putString("phone", phone)
+        bundle.putString("city", city)
+        return bundle
+    }
 }

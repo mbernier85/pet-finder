@@ -17,15 +17,15 @@ import android.content.Intent
 import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
+import android.support.annotation.StringRes
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.Toolbar
 import android.widget.ImageView
 import android.widget.TextView
-
-import com.squareup.picasso.Picasso
-
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
+import com.squareup.picasso.Picasso
 import im.bernier.petfinder.R
 import im.bernier.petfinder.model.Pet
 import im.bernier.petfinder.mvp.presenter.PetPresenter
@@ -110,13 +110,21 @@ class PetActivity : BaseActivity(), PetView {
     }
 
     override fun openMap(pet: Pet) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(String.format("geo:0,0?q=%s", pet.contact!!.address)))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(String.format("geo:0,0?q=%s", pet.contact?.address)))
         startActivity(intent)
     }
 
     override fun openDialer(pet: Pet) {
-        val intent = Intent(Intent.ACTION_DIAL, Uri.parse(String.format("tel:%s", pet.contact!!.phone)))
-        startActivity(intent)
+        val intent = Intent(Intent.ACTION_DIAL, Uri.parse(String.format("tel:%s", pet.contact?.phone)))
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent);
+        } else {
+            showError(R.string.no_dialer_found)
+        }
+    }
+
+    fun showError(@StringRes id: Int) {
+        Snackbar.make(contactPhoneTextView, id, Snackbar.LENGTH_LONG).show()
     }
 
     @OnClick(R.id.contact_phone)

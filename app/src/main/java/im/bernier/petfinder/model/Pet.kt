@@ -14,27 +14,24 @@
 package im.bernier.petfinder.model
 
 import android.os.Bundle
-
 import com.google.firebase.analytics.FirebaseAnalytics
-
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
-
-import java.util.ArrayList
+import java.util.*
 
 /**
- * Created by Michael on 2016-07-09.
- */
+* Created by Michael Bernier on 2016-07-09.
+*/
 
 @Root(name = "pet", strict = false)
-data class Pet(@field:Element var id: String? = null, @field:Element var name: String? = null, @field:Element var age: String? = null, @field:Element var sex: String? = null, @field:Element(required = false) var description: String? = null, @field:Element(required = false) var media: Media? = null, @field:Element var contact: Contact? = null, @field:ElementList(required = false) var breeds: ArrayList<String>? = null) {
+data class Pet(@field:Element var id: String? = null, @field:Element var name: String? = null, @field:Element var age: String? = null, @field:Element var sex: String? = null, @field:Element(required = false) var description: String? = null, @field:Element(required = false) var media: Media? = null, @field:Element var contact: Contact? = null, @field:ElementList(required = false) var breeds: ArrayList<String> = ArrayList()) {
 
     val breed: String
         get() {
             val stringBuilder = StringBuilder()
-            breeds?.indices?.forEach { i ->
-                stringBuilder.append(breeds!![i])
+            breeds.indices.forEach { i ->
+                stringBuilder.append(breeds[i])
                 stringBuilder.append(" ")
             }
             return stringBuilder.toString()
@@ -45,6 +42,7 @@ data class Pet(@field:Element var id: String? = null, @field:Element var name: S
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id)
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name)
         bundle.putString("breed", breed)
+        bundle.putParcelable("contact", contact?.toBundle())
         return bundle
     }
 }
