@@ -1,7 +1,8 @@
 dependencies:
   pre:
     - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
-    - echo y | android update sdk --no-ui --all --filter build-tools-26.0.0, android-26
+    - echo y | android update sdk --no-ui --all --filter build-tools-26.0.0
+    - echo y | android update sdk --no-ui --all --filter android-26
     - chmod +x gradlew
   post:
     - echo $FirebaseServiceAccountFilePath > ${HOME}/firebase_secret.json
