@@ -17,6 +17,7 @@
 #}
 
 -dontpreverify
+-dontnote
 -optimizations !code/simplification/arithmetic
 -keepattributes Exceptions,InnerClasses,Signature,*Annotation*,ElementList,Root
 
@@ -70,6 +71,7 @@
 ## https://square.github.io/retrofit/ ##
 
 -dontwarn retrofit2.**
+-dontwarn javax.annotation.**
 -keep class retrofit2.** { *; }
 -keepattributes Signature
 -keepattributes Exceptions
