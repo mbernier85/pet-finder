@@ -1,16 +1,17 @@
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "com.google.firebase.firebase-crash"
+apply plugin: "com.google.firebase.firebase-perf"
 
-def supportVersion = "26.0.0-beta2"
-def firebaseVersion = "11.0.2"
+def supportVersion = "26.0.0"
+def firebaseVersion = "11.0.4"
 def productVersion = "1.2.0"
 def butterKnifeVersion = "8.7.0"
 def okHttpVersion = "3.8.1"
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    buildToolsVersion "26.0.1"
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -86,6 +87,7 @@ dependencies {
 
     implementation "com.google.android.gms:play-services-places:${firebaseVersion}"
     implementation "com.google.firebase:firebase-core:${firebaseVersion}"
+    implementation "com.google.firebase:firebase-perf:${firebaseVersion}"
     releaseImplementation "com.google.firebase:firebase-crash:${firebaseVersion}"
 
     implementation "com.squareup.retrofit2:retrofit:2.3.0"
