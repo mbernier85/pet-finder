@@ -25,7 +25,6 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.squareup.picasso.Picasso
 import im.bernier.petfinder.GlideApp
 import im.bernier.petfinder.R
 import im.bernier.petfinder.model.Pet
