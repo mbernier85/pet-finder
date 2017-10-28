@@ -20,16 +20,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-
-import com.squareup.picasso.Picasso
-
-import java.util.ArrayList
-
 import butterknife.BindView
 import butterknife.ButterKnife
 import im.bernier.petfinder.GlideApp
 import im.bernier.petfinder.R
 import im.bernier.petfinder.model.Pet
+import java.util.*
 
 /**
  * Created by Michael on 2016-07-09.
