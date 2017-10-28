@@ -3,15 +3,15 @@ apply plugin: "kotlin-android"
 apply plugin: "com.google.firebase.firebase-crash"
 apply plugin: "com.google.firebase.firebase-perf"
 
-def supportVersion = "26.0.0"
-def firebaseVersion = "11.0.4"
+def supportVersion = "26.1.0"
+def firebaseVersion = "11.4.2"
 def productVersion = "1.2.0"
-def butterKnifeVersion = "8.7.0"
-def okHttpVersion = "3.8.1"
+def butterKnifeVersion = "8.8.1"
+def okHttpVersion = "3.9.0"
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
