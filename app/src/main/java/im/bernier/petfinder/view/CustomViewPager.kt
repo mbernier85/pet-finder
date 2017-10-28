@@ -29,12 +29,12 @@ class CustomViewPager : ViewPager {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        try {
-            return super.onInterceptTouchEvent(ev)
+        return try {
+            super.onInterceptTouchEvent(ev)
         } catch (e: IllegalArgumentException) {
             //uncomment if you really want to see these errors
             //e.printStackTrace();
-            return false
+            false
         }
 
     }

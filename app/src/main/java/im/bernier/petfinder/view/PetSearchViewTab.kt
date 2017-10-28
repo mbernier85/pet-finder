@@ -47,13 +47,13 @@ import java.io.IOException
 class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petfinder.mvp.view.PetSearchView {
 
     lateinit var presenter: PetSearchPresenter
-    lateinit var animalAdapter: AnimalAdapter
+    private lateinit var animalAdapter: AnimalAdapter
     lateinit var breedAdapter: ArrayAdapter<String>
-    lateinit var ageAdapter: ArrayAdapter<String>
-    lateinit var sexAdapter: ArrayAdapter<String>
+    private lateinit var ageAdapter: ArrayAdapter<String>
+    private lateinit var sexAdapter: ArrayAdapter<String>
 
-    internal var ages = arrayOf("Any", "baby", "young", "adult", "senior")
-    internal var sexes = arrayOf("Any", "M", "F")
+    private var ages = arrayOf("Any", "baby", "young", "adult", "senior")
+    private var sexes = arrayOf("Any", "M", "F")
     internal var breed = arrayOf("Any")
 
     @BindView(R.id.search_animal_spinner)
@@ -166,10 +166,9 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
             return
         }
 
-        val viewState = state
-        super.onRestoreInstanceState(viewState.superState)
+        super.onRestoreInstanceState(state.superState)
 
-        this.postalCode = viewState.postalCode
+        this.postalCode = state.postalCode
     }
 
     internal class ViewState : View.BaseSavedState {
@@ -212,12 +211,7 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
         breedAutoComplete.setText("")
         breedAutoComplete.validator = object : AutoCompleteTextView.Validator {
             override fun isValid(charSequence: CharSequence): Boolean {
-                for (i in 0..breedAdapter.count - 1) {
-                    if (breedAdapter.getItem(i) == charSequence.toString()) {
-                        return true
-                    }
-                }
-                return false
+                return (0 until breedAdapter.count).any { breedAdapter.getItem(it) == charSequence.toString() }
             }
 
             override fun fixText(charSequence: CharSequence): CharSequence {

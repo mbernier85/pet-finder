@@ -47,7 +47,7 @@ class ShelterSearchViewTab(context: Context) : FrameLayout(context), ShelterSear
     @BindView(R.id.search_shelter_name_edit_text)
     lateinit var nameEditText: EditText
 
-    lateinit var placeAutocompleteFragment: PlaceAutocompleteFragment
+    private lateinit var placeAutocompleteFragment: PlaceAutocompleteFragment
     lateinit var presenter: ShelterSearchPresenter
     private var geocoder: Geocoder? = null
     private var postalCode: String = ""
@@ -120,10 +120,9 @@ class ShelterSearchViewTab(context: Context) : FrameLayout(context), ShelterSear
             return
         }
 
-        val viewState = state
-        super.onRestoreInstanceState(viewState.superState)
+        super.onRestoreInstanceState(state.superState)
 
-        this.postalCode = viewState.postalCode
+        this.postalCode = state.postalCode
     }
 
     internal class ViewState : View.BaseSavedState {
