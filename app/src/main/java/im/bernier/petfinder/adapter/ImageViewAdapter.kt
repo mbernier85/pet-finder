@@ -14,27 +14,22 @@
 package im.bernier.petfinder.adapter
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.support.v4.view.PagerAdapter
-import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.bumptech.glide.request.target.ImageViewTarget
+import com.bumptech.glide.request.target.Target
+import im.bernier.petfinder.GlideApp
 
-import com.squareup.picasso.Picasso
-import com.squareup.picasso.Target
 
 import im.bernier.petfinder.model.Photo
-import timber.log.Timber
-import uk.co.senab.photoview.PhotoViewAttacher
 
 /**
 * Created by Michael Bernier on 2017-02-06.
 */
 
 class ImageViewAdapter(private val context: Context, private var photos: List<Photo>) : PagerAdapter() {
-    private val sparseIntArray = SparseArray<PhotoViewAttacher>()
 
     fun update(photos: List<Photo>) {
         this.photos = photos
@@ -44,33 +39,28 @@ class ImageViewAdapter(private val context: Context, private var photos: List<Ph
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val imageView = ImageView(context)
         container.addView(imageView)
-
-        Picasso.with(context).load(photos[position].value).into(object : Target {
-            override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-                imageView.setImageBitmap(bitmap)
-                val photoViewAttacher = PhotoViewAttacher(imageView)
-                sparseIntArray.append(position, photoViewAttacher)
-            }
-
-            override fun onBitmapFailed(errorDrawable: Drawable) {
-                Timber.e("onBitmapFailed")
-            }
-
-            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-
-            }
-        })
+        GlideApp.with(context).load(photos[position].value).into(imageView)
+//        Picasso.with(context).load(photos[position].value).into(object : Target {
+//            override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
+//                imageView.setImageBitmap(bitmap)
+//                val photoViewAttacher = PhotoViewAttacher(imageView)
+//                sparseIntArray.append(position, photoViewAttacher)
+//            }
+//
+//            override fun onBitmapFailed(errorDrawable: Drawable) {
+//                Timber.e("onBitmapFailed")
+//            }
+//
+//            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+//
+//            }
+//        })
         return imageView
     }
 
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as View)
-        val photoViewAttacher = sparseIntArray.get(position)
-        if (photoViewAttacher != null) {
-            sparseIntArray.get(position).cleanup()
-            container.viewTreeObserver.removeOnGlobalLayoutListener(sparseIntArray.get(position))
-        }
+    override fun destroyItem(container: ViewGroup, position: Int, view: Any) {
+        container.removeView(view as View)
     }
 
     override fun getCount(): Int {

@@ -26,6 +26,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.squareup.picasso.Picasso
+import im.bernier.petfinder.GlideApp
 import im.bernier.petfinder.R
 import im.bernier.petfinder.model.Pet
 import im.bernier.petfinder.mvp.presenter.PetPresenter
@@ -91,7 +92,8 @@ class PetActivity : BaseActivity(), PetView {
         descriptionTextView.text = pet.description
         val url = pet.media?.thumbnail
         if (url != null) {
-            Picasso.with(this).load(url).resize(size.x, height.toInt()).centerCrop().into(petImageView)
+            GlideApp.with(this).load(url).fitCenter().centerCrop().into(petImageView)
+//            Picasso.with(this).load(url).resize(size.x, height.toInt()).centerCrop().into(petImageView)
         }
 
         contactNameTextView.text = pet.contact?.name

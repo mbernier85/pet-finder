@@ -27,6 +27,7 @@ import java.util.ArrayList
 
 import butterknife.BindView
 import butterknife.ButterKnife
+import im.bernier.petfinder.GlideApp
 import im.bernier.petfinder.R
 import im.bernier.petfinder.model.Pet
 
@@ -96,7 +97,8 @@ class PetAdapter : RecyclerView.Adapter<PetAdapter.PetViewHolder>() {
             breed.text = pet.breed
             val url = pet.media!!.thumbnail
             if (url != null) {
-                Picasso.with(itemView.context).load(url).fit().centerCrop().into(imageView)
+                GlideApp.with(itemView).load(url).fitCenter().centerCrop().into(imageView)
+//                Picasso.with(itemView.context).load(url).fit().centerCrop().into(imageView)
             } else {
                 imageView.setImageResource(R.drawable.ic_broken_image_black_24dp)
             }
