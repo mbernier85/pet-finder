@@ -14,7 +14,7 @@ machine:
     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx1024m -XX:+HeapDumpOnOutOfMemoryError"'
 test:
   override:
-    - ./gradlew assembleProdRelease lintProdRelease
+#    - ./gradlew assembleProdRelease lintProdRelease
     - ./gradlew :app:firebaseUploadProdReleaseProguardMapping -PFirebaseServiceAccountFilePath=${HOME}/firebase_secret.json
     - cp -r ~/pet-finder/app/build/outputs $CIRCLE_ARTIFACTS
     - cp -r ~/pet-finder/app/build/reports $CIRCLE_ARTIFACTS
