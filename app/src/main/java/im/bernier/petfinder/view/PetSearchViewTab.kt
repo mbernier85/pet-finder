@@ -261,7 +261,7 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
         presenter.search(search)
     }
 
-    @OnItemSelected(value = R.id.search_animal_spinner, callback = OnItemSelected.Callback.ITEM_SELECTED)
+    @OnItemSelected(value = [(R.id.search_animal_spinner)], callback = OnItemSelected.Callback.ITEM_SELECTED)
     internal fun onAnimalSelected(position: Int) {
         val animal = animalAdapter.animals[position].key
         presenter.loadBreed(animal)
