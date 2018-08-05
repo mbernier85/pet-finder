@@ -17,9 +17,9 @@ import android.content.Intent
 import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.Toolbar
+import androidx.annotation.StringRes
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.widget.Toolbar
 import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
@@ -125,7 +125,7 @@ class PetActivity : BaseActivity(), PetView {
     }
 
     fun showError(@StringRes id: Int) {
-        Snackbar.make(contactPhoneTextView, id, Snackbar.LENGTH_LONG).show()
+        com.google.android.material.snackbar.Snackbar.make(contactPhoneTextView, id, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
     }
 
     @OnClick(R.id.contact_phone)

@@ -14,7 +14,7 @@
 package im.bernier.petfinder.view
 
 import android.content.Context
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import android.util.AttributeSet
 import android.view.MotionEvent
 
@@ -22,7 +22,7 @@ import android.view.MotionEvent
  * Created by Michael on 2017-02-06.
  */
 
-class CustomViewPager : ViewPager {
+class CustomViewPager : androidx.viewpager.widget.ViewPager {
 
     constructor(context: Context) : super(context)
 

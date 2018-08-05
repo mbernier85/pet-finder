@@ -18,9 +18,9 @@ import android.content.Intent
 import android.location.Geocoder
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
-import android.support.v4.app.FragmentActivity
+import androidx.annotation.StringRes
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.FragmentActivity
 import android.view.View
 import android.widget.*
 import butterknife.BindView
@@ -81,7 +81,7 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
                 .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS or AutocompleteFilter.TYPE_FILTER_REGIONS)
                 .build()
 
-        placeAutocompleteFragment = (context as FragmentActivity).fragmentManager.findFragmentById(R.id.place_autocomplete_fragment) as PlaceAutocompleteFragment
+        placeAutocompleteFragment = (context as androidx.fragment.app.FragmentActivity).fragmentManager.findFragmentById(R.id.place_autocomplete_fragment) as PlaceAutocompleteFragment
         placeAutocompleteFragment.setFilter(autocompleteFilter)
         placeAutocompleteFragment.setHint(context.getString(R.string.location_search))
         placeAutocompleteFragment.view.findViewById<View>(R.id.place_autocomplete_clear_button).setOnClickListener { view ->
@@ -149,7 +149,7 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
     }
 
     override fun showError(message: String) {
-        Snackbar.make(animalSpinner, message, Snackbar.LENGTH_LONG).show()
+        com.google.android.material.snackbar.Snackbar.make(animalSpinner, message, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
     }
 
     override fun onSaveInstanceState(): Parcelable? {

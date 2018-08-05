@@ -17,9 +17,9 @@ import android.content.Context
 import android.location.Geocoder
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
-import android.support.v4.app.FragmentActivity
+import androidx.annotation.StringRes
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.FragmentActivity
 import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
@@ -65,7 +65,7 @@ class ShelterSearchViewTab(context: Context) : FrameLayout(context), ShelterSear
                 .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS or AutocompleteFilter.TYPE_FILTER_REGIONS)
                 .build()
 
-        placeAutocompleteFragment = (context as FragmentActivity).fragmentManager.findFragmentById(R.id.shelter_place_autocomplete_fragment) as PlaceAutocompleteFragment
+        placeAutocompleteFragment = (context as androidx.fragment.app.FragmentActivity).fragmentManager.findFragmentById(R.id.shelter_place_autocomplete_fragment) as PlaceAutocompleteFragment
         placeAutocompleteFragment.setFilter(autocompleteFilter)
         placeAutocompleteFragment.setHint(context.getString(R.string.location_search))
         placeAutocompleteFragment.view!!.findViewById<View>(R.id.place_autocomplete_clear_button).setOnClickListener { view ->
@@ -158,7 +158,7 @@ class ShelterSearchViewTab(context: Context) : FrameLayout(context), ShelterSear
     }
 
     private fun showError(message: String) {
-        Snackbar.make(nameEditText, message, Snackbar.LENGTH_LONG).show()
+        com.google.android.material.snackbar.Snackbar.make(nameEditText, message, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
     }
 
     override fun onAttachedToWindow() {

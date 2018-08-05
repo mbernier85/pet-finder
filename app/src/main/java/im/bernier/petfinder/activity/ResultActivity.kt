@@ -15,13 +15,10 @@ package im.bernier.petfinder.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.BindView
 import butterknife.ButterKnife
 import im.bernier.petfinder.R
@@ -34,7 +31,7 @@ import java.util.*
 class ResultActivity : BaseActivity(), ResultView {
 
     @BindView(R.id.result_recycler_view)
-    lateinit var recyclerView: RecyclerView
+    lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
 
     @BindView(R.id.activity_result_progress_bar)
     lateinit var progressbar: ProgressBar
@@ -54,9 +51,9 @@ class ResultActivity : BaseActivity(), ResultView {
         presenter.onAttach()
 
         if (isTablet) {
-            recyclerView.layoutManager = GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false)
+            recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 3, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         } else {
-            recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         }
         recyclerView.setHasFixedSize(true)
         petAdapter = PetAdapter()
@@ -73,7 +70,7 @@ class ResultActivity : BaseActivity(), ResultView {
     }
 
     override fun showError(error: String) {
-        Snackbar.make(recyclerView, error, Snackbar.LENGTH_LONG).show()
+        com.google.android.material.snackbar.Snackbar.make(recyclerView, error, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
     }
 
     override fun openPet(pet: Pet) {

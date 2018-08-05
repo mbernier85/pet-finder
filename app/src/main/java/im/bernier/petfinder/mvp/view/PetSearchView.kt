@@ -13,7 +13,7 @@
 
 package im.bernier.petfinder.mvp.view
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 
 /**
  * Created by Michael on 2016-07-12.

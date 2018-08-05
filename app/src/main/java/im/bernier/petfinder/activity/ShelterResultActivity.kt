@@ -17,10 +17,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -40,7 +40,7 @@ import im.bernier.petfinder.mvp.view.ShelterResultView
 class ShelterResultActivity : BaseActivity(), ShelterResultView {
 
     @BindView(R.id.activity_shelter_recycler_view)
-    lateinit var shelterRecyclerView: RecyclerView
+    lateinit var shelterRecyclerView: androidx.recyclerview.widget.RecyclerView
 
     @BindView(R.id.activity_shelter_progress_bar)
     lateinit var progressBar: ProgressBar
@@ -61,9 +61,9 @@ class ShelterResultActivity : BaseActivity(), ShelterResultView {
         ButterKnife.bind(this)
 
         if (isTablet) {
-            shelterRecyclerView.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
+            shelterRecyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 2, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         } else {
-            shelterRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            shelterRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         }
         adapter = ShelterAdapter(object : ShelterAdapter.ShelterItemListener {
             override fun itemClick(shelter: Shelter) {
@@ -108,7 +108,7 @@ class ShelterResultActivity : BaseActivity(), ShelterResultView {
     }
 
     override fun showError(error: String) {
-        Snackbar.make(shelterRecyclerView, error, Snackbar.LENGTH_LONG).show()
+        com.google.android.material.snackbar.Snackbar.make(shelterRecyclerView, error, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
         progressBar.visibility = View.GONE
     }
 

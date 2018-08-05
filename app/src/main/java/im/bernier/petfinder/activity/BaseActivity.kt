@@ -1,6 +1,6 @@
 package im.bernier.petfinder.activity
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 /**
  * Created by Michael on 2017-03-24.
