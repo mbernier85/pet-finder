@@ -32,6 +32,7 @@ import com.google.android.gms.location.places.AutocompleteFilter
 import com.google.android.gms.location.places.Place
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment
 import com.google.android.gms.location.places.ui.PlaceSelectionListener
+import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment
 import im.bernier.petfinder.R
 import im.bernier.petfinder.activity.ResultActivity
 import im.bernier.petfinder.model.Animal
@@ -68,7 +69,7 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
     @BindView(R.id.search_sex_spinner)
     lateinit var sexSpinner: Spinner
 
-    lateinit var placeAutocompleteFragment: PlaceAutocompleteFragment
+    lateinit var placeAutocompleteFragment: SupportPlaceAutocompleteFragment
     lateinit var geocoder: Geocoder
     private var postalCode: String = ""
 
@@ -81,12 +82,12 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
                 .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS or AutocompleteFilter.TYPE_FILTER_REGIONS)
                 .build()
 
-        placeAutocompleteFragment = (context as androidx.fragment.app.FragmentActivity).fragmentManager.findFragmentById(R.id.place_autocomplete_fragment) as PlaceAutocompleteFragment
+        placeAutocompleteFragment = (context as androidx.fragment.app.FragmentActivity).supportFragmentManager.findFragmentById(R.id.place_autocomplete_fragment) as SupportPlaceAutocompleteFragment
         placeAutocompleteFragment.setFilter(autocompleteFilter)
         placeAutocompleteFragment.setHint(context.getString(R.string.location_search))
-        placeAutocompleteFragment.view.findViewById<View>(R.id.place_autocomplete_clear_button).setOnClickListener { view ->
+        placeAutocompleteFragment.view?.findViewById<View>(R.id.place_autocomplete_clear_button)?.setOnClickListener { view ->
             postalCode = ""
-            (placeAutocompleteFragment.view.findViewById<View>(R.id.place_autocomplete_search_input) as EditText).setText("")
+            (placeAutocompleteFragment.view?.findViewById<View>(R.id.place_autocomplete_search_input) as EditText).setText("")
             view.visibility = View.GONE
         }
         placeAutocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
@@ -137,19 +138,19 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
         animalAdapter = AnimalAdapter(context, animalArrayList)
         animalSpinner.adapter = animalAdapter
 
-        breedAdapter = ArrayAdapter(context, android.support.design.R.layout.support_simple_spinner_dropdown_item, breed)
+        breedAdapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, breed)
         breedAutoComplete.setAdapter<ArrayAdapter<String>>(breedAdapter)
         breedAutoComplete.threshold = 1
 
-        ageAdapter = ArrayAdapter(context, android.support.design.R.layout.support_simple_spinner_dropdown_item, ages)
+        ageAdapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, ages)
         ageSpinner.adapter = ageAdapter
 
-        sexAdapter = ArrayAdapter(context, android.support.design.R.layout.support_simple_spinner_dropdown_item, sexes)
+        sexAdapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, sexes)
         sexSpinner.adapter = sexAdapter
     }
 
     override fun showError(message: String) {
-        com.google.android.material.snackbar.Snackbar.make(animalSpinner, message, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
+        Snackbar.make(animalSpinner, message, Snackbar.LENGTH_LONG).show()
     }
 
     override fun onSaveInstanceState(): Parcelable? {
@@ -187,6 +188,7 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
 
         companion object {
 
+            @JvmField
             val CREATOR: Parcelable.Creator<ViewState> = object : Parcelable.Creator<ViewState> {
                 override fun createFromParcel(`in`: Parcel): ViewState {
                     return ViewState(`in`)
@@ -206,7 +208,7 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
     override fun updateBreeds(breeds: List<String>) {
         val breedList: ArrayList<String> = ArrayList(breeds)
         breedList.add(0, "Any")
-        breedAdapter = ArrayAdapter(context, android.support.design.R.layout.support_simple_spinner_dropdown_item, breedList)
+        breedAdapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, breedList)
         breedAutoComplete.setAdapter<ArrayAdapter<String>>(breedAdapter)
         breedAutoComplete.setText("")
         breedAutoComplete.validator = object : AutoCompleteTextView.Validator {

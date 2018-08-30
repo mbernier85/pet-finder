@@ -18,8 +18,6 @@ import android.location.Geocoder
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.annotation.StringRes
-import com.google.android.material.snackbar.Snackbar
-import androidx.fragment.app.FragmentActivity
 import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
@@ -31,6 +29,7 @@ import com.google.android.gms.location.places.AutocompleteFilter
 import com.google.android.gms.location.places.Place
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment
 import com.google.android.gms.location.places.ui.PlaceSelectionListener
+import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment
 import im.bernier.petfinder.R
 import im.bernier.petfinder.activity.ShelterResultActivity
 import im.bernier.petfinder.mvp.presenter.ShelterSearchPresenter
@@ -47,9 +46,9 @@ class ShelterSearchViewTab(context: Context) : FrameLayout(context), ShelterSear
     @BindView(R.id.search_shelter_name_edit_text)
     lateinit var nameEditText: EditText
 
-    private lateinit var placeAutocompleteFragment: PlaceAutocompleteFragment
+    private lateinit var placeAutocompleteFragment: SupportPlaceAutocompleteFragment
     lateinit var presenter: ShelterSearchPresenter
-    private var geocoder: Geocoder? = null
+    private lateinit var geocoder: Geocoder
     private var postalCode: String = ""
 
     init {
@@ -65,19 +64,19 @@ class ShelterSearchViewTab(context: Context) : FrameLayout(context), ShelterSear
                 .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS or AutocompleteFilter.TYPE_FILTER_REGIONS)
                 .build()
 
-        placeAutocompleteFragment = (context as androidx.fragment.app.FragmentActivity).fragmentManager.findFragmentById(R.id.shelter_place_autocomplete_fragment) as PlaceAutocompleteFragment
+        placeAutocompleteFragment = (context as androidx.fragment.app.FragmentActivity).supportFragmentManager.findFragmentById(R.id.shelter_place_autocomplete_fragment) as SupportPlaceAutocompleteFragment
         placeAutocompleteFragment.setFilter(autocompleteFilter)
         placeAutocompleteFragment.setHint(context.getString(R.string.location_search))
-        placeAutocompleteFragment.view!!.findViewById<View>(R.id.place_autocomplete_clear_button).setOnClickListener { view ->
+        placeAutocompleteFragment.view?.findViewById<View>(R.id.place_autocomplete_clear_button)?.setOnClickListener { view ->
             postalCode = ""
-            (placeAutocompleteFragment.view!!.findViewById<View>(R.id.place_autocomplete_search_input) as EditText).setText("")
+            (placeAutocompleteFragment.view?.findViewById<View>(R.id.place_autocomplete_search_input) as EditText).setText("")
             view.visibility = View.GONE
         }
         placeAutocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 try {
                     presenter.placeSelected(place)
-                    val addresses = geocoder!!.getFromLocation(place.latLng.latitude, place.latLng.longitude, 5)
+                    val addresses = geocoder.getFromLocation(place.latLng.latitude, place.latLng.longitude, 5)
                     for (address in addresses) {
                         if (address.postalCode != null && address.postalCode.length > 3) {
                             postalCode = address.postalCode
@@ -141,6 +140,7 @@ class ShelterSearchViewTab(context: Context) : FrameLayout(context), ShelterSear
 
         companion object {
 
+            @JvmField
             val CREATOR: Parcelable.Creator<ViewState> = object : Parcelable.Creator<ViewState> {
                 override fun createFromParcel(`in`: Parcel): ViewState {
                     return ViewState(`in`)

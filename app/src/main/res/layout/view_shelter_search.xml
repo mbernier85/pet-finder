@@ -34,7 +34,7 @@
 
             <fragment
                 android:id="@+id/shelter_place_autocomplete_fragment"
-                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                android:name="com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
