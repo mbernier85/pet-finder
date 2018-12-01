@@ -13,16 +13,12 @@
 
 package im.bernier.petfinder.adapter
 
+
 import android.content.Context
-import androidx.viewpager.widget.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.bumptech.glide.request.target.ImageViewTarget
-import com.bumptech.glide.request.target.Target
 import im.bernier.petfinder.GlideApp
-
-
 import im.bernier.petfinder.model.Photo
 
 /**

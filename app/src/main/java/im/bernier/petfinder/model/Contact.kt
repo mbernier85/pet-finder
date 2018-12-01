@@ -41,7 +41,7 @@ data class Contact(@field:Element(required = false) var name: String? = null, @f
         }
 
     fun toBundle(): Bundle {
-        val bundle: Bundle = Bundle()
+        val bundle = Bundle()
         bundle.putString("name", name)
         bundle.putString("address", address)
         bundle.putString("email", email)

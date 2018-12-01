@@ -18,7 +18,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
 import im.bernier.petfinder.R
@@ -40,7 +42,7 @@ class ResultActivity : BaseActivity(), ResultView {
     lateinit var textView: TextView
 
     lateinit var presenter: PetResultPresenter
-    lateinit var petAdapter: PetAdapter
+    private lateinit var petAdapter: PetAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +53,9 @@ class ResultActivity : BaseActivity(), ResultView {
         presenter.onAttach()
 
         if (isTablet) {
-            recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 3, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            recyclerView.layoutManager = GridLayoutManager(this, 3, RecyclerView.VERTICAL, false)
         } else {
-            recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         }
         recyclerView.setHasFixedSize(true)
         petAdapter = PetAdapter()

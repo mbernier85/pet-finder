@@ -18,11 +18,9 @@ import android.content.Intent
 import android.location.Geocoder
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.annotation.StringRes
-import com.google.android.material.snackbar.Snackbar
-import androidx.fragment.app.FragmentActivity
 import android.view.View
 import android.widget.*
+import androidx.annotation.StringRes
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -30,9 +28,9 @@ import butterknife.OnItemSelected
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.places.AutocompleteFilter
 import com.google.android.gms.location.places.Place
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment
 import com.google.android.gms.location.places.ui.PlaceSelectionListener
 import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment
+import com.google.android.material.snackbar.Snackbar
 import im.bernier.petfinder.R
 import im.bernier.petfinder.activity.ResultActivity
 import im.bernier.petfinder.model.Animal
@@ -69,7 +67,7 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
     @BindView(R.id.search_sex_spinner)
     lateinit var sexSpinner: Spinner
 
-    lateinit var placeAutocompleteFragment: SupportPlaceAutocompleteFragment
+    private lateinit var placeAutocompleteFragment: SupportPlaceAutocompleteFragment
     lateinit var geocoder: Geocoder
     private var postalCode: String = ""
 
@@ -176,10 +174,10 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
         internal var postalCode: String = ""
 
         constructor(source: Parcel) : super(source) {
-            postalCode = source.readString()
+            postalCode = source.readString()!!
         }
 
-        constructor(superState: Parcelable) : super(superState) {}
+        constructor(superState: Parcelable?) : super(superState)
 
         override fun writeToParcel(out: Parcel, flags: Int) {
             super.writeToParcel(out, flags)

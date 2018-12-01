@@ -17,14 +17,12 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
-
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
 import im.bernier.petfinder.R
@@ -61,9 +59,9 @@ class ShelterResultActivity : BaseActivity(), ShelterResultView {
         ButterKnife.bind(this)
 
         if (isTablet) {
-            shelterRecyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 2, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            shelterRecyclerView.layoutManager = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
         } else {
-            shelterRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            shelterRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         }
         adapter = ShelterAdapter(object : ShelterAdapter.ShelterItemListener {
             override fun itemClick(shelter: Shelter) {

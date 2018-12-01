@@ -17,17 +17,16 @@ import android.content.Context
 import android.location.Geocoder
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.annotation.StringRes
 import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
+import androidx.annotation.StringRes
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.places.AutocompleteFilter
 import com.google.android.gms.location.places.Place
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment
 import com.google.android.gms.location.places.ui.PlaceSelectionListener
 import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment
 import im.bernier.petfinder.R
@@ -128,10 +127,10 @@ class ShelterSearchViewTab(context: Context) : FrameLayout(context), ShelterSear
         internal var postalCode: String = ""
 
         constructor(source: Parcel) : super(source) {
-            postalCode = source.readString()
+            postalCode = source.readString()!!
         }
 
-        constructor(superState: Parcelable) : super(superState) {}
+        constructor(superState: Parcelable?) : super(superState)
 
         override fun writeToParcel(out: Parcel, flags: Int) {
             super.writeToParcel(out, flags)

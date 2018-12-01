@@ -1,5 +1,6 @@
 package im.bernier.petfinder.activity
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 
 /**
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
  * Breather Products Inc.
  */
 
+@SuppressLint("Registered")
 open class BaseActivity : AppCompatActivity() {
 
     protected val isTablet: Boolean
