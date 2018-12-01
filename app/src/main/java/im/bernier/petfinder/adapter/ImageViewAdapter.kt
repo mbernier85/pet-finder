@@ -13,23 +13,19 @@
 
 package im.bernier.petfinder.adapter
 
+
 import android.content.Context
-import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.bumptech.glide.request.target.ImageViewTarget
-import com.bumptech.glide.request.target.Target
 import im.bernier.petfinder.GlideApp
-
-
 import im.bernier.petfinder.model.Photo
 
 /**
 * Created by Michael Bernier on 2017-02-06.
 */
 
-class ImageViewAdapter(private val context: Context, private var photos: List<Photo>) : PagerAdapter() {
+class ImageViewAdapter(private val context: Context, private var photos: List<Photo>) : androidx.viewpager.widget.PagerAdapter() {
 
     fun update(photos: List<Photo>) {
         this.photos = photos

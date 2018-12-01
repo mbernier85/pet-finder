@@ -14,26 +14,18 @@
 package im.bernier.petfinder.activity
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.FragmentTransaction
 import android.util.SparseArray
-import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.FrameLayout
-
-import com.mikepenz.aboutlibraries.LibsBuilder
-import com.mikepenz.aboutlibraries.ui.LibsSupportFragment
-
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mikepenz.aboutlibraries.LibsBuilder
 import im.bernier.petfinder.Analytics
 import im.bernier.petfinder.R
+import im.bernier.petfinder.R.id.*
 import im.bernier.petfinder.view.PetSearchViewTab
 import im.bernier.petfinder.view.ShelterSearchViewTab
-
-import im.bernier.petfinder.R.id.action_about
-import im.bernier.petfinder.R.id.action_search
-import im.bernier.petfinder.R.id.action_shelter
 
 /**
  * Created by Michael on 2016-10-22.
@@ -47,7 +39,7 @@ class HomeActivity : BaseActivity() {
     @BindView(R.id.content)
     lateinit var content: FrameLayout
 
-    lateinit var viewGroups: SparseArray<ViewGroup>
+    private lateinit var viewGroups: SparseArray<ViewGroup>
     private val analytics = Analytics.instance
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +47,7 @@ class HomeActivity : BaseActivity() {
         setContentView(R.layout.activity_home)
         ButterKnife.bind(this)
 
-        viewGroups = SparseArray<ViewGroup>()
+        viewGroups = SparseArray()
         viewGroups.append(action_search, PetSearchViewTab(this@HomeActivity))
         content.addView(viewGroups.get(action_search))
 

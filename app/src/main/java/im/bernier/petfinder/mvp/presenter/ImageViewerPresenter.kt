@@ -14,7 +14,6 @@
 package im.bernier.petfinder.mvp.presenter
 
 import im.bernier.petfinder.datasource.Storage
-import im.bernier.petfinder.model.Pet
 import im.bernier.petfinder.mvp.view.ImageViewerView
 
 /**

@@ -15,9 +15,7 @@ package im.bernier.petfinder.model
 
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
-
-import java.lang.reflect.Array
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by Michael on 2016-07-09.

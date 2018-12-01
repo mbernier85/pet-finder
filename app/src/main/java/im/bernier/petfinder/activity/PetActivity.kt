@@ -17,11 +17,10 @@ import android.content.Intent
 import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.Toolbar
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.StringRes
+import androidx.appcompat.widget.Toolbar
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -118,14 +117,14 @@ class PetActivity : BaseActivity(), PetView {
     override fun openDialer(pet: Pet) {
         val intent = Intent(Intent.ACTION_DIAL, Uri.parse(String.format("tel:%s", pet.contact?.phone)))
         if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent);
+            startActivity(intent)
         } else {
             showError(R.string.no_dialer_found)
         }
     }
 
     fun showError(@StringRes id: Int) {
-        Snackbar.make(contactPhoneTextView, id, Snackbar.LENGTH_LONG).show()
+        com.google.android.material.snackbar.Snackbar.make(contactPhoneTextView, id, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
     }
 
     @OnClick(R.id.contact_phone)

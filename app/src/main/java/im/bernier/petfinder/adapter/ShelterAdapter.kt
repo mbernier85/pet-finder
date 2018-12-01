@@ -13,26 +13,23 @@
 
 package im.bernier.petfinder.adapter
 
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-
-import java.util.ArrayList
-
 import butterknife.BindView
 import butterknife.ButterKnife
 import im.bernier.petfinder.R
 import im.bernier.petfinder.model.Shelter
+import java.util.*
 
 /**
  * Created by Michael on 2016-10-30.
  */
 
-class ShelterAdapter(private val listener: ShelterAdapter.ShelterItemListener) : RecyclerView.Adapter<ShelterAdapter.ShelterViewHolder>() {
+class ShelterAdapter(private val listener: ShelterAdapter.ShelterItemListener) : androidx.recyclerview.widget.RecyclerView.Adapter<ShelterAdapter.ShelterViewHolder>() {
 
     private var shelters: List<Shelter>
 
@@ -49,7 +46,7 @@ class ShelterAdapter(private val listener: ShelterAdapter.ShelterItemListener) :
     }
 
     init {
-        shelters = ArrayList<Shelter>()
+        shelters = ArrayList()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShelterAdapter.ShelterViewHolder {
@@ -81,7 +78,7 @@ class ShelterAdapter(private val listener: ShelterAdapter.ShelterItemListener) :
         return shelters.size
     }
 
-    class ShelterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ShelterViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         @BindView(R.id.item_shelter_city_text_view)
         lateinit var cityTextView: TextView

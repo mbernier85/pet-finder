@@ -65,7 +65,7 @@ class PetSearchPresenter : Presenter {
 
     fun loadBreed(animal: String?) {
         if (animal == null) {
-            view?.updateBreeds(ArrayList<String>())
+            view?.updateBreeds(ArrayList())
         } else {
             val call = Repository.instance.loadBreeds(animal)
             call.enqueue(object : Callback<Breeds> {

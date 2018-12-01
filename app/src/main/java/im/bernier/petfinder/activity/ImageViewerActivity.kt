@@ -14,18 +14,14 @@
 package im.bernier.petfinder.activity
 
 import android.os.Bundle
-import android.support.v4.view.ViewPager
-
-import java.util.ArrayList
-
 import butterknife.BindView
 import butterknife.ButterKnife
 import im.bernier.petfinder.R
 import im.bernier.petfinder.adapter.ImageViewAdapter
 import im.bernier.petfinder.model.Pet
-import im.bernier.petfinder.model.Photo
 import im.bernier.petfinder.mvp.presenter.ImageViewerPresenter
 import im.bernier.petfinder.mvp.view.ImageViewerView
+import java.util.*
 
 /**
  * Created by Michael on 2016-07-12.
@@ -34,17 +30,17 @@ import im.bernier.petfinder.mvp.view.ImageViewerView
 class ImageViewerActivity : BaseActivity(), ImageViewerView {
 
     @BindView(R.id.activity_image_view_pager)
-    lateinit var viewPager: ViewPager
+    lateinit var viewPager: androidx.viewpager.widget.ViewPager
 
     lateinit var presenter: ImageViewerPresenter
-    lateinit var imageViewAdapter: ImageViewAdapter
+    private lateinit var imageViewAdapter: ImageViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image_view)
         ButterKnife.bind(this)
 
-        imageViewAdapter = ImageViewAdapter(this, ArrayList<Photo>())
+        imageViewAdapter = ImageViewAdapter(this, ArrayList())
         viewPager.adapter = imageViewAdapter
 
         presenter = ImageViewerPresenter()

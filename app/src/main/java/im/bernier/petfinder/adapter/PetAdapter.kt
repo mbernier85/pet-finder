@@ -13,8 +13,6 @@
 
 package im.bernier.petfinder.adapter
 
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +29,7 @@ import java.util.*
  * Created by Michael on 2016-07-09.
  */
 
-class PetAdapter : RecyclerView.Adapter<PetAdapter.PetViewHolder>() {
+class PetAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<PetAdapter.PetViewHolder>() {
 
     private var pets = ArrayList<Pet>()
     private var petClick: PetClick? = null
@@ -67,7 +65,7 @@ class PetAdapter : RecyclerView.Adapter<PetAdapter.PetViewHolder>() {
         return pets.size
     }
 
-    class PetViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class PetViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         @BindView(R.id.item_pet_name)
         lateinit var petName: TextView
@@ -79,7 +77,7 @@ class PetAdapter : RecyclerView.Adapter<PetAdapter.PetViewHolder>() {
         lateinit var breed: TextView
 
         @BindView(R.id.item_pet_card_view)
-        lateinit var cardView: CardView
+        lateinit var cardView: androidx.cardview.widget.CardView
 
         var pet: Pet? = null
 
@@ -94,7 +92,6 @@ class PetAdapter : RecyclerView.Adapter<PetAdapter.PetViewHolder>() {
             val url = pet.media!!.thumbnail
             if (url != null) {
                 GlideApp.with(itemView).load(url).fitCenter().centerCrop().into(imageView)
-//                Picasso.with(itemView.context).load(url).fit().centerCrop().into(imageView)
             } else {
                 imageView.setImageResource(R.drawable.ic_broken_image_black_24dp)
             }
