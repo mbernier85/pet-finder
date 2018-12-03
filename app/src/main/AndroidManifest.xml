@@ -16,9 +16,9 @@
         android:theme="@style/PetFinderTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".activity.ResultActivity" />
+        <activity android:name=".activity.PetResultActivity" />
         <activity android:name=".activity.PetActivity" />
-        <activity android:name=".activity.ImageViewerActivity" />
+        <activity android:name=".activity.GalleryActivity" />
         <activity android:name=".activity.ShelterResultActivity" />
         <activity
             android:name=".activity.HomeActivity"

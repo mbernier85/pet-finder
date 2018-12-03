@@ -5,12 +5,12 @@
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/activity_shelter_recycler_view"
+        android:id="@+id/recyclerViewShelter"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <TextView
-        android:id="@+id/activity_shelter_no_results_text_view"
+        android:id="@+id/textViewShelterMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -18,7 +18,7 @@
         android:textSize="@dimen/header2" />
 
     <ProgressBar
-        android:id="@+id/activity_shelter_progress_bar"
+        android:id="@+id/progressBarShelter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

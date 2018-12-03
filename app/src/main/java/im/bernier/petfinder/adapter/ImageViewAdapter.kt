@@ -36,24 +36,8 @@ class ImageViewAdapter(private val context: Context, private var photos: List<Ph
         val imageView = ImageView(context)
         container.addView(imageView)
         GlideApp.with(context).load(photos[position].value).into(imageView)
-//        Picasso.with(context).load(photos[position].value).into(object : Target {
-//            override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-//                imageView.setImageBitmap(bitmap)
-//                val photoViewAttacher = PhotoViewAttacher(imageView)
-//                sparseIntArray.append(position, photoViewAttacher)
-//            }
-//
-//            override fun onBitmapFailed(errorDrawable: Drawable) {
-//                Timber.e("onBitmapFailed")
-//            }
-//
-//            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-//
-//            }
-//        })
         return imageView
     }
-
 
     override fun destroyItem(container: ViewGroup, position: Int, view: Any) {
         container.removeView(view as View)

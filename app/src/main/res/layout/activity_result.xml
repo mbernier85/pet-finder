@@ -4,23 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="im.bernier.petfinder.activity.ResultActivity">
+    tools:context="im.bernier.petfinder.activity.PetResultActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/result_recycler_view"
+        android:id="@+id/reyclerViewPets"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/divider"
         android:visibility="gone" />
 
     <ProgressBar
-        android:id="@+id/activity_result_progress_bar"
+        android:id="@+id/progressBarPets"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
     <TextView
-        android:id="@+id/activity_result_text_view"
+        android:id="@+id/textViewPets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

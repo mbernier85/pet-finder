@@ -6,13 +6,13 @@
     tools:showIn="@layout/activity_pet">
 
     <TextView
-        android:id="@+id/contact_name"
+        android:id="@+id/textViewContactName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="John snow" />
 
     <TextView
-        android:id="@+id/contact_address"
+        android:id="@+id/textViewContactAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="4dp"
@@ -24,7 +24,7 @@
         tools:text="123 example road\nMontreal, QC\nA2A2A2" />
 
     <TextView
-        android:id="@+id/contact_phone"
+        android:id="@+id/textViewContactPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
@@ -35,7 +35,7 @@
         tools:text="555 555-5555" />
 
     <TextView
-        android:id="@+id/contact_email"
+        android:id="@+id/textViewContactEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"

@@ -14,14 +14,9 @@
 package im.bernier.petfinder.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
-import im.bernier.petfinder.GlideApp
 import im.bernier.petfinder.R
+import im.bernier.petfinder.holder.PetViewHolder
 import im.bernier.petfinder.model.Pet
 import java.util.*
 
@@ -29,7 +24,7 @@ import java.util.*
  * Created by Michael on 2016-07-09.
  */
 
-class PetAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<PetAdapter.PetViewHolder>() {
+class PetAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<PetViewHolder>() {
 
     private var pets = ArrayList<Pet>()
     private var petClick: PetClick? = null
@@ -44,10 +39,8 @@ class PetAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<PetAdapter.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PetViewHolder {
         val holder = PetViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_pet, parent, false))
-        holder.cardView.setOnClickListener { _ ->
-            if (petClick != null) {
-                holder.pet?.let { petClick?.onClick(it) }
-            }
+        holder.itemView.setOnClickListener {
+            petClick?.onClick(holder.pet!!)
         }
         return holder
     }
@@ -65,36 +58,5 @@ class PetAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<PetAdapter.
         return pets.size
     }
 
-    class PetViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
-        @BindView(R.id.item_pet_name)
-        lateinit var petName: TextView
-
-        @BindView(R.id.item_pet_picture)
-        lateinit var imageView: ImageView
-
-        @BindView(R.id.item_pet_breed)
-        lateinit var breed: TextView
-
-        @BindView(R.id.item_pet_card_view)
-        lateinit var cardView: androidx.cardview.widget.CardView
-
-        var pet: Pet? = null
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
-
-        fun bind(pet: Pet) {
-            this.pet = pet
-            petName.text = String.format("%s, %s, %s", pet.name, pet.age, pet.sex)
-            breed.text = pet.breed
-            val url = pet.media!!.thumbnail
-            if (url != null) {
-                GlideApp.with(itemView).load(url).fitCenter().centerCrop().into(imageView)
-            } else {
-                imageView.setImageResource(R.drawable.ic_broken_image_black_24dp)
-            }
-        }
-    }
 }

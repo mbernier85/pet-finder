@@ -13,23 +13,20 @@
 
 package im.bernier.petfinder.adapter
 
-import android.text.TextUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
+import androidx.recyclerview.widget.RecyclerView
 import im.bernier.petfinder.R
+import im.bernier.petfinder.holder.ShelterViewHolder
 import im.bernier.petfinder.model.Shelter
+import kotlinx.android.synthetic.main.item_shelter.view.*
 import java.util.*
 
 /**
  * Created by Michael on 2016-10-30.
  */
 
-class ShelterAdapter(private val listener: ShelterAdapter.ShelterItemListener) : androidx.recyclerview.widget.RecyclerView.Adapter<ShelterAdapter.ShelterViewHolder>() {
+class ShelterAdapter(private val listener: ShelterAdapter.ShelterItemListener) : RecyclerView.Adapter<ShelterViewHolder>() {
 
     private var shelters: List<Shelter>
 
@@ -49,89 +46,32 @@ class ShelterAdapter(private val listener: ShelterAdapter.ShelterItemListener) :
         shelters = ArrayList()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShelterAdapter.ShelterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShelterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_shelter, parent, false)
         val holder = ShelterViewHolder(view)
         view.setOnClickListener {
             listener.itemClick(shelters[holder.adapterPosition])
         }
-        holder.directionsButton.setOnClickListener {
+        holder.itemView.buttonShelterDirection.setOnClickListener {
             listener.directionClick(shelters[holder.adapterPosition])
         }
 
-        holder.emailButton.setOnClickListener {
+        holder.itemView.buttonShelterEmail.setOnClickListener {
             listener.emailClick(shelters[holder.adapterPosition])
         }
 
-        holder.phoneButton.setOnClickListener {
+        holder.itemView.buttonShelterPhone.setOnClickListener {
             listener.phoneClick(shelters[holder.adapterPosition])
         }
 
         return holder
     }
 
-    override fun onBindViewHolder(holder: ShelterAdapter.ShelterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ShelterViewHolder, position: Int) {
         holder.bindItem(shelters[position])
     }
 
     override fun getItemCount(): Int {
         return shelters.size
-    }
-
-    class ShelterViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
-
-        @BindView(R.id.item_shelter_city_text_view)
-        lateinit var cityTextView: TextView
-
-        @BindView(R.id.item_shelter_name_text_view)
-        lateinit var nameTextView: TextView
-
-        @BindView(R.id.item_shelter_directions_button)
-        lateinit var directionsButton: Button
-
-        @BindView(R.id.item_shelter_email_text_view)
-        lateinit var emailTextView: TextView
-
-        @BindView(R.id.item_shelter_phone_text_view)
-        lateinit var phoneTextView: TextView
-
-        @BindView(R.id.item_shelter_phone_button)
-        lateinit var phoneButton: Button
-
-        @BindView(R.id.item_shelter_email_button)
-        lateinit var emailButton: Button
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
-
-        fun bindItem(shelter: Shelter) {
-            val builder = StringBuilder()
-            if (!TextUtils.isEmpty(shelter.address1)) {
-                builder.append(shelter.address1)
-                builder.append(", ")
-            }
-            builder.append(String.format("%s, %s, %s", shelter.zip, shelter.state, shelter.country))
-            cityTextView.text = builder
-            nameTextView.text = shelter.name
-
-            if (TextUtils.isEmpty(shelter.email)) {
-                emailTextView.visibility = View.GONE
-                emailButton.visibility = View.GONE
-            } else {
-                emailTextView.visibility = View.VISIBLE
-                emailButton.visibility = View.VISIBLE
-                emailTextView.text = shelter.email
-            }
-
-            if (TextUtils.isEmpty(shelter.phone)) {
-                phoneButton.visibility = View.GONE
-                phoneTextView.visibility = View.GONE
-            } else {
-                phoneTextView.visibility = View.VISIBLE
-                phoneButton.visibility = View.VISIBLE
-                phoneTextView.text = shelter.phone
-            }
-        }
     }
 }

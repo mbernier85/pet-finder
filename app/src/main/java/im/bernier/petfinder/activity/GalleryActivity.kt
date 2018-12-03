@@ -14,23 +14,18 @@
 package im.bernier.petfinder.activity
 
 import android.os.Bundle
-import butterknife.BindView
-import butterknife.ButterKnife
 import im.bernier.petfinder.R
 import im.bernier.petfinder.adapter.ImageViewAdapter
 import im.bernier.petfinder.model.Pet
 import im.bernier.petfinder.mvp.presenter.ImageViewerPresenter
 import im.bernier.petfinder.mvp.view.ImageViewerView
+import kotlinx.android.synthetic.main.activity_image_view.*
 import java.util.*
-
 /**
  * Created by Michael on 2016-07-12.
  */
 
-class ImageViewerActivity : BaseActivity(), ImageViewerView {
-
-    @BindView(R.id.activity_image_view_pager)
-    lateinit var viewPager: androidx.viewpager.widget.ViewPager
+class GalleryActivity : BaseActivity(), ImageViewerView {
 
     lateinit var presenter: ImageViewerPresenter
     private lateinit var imageViewAdapter: ImageViewAdapter
@@ -38,10 +33,9 @@ class ImageViewerActivity : BaseActivity(), ImageViewerView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image_view)
-        ButterKnife.bind(this)
 
         imageViewAdapter = ImageViewAdapter(this, ArrayList())
-        viewPager.adapter = imageViewAdapter
+        viewPagerGallery.adapter = imageViewAdapter
 
         presenter = ImageViewerPresenter()
         presenter.setView(this)

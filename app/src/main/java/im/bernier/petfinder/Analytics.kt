@@ -23,7 +23,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
  */
 
 object Analytics {
-
     private var firebaseAnalytics: FirebaseAnalytics? = null
 
     fun track(key: String, bundle: Bundle? = null) {
@@ -44,5 +43,4 @@ object Analytics {
         bundle.putString("place_name", place.name.toString())
         return bundle
     }
-
 }

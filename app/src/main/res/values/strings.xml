@@ -47,5 +47,6 @@
     <string name="phone">Phone</string>
     <string name="email">Email</string>
     <string name="no_dialer_found">Sorry, your device doesn\'t support phone calls</string>
+    <string name="pet_image_content_descriptor">Pet photo</string>
 
 </resources>

@@ -32,7 +32,7 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener
 import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment
 import com.google.android.material.snackbar.Snackbar
 import im.bernier.petfinder.R
-import im.bernier.petfinder.activity.ResultActivity
+import im.bernier.petfinder.activity.PetResultActivity
 import im.bernier.petfinder.model.Animal
 import im.bernier.petfinder.model.Search
 import im.bernier.petfinder.mvp.presenter.PetSearchPresenter
@@ -268,7 +268,7 @@ class PetSearchViewTab(context: Context) : FrameLayout(context), im.bernier.petf
     }
 
     override fun showResults() {
-        context.startActivity(Intent(context, ResultActivity::class.java))
+        context.startActivity(Intent(context, PetResultActivity::class.java))
     }
 
     inner class AnimalAdapter internal constructor(context: Context, internal val animals: ArrayList<Animal>) : ArrayAdapter<Animal>(context, R.layout.support_simple_spinner_dropdown_item, animals) {

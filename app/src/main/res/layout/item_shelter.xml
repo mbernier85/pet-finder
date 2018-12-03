@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/item_shelter_name_text_view"
+            android:id="@+id/textViewShelterName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -23,7 +23,7 @@
             tools:text="Second chance animal rescue society" />
 
         <TextView
-            android:id="@+id/item_shelter_city_text_view"
+            android:id="@+id/textViewShelterCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -32,7 +32,7 @@
             tools:text="Red Deer, AB" />
 
         <TextView
-            android:id="@+id/item_shelter_email_text_view"
+            android:id="@+id/textViewShelterEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -41,7 +41,7 @@
             tools:text="email@example.com" />
 
         <TextView
-            android:id="@+id/item_shelter_phone_text_view"
+            android:id="@+id/textViewShelterPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -63,7 +63,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/item_shelter_directions_button"
+                android:id="@+id/buttonShelterDirection"
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                 android:text="@string/directions" />
 
             <Button
-                android:id="@+id/item_shelter_phone_button"
+                android:id="@+id/buttonShelterPhone"
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 android:text="@string/phone" />
 
             <Button
-                android:id="@+id/item_shelter_email_button"
+                android:id="@+id/buttonShelterEmail"
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
