@@ -28,7 +28,7 @@ import im.bernier.petfinder.mvp.view.ShelterSearchView
  */
 
 class ShelterSearchPresenter(private val view: ShelterSearchView) : Presenter {
-    private val analytics = Analytics.instance
+    private val analytics = Analytics
 
     fun submit(location: String, name: String) {
         if (location.length > 3) {
@@ -45,7 +45,7 @@ class ShelterSearchPresenter(private val view: ShelterSearchView) : Presenter {
     }
 
     fun placeSelected(place: Place) {
-        analytics.track("shelter_place_selected", Analytics.instance.placeToBundle(place))
+        analytics.track("shelter_place_selected", analytics.placeToBundle(place))
     }
 
     override fun onAttach() {

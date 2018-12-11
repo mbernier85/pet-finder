@@ -31,7 +31,7 @@ import timber.log.Timber
  */
 
 class ShelterResultPresenter(private val view: ShelterResultView) : Presenter {
-    private val analytics = Analytics.instance
+    private val analytics = Analytics
 
     override fun onAttach() {
         val shelterSearch = Storage.instance.shelterSearch

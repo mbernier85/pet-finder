@@ -25,7 +25,7 @@ import im.bernier.petfinder.mvp.view.PetView
 class PetPresenter : Presenter {
 
     lateinit var pet: Pet
-    private val analytics = Analytics.instance
+    private val analytics = Analytics
 
     private var view: PetView? = null
 

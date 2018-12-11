@@ -30,6 +30,6 @@ class BaseApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-        Analytics.instance.init(FirebaseAnalytics.getInstance(this))
+        Analytics.init(FirebaseAnalytics.getInstance(this))
     }
 }

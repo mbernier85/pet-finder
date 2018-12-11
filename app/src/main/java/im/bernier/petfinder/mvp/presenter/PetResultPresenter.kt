@@ -34,7 +34,7 @@ import timber.log.Timber
 class PetResultPresenter : Presenter {
 
     private var view: ResultView? = null
-    private val analytics = Analytics.instance
+    private val analytics = Analytics
 
     override fun onAttach() {
         val search = Storage.instance.search

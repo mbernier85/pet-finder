@@ -40,7 +40,7 @@ class HomeActivity : BaseActivity() {
     lateinit var content: FrameLayout
 
     private lateinit var viewGroups: SparseArray<ViewGroup>
-    private val analytics = Analytics.instance
+    private val analytics = Analytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

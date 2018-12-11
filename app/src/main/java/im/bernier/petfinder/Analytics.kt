@@ -22,11 +22,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
  * Created by Michael on 2017-02-07.
  */
 
-class Analytics private constructor() {
-
-    private object Holder {
-        var INSTANCE = Analytics()
-    }
+object Analytics {
 
     private var firebaseAnalytics: FirebaseAnalytics? = null
 
@@ -39,7 +35,7 @@ class Analytics private constructor() {
     }
 
     fun init(firebaseAnalytics: FirebaseAnalytics) {
-        Holder.INSTANCE.firebaseAnalytics = firebaseAnalytics
+        this.firebaseAnalytics = firebaseAnalytics
     }
 
     fun placeToBundle(place: Place): Bundle {
@@ -47,10 +43,6 @@ class Analytics private constructor() {
         bundle.putString("place_address", place.address.toString())
         bundle.putString("place_name", place.name.toString())
         return bundle
-    }
-
-    companion object {
-        val instance: Analytics by lazy { Holder.INSTANCE }
     }
 
 }
