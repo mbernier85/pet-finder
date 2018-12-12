@@ -34,7 +34,7 @@ import java.util.*
 class PetSearchPresenter : Presenter {
 
     private var view: PetSearchView? = null
-    private val analytics = Analytics.instance
+    private val analytics = Analytics
     private val animals = arrayOf("cat", "dog", "rabbit", "smallfurry", "horse", "bird", "reptile", "pig", "barnyard")
 
     fun setView(view: PetSearchView) {
@@ -60,7 +60,7 @@ class PetSearchPresenter : Presenter {
     }
 
     fun placeSelected(place: Place) {
-        analytics.track("shelter_place_selected", Analytics.instance.placeToBundle(place))
+        analytics.track("shelter_place_selected", analytics.placeToBundle(place))
     }
 
     fun loadBreed(animal: String?) {
