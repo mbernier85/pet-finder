@@ -23,7 +23,7 @@ class ShelterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         if (TextUtils.isEmpty(shelter.email)) {
             itemView.textViewShelterEmail.visibility = View.GONE
-            itemView.textViewShelterEmail.visibility = View.GONE
+            itemView.buttonShelterEmail.visibility = View.GONE
         } else {
             itemView.textViewShelterEmail.visibility = View.VISIBLE
             itemView.buttonShelterEmail.visibility = View.VISIBLE

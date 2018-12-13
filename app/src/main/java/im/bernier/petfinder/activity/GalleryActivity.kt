@@ -21,6 +21,7 @@ import im.bernier.petfinder.mvp.presenter.ImageViewerPresenter
 import im.bernier.petfinder.mvp.view.ImageViewerView
 import kotlinx.android.synthetic.main.activity_image_view.*
 import java.util.*
+
 /**
  * Created by Michael on 2016-07-12.
  */

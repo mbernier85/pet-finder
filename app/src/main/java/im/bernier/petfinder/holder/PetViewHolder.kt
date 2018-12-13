@@ -19,7 +19,8 @@ class PetViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.textViewPetItemBreed.text = pet.breed
         val url = pet.media!!.thumbnail
         if (url != null) {
-            GlideApp.with(itemView).load(url).fitCenter().centerCrop().into(itemView.imageViewPetItem)
+            GlideApp.with(itemView).load(url).fitCenter().centerCrop()
+                .into(itemView.imageViewPetItem)
         } else {
             itemView.imageViewPetItem.setImageResource(R.drawable.ic_broken_image_black_24dp)
         }

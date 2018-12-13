@@ -46,9 +46,11 @@ class ShelterResultActivity : BaseActivity(), ShelterResultView {
         setContentView(R.layout.activity_shelter_result)
 
         if (isTablet) {
-            recyclerViewShelter.layoutManager = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
+            recyclerViewShelter.layoutManager =
+                    GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
         } else {
-            recyclerViewShelter.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+            recyclerViewShelter.layoutManager =
+                    LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         }
         adapter = ShelterAdapter(object : ShelterAdapter.ShelterItemListener {
             override fun itemClick(shelter: Shelter) {
@@ -71,9 +73,20 @@ class ShelterResultActivity : BaseActivity(), ShelterResultView {
             }
 
             override fun directionClick(shelter: Shelter) {
-                val intent = Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse(String.format("http://maps.google.com/maps?daddr=%s, %s", shelter.city, shelter.zip)))
-                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity")
+                val intent = Intent(
+                    android.content.Intent.ACTION_VIEW,
+                    Uri.parse(
+                        String.format(
+                            "http://maps.google.com/maps?daddr=%s, %s",
+                            shelter.city,
+                            shelter.zip
+                        )
+                    )
+                )
+                intent.setClassName(
+                    "com.google.android.apps.maps",
+                    "com.google.android.maps.MapsActivity"
+                )
                 startActivity(intent)
             }
         })
@@ -93,7 +106,11 @@ class ShelterResultActivity : BaseActivity(), ShelterResultView {
     }
 
     override fun showError(error: String) {
-        com.google.android.material.snackbar.Snackbar.make(recyclerViewShelter, error, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
+        com.google.android.material.snackbar.Snackbar.make(
+            recyclerViewShelter,
+            error,
+            com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+        ).show()
         progressBarShelter.visibility = View.GONE
     }
 

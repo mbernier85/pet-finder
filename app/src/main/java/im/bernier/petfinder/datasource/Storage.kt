@@ -23,7 +23,9 @@ import im.bernier.petfinder.model.ShelterSearch
 
 class Storage private constructor() {
 
-    private object Holder { val INSTANCE = Storage() }
+    private object Holder {
+        val INSTANCE = Storage()
+    }
 
     var pet: Pet? = null
     var search: Search? = null

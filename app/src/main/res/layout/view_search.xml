@@ -12,7 +12,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/search_toolbar"
+            android:id="@+id/toolbarPetSearch"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="@string/app_name"
@@ -31,7 +31,7 @@
             android:orientation="vertical">
 
             <fragment
-                android:id="@+id/place_autocomplete_fragment"
+                android:id="@+id/fragmentPetSearchAutoComplete"
                 android:name="com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -46,7 +46,7 @@
                 android:text="@string/animal" />
 
             <Spinner
-                android:id="@+id/search_animal_spinner"
+                android:id="@+id/spinnerPetSearchAnimal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -61,7 +61,7 @@
                 android:text="@string/breed" />
 
             <AutoCompleteTextView
-                android:id="@+id/search_breed_auto_complete"
+                android:id="@+id/autoCompleteTextViewPetSearchBreed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -77,7 +77,7 @@
                 android:text="@string/sex" />
 
             <Spinner
-                android:id="@+id/search_sex_spinner"
+                android:id="@+id/spinnerPetSearchSex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -92,7 +92,7 @@
                 android:text="@string/age" />
 
             <Spinner
-                android:id="@+id/search_age_spinner"
+                android:id="@+id/spinnerPetSearchAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -100,7 +100,7 @@
                 android:layout_marginStart="@dimen/activity_horizontal_margin" />
 
             <Button
-                android:id="@+id/search_submit"
+                android:id="@+id/buttonPetSearchSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"

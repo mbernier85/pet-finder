@@ -21,5 +21,18 @@ import org.simpleframework.xml.Root
  */
 
 @Root(name = "shelter", strict = false)
-data class Shelter(@field:Element var id: String? = null, @field:Element var name: String? = null, @field:Element(required = false) var address1: String? = null, @field:Element(required = false) var address2: String? = null, @field:Element var city: String? = null, @field:Element var state: String? = null, @field:Element var country: String? = null, @field:Element var zip: String? = null, @field:Element var latitude: Double = 0.toDouble(), @field:Element var longitude: Double = 0.toDouble(), @field:Element(required = false) var phone: String? = null, @field:Element var email: String? = null)
+data class Shelter(
+    @field:Element var id: String? = null,
+    @field:Element var name: String? = null,
+    @field:Element(required = false) var address1: String? = null,
+    @field:Element(required = false) var address2: String? = null,
+    @field:Element var city: String? = null,
+    @field:Element var state: String? = null,
+    @field:Element var country: String? = null,
+    @field:Element var zip: String? = null,
+    @field:Element var latitude: Double = 0.toDouble(),
+    @field:Element var longitude: Double = 0.toDouble(),
+    @field:Element(required = false) var phone: String? = null,
+    @field:Element(required = false) var email: String? = null
+)
 

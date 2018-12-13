@@ -21,9 +21,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.annotation.StringRes
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
+import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.places.AutocompleteFilter
 import com.google.android.gms.location.places.Place
@@ -33,6 +31,7 @@ import im.bernier.petfinder.R
 import im.bernier.petfinder.activity.ShelterResultActivity
 import im.bernier.petfinder.mvp.presenter.ShelterSearchPresenter
 import im.bernier.petfinder.mvp.view.ShelterSearchView
+import kotlinx.android.synthetic.main.view_shelter_search.view.*
 import timber.log.Timber
 import java.io.IOException
 
@@ -42,40 +41,38 @@ import java.io.IOException
 
 class ShelterSearchViewTab(context: Context) : FrameLayout(context), ShelterSearchView {
 
-    @BindView(R.id.search_shelter_name_edit_text)
-    lateinit var nameEditText: EditText
-
-    private lateinit var placeAutocompleteFragment: SupportPlaceAutocompleteFragment
     lateinit var presenter: ShelterSearchPresenter
-    private lateinit var geocoder: Geocoder
+    private var placeAutocompleteFragment: SupportPlaceAutocompleteFragment
+    private var geocoder: Geocoder
     private var postalCode: String = ""
 
     init {
-        init()
-    }
-
-    fun init() {
         View.inflate(context, R.layout.view_shelter_search, this)
-        ButterKnife.bind(this)
 
         geocoder = Geocoder(context)
         val autocompleteFilter = AutocompleteFilter.Builder()
-                .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS or AutocompleteFilter.TYPE_FILTER_REGIONS)
-                .build()
+            .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS or AutocompleteFilter.TYPE_FILTER_REGIONS)
+            .build()
 
-        placeAutocompleteFragment = (context as androidx.fragment.app.FragmentActivity).supportFragmentManager.findFragmentById(R.id.shelter_place_autocomplete_fragment) as SupportPlaceAutocompleteFragment
+        placeAutocompleteFragment =
+                (context as FragmentActivity).supportFragmentManager.findFragmentById(
+                    R.id.fragmentShelterSearchAutoComplete
+                ) as SupportPlaceAutocompleteFragment
         placeAutocompleteFragment.setFilter(autocompleteFilter)
         placeAutocompleteFragment.setHint(context.getString(R.string.location_search))
-        placeAutocompleteFragment.view?.findViewById<View>(R.id.place_autocomplete_clear_button)?.setOnClickListener { view ->
-            postalCode = ""
-            (placeAutocompleteFragment.view?.findViewById<View>(R.id.place_autocomplete_search_input) as EditText).setText("")
-            view.visibility = View.GONE
-        }
+        placeAutocompleteFragment.view?.findViewById<View>(R.id.place_autocomplete_clear_button)
+            ?.setOnClickListener { view ->
+                postalCode = ""
+                (placeAutocompleteFragment.view?.findViewById<View>(R.id.place_autocomplete_search_input) as EditText)
+                    .setText("")
+                view.visibility = View.GONE
+            }
         placeAutocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 try {
                     presenter.placeSelected(place)
-                    val addresses = geocoder.getFromLocation(place.latLng.latitude, place.latLng.longitude, 5)
+                    val addresses =
+                        geocoder.getFromLocation(place.latLng.latitude, place.latLng.longitude, 5)
                     for (address in addresses) {
                         if (address.postalCode != null && address.postalCode.length > 3) {
                             postalCode = address.postalCode
@@ -99,6 +96,10 @@ class ShelterSearchViewTab(context: Context) : FrameLayout(context), ShelterSear
 
         id = R.id.shelter_search_view
         isSaveEnabled = true
+
+        buttonShelterSearchSubmit.setOnClickListener {
+            submitClick()
+        }
 
         presenter = ShelterSearchPresenter(this)
     }
@@ -157,7 +158,11 @@ class ShelterSearchViewTab(context: Context) : FrameLayout(context), ShelterSear
     }
 
     private fun showError(message: String) {
-        com.google.android.material.snackbar.Snackbar.make(nameEditText, message, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
+        com.google.android.material.snackbar.Snackbar.make(
+            textInputEditTextShelterSearch,
+            message,
+            com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+        ).show()
     }
 
     override fun onAttachedToWindow() {
@@ -170,9 +175,8 @@ class ShelterSearchViewTab(context: Context) : FrameLayout(context), ShelterSear
         super.onDetachedFromWindow()
     }
 
-    @OnClick(R.id.search_shelter_button_submit)
-    internal fun submitClick() {
-        val name = nameEditText.text.toString().trim { it <= ' ' }
+    private fun submitClick() {
+        val name = textInputEditTextShelterSearch.text.toString().trim { it <= ' ' }
         presenter.submit(postalCode, name)
     }
 

@@ -15,6 +15,7 @@ package im.bernier.petfinder.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import im.bernier.petfinder.R
 import im.bernier.petfinder.holder.PetViewHolder
 import im.bernier.petfinder.model.Pet
@@ -24,7 +25,7 @@ import java.util.*
  * Created by Michael on 2016-07-09.
  */
 
-class PetAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<PetViewHolder>() {
+class PetAdapter : RecyclerView.Adapter<PetViewHolder>() {
 
     private var pets = ArrayList<Pet>()
     private var petClick: PetClick? = null
@@ -38,7 +39,13 @@ class PetAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<PetViewHold
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PetViewHolder {
-        val holder = PetViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_pet, parent, false))
+        val holder = PetViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_pet,
+                parent,
+                false
+            )
+        )
         holder.itemView.setOnClickListener {
             petClick?.onClick(holder.pet!!)
         }

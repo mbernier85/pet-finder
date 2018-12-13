@@ -19,8 +19,8 @@ import im.bernier.petfinder.model.Pet
 import im.bernier.petfinder.mvp.view.PetView
 
 /**
-* Created by Michael Bernier on 2016-07-09.
-*/
+ * Created by Michael Bernier on 2016-07-09.
+ */
 
 class PetPresenter : Presenter {
 

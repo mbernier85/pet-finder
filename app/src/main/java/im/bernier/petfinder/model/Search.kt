@@ -19,7 +19,13 @@ import android.os.Bundle
  * Created by Michael on 2016-07-13.
  */
 
-data class Search(var location: String? = "", var animal: Animal? = Animal(), var breed: String? = "", var age: String? = "", var sex: String? = "") {
+data class Search(
+    var location: String? = "",
+    var animal: Animal? = Animal(),
+    var breed: String? = "",
+    var age: String? = "",
+    var sex: String? = ""
+) {
 
     val bundle: Bundle
         get() {

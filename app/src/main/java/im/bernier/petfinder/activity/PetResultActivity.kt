@@ -24,8 +24,7 @@ import im.bernier.petfinder.adapter.PetAdapter
 import im.bernier.petfinder.model.Pet
 import im.bernier.petfinder.mvp.presenter.PetResultPresenter
 import im.bernier.petfinder.mvp.view.ResultView
-import kotlinx.android.synthetic.main.activity_result.*
-import kotlinx.android.synthetic.main.activity_shelter_result.*
+import kotlinx.android.synthetic.main.activity_pet_result.*
 import java.util.*
 
 class PetResultActivity : BaseActivity(), ResultView {
@@ -35,19 +34,21 @@ class PetResultActivity : BaseActivity(), ResultView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_result)
+        setContentView(R.layout.activity_pet_result)
         presenter = PetResultPresenter()
         presenter.setView(this)
         presenter.onAttach()
 
         if (isTablet) {
-            recyclerViewShelter.layoutManager = GridLayoutManager(this, 3, RecyclerView.VERTICAL, false)
+            recyclerViewPets.layoutManager =
+                    GridLayoutManager(this, 3, RecyclerView.VERTICAL, false)
         } else {
-            recyclerViewShelter.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+            recyclerViewPets.layoutManager =
+                    LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         }
-        recyclerViewShelter.setHasFixedSize(true)
+        recyclerViewPets.setHasFixedSize(true)
         petAdapter = PetAdapter()
-        recyclerViewShelter.adapter = petAdapter
+        recyclerViewPets.adapter = petAdapter
         petAdapter.setPetClick(object : PetAdapter.PetClick {
             override fun onClick(pet: Pet) {
                 presenter.onPetClick(pet)
@@ -60,7 +61,11 @@ class PetResultActivity : BaseActivity(), ResultView {
     }
 
     override fun showError(error: String) {
-        com.google.android.material.snackbar.Snackbar.make(recyclerViewShelter, error, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
+        com.google.android.material.snackbar.Snackbar.make(
+            recyclerViewPets,
+            error,
+            com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+        ).show()
     }
 
     override fun openPet(pet: Pet) {
@@ -70,10 +75,10 @@ class PetResultActivity : BaseActivity(), ResultView {
     override fun updateResults(pets: ArrayList<Pet>) {
         progressBarPets.visibility = View.GONE
         if (pets.size > 0) {
-            recyclerViewShelter.visibility = View.VISIBLE
+            recyclerViewPets.visibility = View.VISIBLE
             textViewPets.visibility = View.GONE
         } else {
-            recyclerViewShelter.visibility = View.GONE
+            recyclerViewPets.visibility = View.GONE
             textViewPets.visibility = View.VISIBLE
         }
         petAdapter.setPets(pets)

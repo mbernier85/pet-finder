@@ -28,14 +28,15 @@ import timber.log.Timber
 import java.util.*
 
 /**
-* Created by Michael Bernier on 2016-07-12.
-*/
+ * Created by Michael Bernier on 2016-07-12.
+ */
 
 class PetSearchPresenter : Presenter {
 
     private var view: PetSearchView? = null
     private val analytics = Analytics
-    private val animals = arrayOf("cat", "dog", "rabbit", "smallfurry", "horse", "bird", "reptile", "pig", "barnyard")
+    private val animals =
+        arrayOf("cat", "dog", "rabbit", "smallfurry", "horse", "bird", "reptile", "pig", "barnyard")
 
     fun setView(view: PetSearchView) {
         this.view = view

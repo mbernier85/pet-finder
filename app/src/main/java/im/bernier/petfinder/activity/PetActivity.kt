@@ -85,12 +85,16 @@ class PetActivity : BaseActivity(), PetView {
     }
 
     override fun openMap(pet: Pet) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(String.format("geo:0,0?q=%s", pet.contact?.address)))
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(String.format("geo:0,0?q=%s", pet.contact?.address))
+        )
         startActivity(intent)
     }
 
     override fun openDialer(pet: Pet) {
-        val intent = Intent(Intent.ACTION_DIAL, Uri.parse(String.format("tel:%s", pet.contact?.phone)))
+        val intent =
+            Intent(Intent.ACTION_DIAL, Uri.parse(String.format("tel:%s", pet.contact?.phone)))
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
         } else {
@@ -99,11 +103,16 @@ class PetActivity : BaseActivity(), PetView {
     }
 
     fun showError(@StringRes id: Int) {
-        com.google.android.material.snackbar.Snackbar.make(textViewContactPhone, id, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
+        com.google.android.material.snackbar.Snackbar.make(
+            textViewContactPhone,
+            id,
+            com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+        ).show()
     }
 
     override fun openEmail(pet: Pet) {
-        val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", pet.contact?.email, null))
+        val emailIntent =
+            Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", pet.contact?.email, null))
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, String.format("About : %s", pet.name))
         startActivity(Intent.createChooser(emailIntent, "Send email..."))
     }

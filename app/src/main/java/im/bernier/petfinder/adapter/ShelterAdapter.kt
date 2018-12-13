@@ -26,7 +26,8 @@ import java.util.*
  * Created by Michael on 2016-10-30.
  */
 
-class ShelterAdapter(private val listener: ShelterAdapter.ShelterItemListener) : RecyclerView.Adapter<ShelterViewHolder>() {
+class ShelterAdapter(private val listener: ShelterAdapter.ShelterItemListener) :
+    RecyclerView.Adapter<ShelterViewHolder>() {
 
     private var shelters: List<Shelter>
 

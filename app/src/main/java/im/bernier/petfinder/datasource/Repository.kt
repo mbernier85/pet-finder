@@ -13,11 +13,7 @@
 
 package im.bernier.petfinder.datasource
 
-import im.bernier.petfinder.model.Breeds
-import im.bernier.petfinder.model.Search
-import im.bernier.petfinder.model.SearchResult
-import im.bernier.petfinder.model.ShelterResult
-import im.bernier.petfinder.model.ShelterSearch
+import im.bernier.petfinder.model.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -31,24 +27,33 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 class Repository private constructor() {
 
     private val service: Service
-    private object Holder { val INSTANCE = Repository() }
+
+    private object Holder {
+        val INSTANCE = Repository()
+    }
 
     init {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BASIC
         val client = OkHttpClient.Builder()
-                .addInterceptor(logging)
-                .build()
+            .addInterceptor(logging)
+            .build()
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://api.petfinder.com")
-                .client(client)
-                .addConverterFactory(SimpleXmlConverterFactory.create())
-                .build()
+            .baseUrl("https://api.petfinder.com")
+            .client(client)
+            .addConverterFactory(SimpleXmlConverterFactory.create())
+            .build()
         service = retrofit.create(Service::class.java)
     }
 
     fun petFind(search: Search): Call<SearchResult> {
-        return service.petFind(search.location, search.animal?.key, search.breed, search.sex, search.age)
+        return service.petFind(
+            search.location,
+            search.animal?.key,
+            search.breed,
+            search.sex,
+            search.age
+        )
     }
 
     fun loadBreeds(animal: String): Call<Breeds> {

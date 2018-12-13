@@ -12,7 +12,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/search_toolbar"
+            android:id="@+id/toolbarShelterSearch"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="@string/app_name"
@@ -33,7 +33,7 @@
             android:orientation="vertical">
 
             <fragment
-                android:id="@+id/shelter_place_autocomplete_fragment"
+                android:id="@+id/fragmentShelterSearchAutoComplete"
                 android:name="com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/search_shelter_name_edit_text"
+                    android:id="@+id/textInputEditTextShelterSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -54,7 +54,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/search_shelter_button_submit"
+                android:id="@+id/buttonShelterSearchSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/search" />

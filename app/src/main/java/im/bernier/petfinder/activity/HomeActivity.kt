@@ -65,10 +65,10 @@ class HomeActivity : BaseActivity() {
                 action_about -> {
                     frameLayoutHomeContent.removeAllViews()
                     val fragment = LibsBuilder()
-                            .withAboutIconShown(true)
-                            .withAboutVersionShown(true)
-                            .withAboutDescription(getString(R.string.app_description))
-                            .supportFragment()
+                        .withAboutIconShown(true)
+                        .withAboutVersionShown(true)
+                        .withAboutDescription(getString(R.string.app_description))
+                        .supportFragment()
 
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
                     fragmentTransaction.add(R.id.frameLayoutHomeContent, fragment).commit()
