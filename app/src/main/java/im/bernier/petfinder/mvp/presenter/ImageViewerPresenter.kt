@@ -29,7 +29,7 @@ class ImageViewerPresenter : Presenter {
     }
 
     override fun onAttach() {
-        val pet = Storage.instance.pet
+        val pet = Storage.pet
         if (pet == null) {
             view!!.doFinish()
             return

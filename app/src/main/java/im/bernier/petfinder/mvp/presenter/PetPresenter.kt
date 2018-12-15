@@ -38,7 +38,7 @@ class PetPresenter : Presenter {
     }
 
     override fun onAttach() {
-        pet = Storage.instance.pet.takeIf { it != null } ?: Pet()
+        pet = Storage.pet.takeIf { it != null } ?: Pet()
 
         view?.updateUi(pet)
     }

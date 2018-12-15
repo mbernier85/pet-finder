@@ -16,12 +16,13 @@ package im.bernier.petfinder.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
+import androidx.viewpager.widget.ViewPager
 
 /**
  * Created by Michael on 2017-02-06.
  */
 
-class CustomViewPager : androidx.viewpager.widget.ViewPager {
+class CustomViewPager : ViewPager {
 
     constructor(context: Context) : super(context)
 

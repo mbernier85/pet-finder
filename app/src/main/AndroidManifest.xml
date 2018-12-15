@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:networkSecurityConfig="@xml/network_security_config"
         android:name=".BaseApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher_round"
@@ -22,6 +23,7 @@
         <activity android:name=".activity.ShelterResultActivity" />
         <activity
             android:name=".activity.HomeActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity-alias

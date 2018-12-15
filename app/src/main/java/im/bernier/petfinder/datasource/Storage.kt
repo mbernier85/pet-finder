@@ -21,17 +21,8 @@ import im.bernier.petfinder.model.ShelterSearch
  * Created by Michael on 2016-07-09.
  */
 
-class Storage private constructor() {
-
-    private object Holder {
-        val INSTANCE = Storage()
-    }
-
+object Storage {
     var pet: Pet? = null
     var search: Search? = null
     var shelterSearch: ShelterSearch? = null
-
-    companion object {
-        val instance: Storage by lazy { Holder.INSTANCE }
-    }
 }

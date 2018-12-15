@@ -24,13 +24,9 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory
  * Created by Michael on 2016-07-09.
  */
 
-class Repository private constructor() {
+object Repository {
 
     private val service: Service
-
-    private object Holder {
-        val INSTANCE = Repository()
-    }
 
     init {
         val logging = HttpLoggingInterceptor()
@@ -63,9 +59,4 @@ class Repository private constructor() {
     fun shelterFind(shelterSearch: ShelterSearch): Call<ShelterResult> {
         return service.shelterFind(shelterSearch.location!!, shelterSearch.name!!)
     }
-
-    companion object {
-        val instance: Repository by lazy { Holder.INSTANCE }
-    }
-
 }
