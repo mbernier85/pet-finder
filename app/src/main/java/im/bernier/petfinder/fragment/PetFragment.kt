@@ -10,7 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
-import androidx.annotation.StringRes
+import androidx.lifecycle.Observer
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.places.AutocompleteFilter
 import com.google.android.gms.location.places.Place
@@ -23,13 +23,9 @@ import im.bernier.petfinder.adapter.AnimalAdapter
 import im.bernier.petfinder.datasource.Repository
 import im.bernier.petfinder.datasource.Storage
 import im.bernier.petfinder.model.Animal
-import im.bernier.petfinder.model.Breeds
 import im.bernier.petfinder.model.Search
 import kotlinx.android.synthetic.main.content_pet_search.*
 import kotlinx.android.synthetic.main.fragment_pet_search.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
 
@@ -46,7 +42,7 @@ class PetFragment : BaseFragment() {
     private var sexes = arrayOf("Any", "M", "F")
     internal var breed = arrayOf("Any")
     private val animals =
-        arrayOf("cat", "dog", "rabbit", "smallfurry", "horse", "bird", "reptile", "pig", "barnyard")
+            arrayOf("cat", "dog", "rabbit", "smallfurry", "horse", "bird", "reptile", "pig", "barnyard")
 
 
     private lateinit var placeAutocompleteFragment: SupportPlaceAutocompleteFragment
@@ -57,8 +53,8 @@ class PetFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         geocoder = Geocoder(context)
         val autocompleteFilter = AutocompleteFilter.Builder()
-            .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS or AutocompleteFilter.TYPE_FILTER_REGIONS)
-            .build()
+                .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS or AutocompleteFilter.TYPE_FILTER_REGIONS)
+                .build()
 
         placeAutocompleteFragment =
                 childFragmentManager.findFragmentById(R.id.fragmentPetSearchAutoComplete) as SupportPlaceAutocompleteFragment
@@ -67,9 +63,9 @@ class PetFragment : BaseFragment() {
         placeAutocompleteFragment.setHint(getString(R.string.location_search))
         val autoCompleteView = placeAutocompleteFragment.view
         val autoCompleteClearButton =
-            autoCompleteView?.findViewById<View>(R.id.place_autocomplete_clear_button)
+                autoCompleteView?.findViewById<View>(R.id.place_autocomplete_clear_button)
         val autoCompleteEditText = placeAutocompleteFragment.view
-            ?.findViewById<EditText>(R.id.place_autocomplete_search_input)
+                ?.findViewById<EditText>(R.id.place_autocomplete_search_input)
         autoCompleteClearButton?.setOnClickListener { view ->
             postalCode = ""
             autoCompleteEditText?.setText("")
@@ -79,7 +75,7 @@ class PetFragment : BaseFragment() {
             override fun onPlaceSelected(place: Place) {
                 try {
                     val addresses =
-                        geocoder.getFromLocation(place.latLng.latitude, place.latLng.longitude, 5)
+                            geocoder.getFromLocation(place.latLng.latitude, place.latLng.longitude, 5)
                     for (address in addresses) {
                         if (address.postalCode != null && address.postalCode.length > 3) {
                             postalCode = address.postalCode
@@ -112,41 +108,33 @@ class PetFragment : BaseFragment() {
                     }
 
                     override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
                     ) {
                         onAnimalSelected(position)
                     }
                 }
         setAnimalsSpinner(animals)
+
+        val listing = repository.getBreeds()
+        listing.list.observe(viewLifecycleOwner, Observer { updateBreeds(it.breeds) })
+        listing.networkState.observe(viewLifecycleOwner, Observer {
+            if (it.status == im.bernier.petfinder.datasource.Status.FAILED) {
+                showError(it.message)
+            }
+        })
     }
 
-    fun showError(message: String) {
-        Snackbar.make(toolbarPetSearch, message, Snackbar.LENGTH_LONG).show()
-    }
-
-    fun showError(@StringRes id: Int) {
-        showError(getString(id))
+    fun showError(message: String?) {
+        val error = message ?: getString(R.string.sorry_something_went_wrong)
+        Snackbar.make(toolbarPetSearch, error, Snackbar.LENGTH_LONG).show()
     }
 
     fun onAnimalSelected(position: Int) {
         val animal = animalAdapter.animals[position].key ?: ""
-        repository.loadBreeds(animal).enqueue(object : Callback<Breeds?> {
-            override fun onFailure(call: Call<Breeds?>, t: Throwable) {
-                showError(t.localizedMessage)
-            }
-
-            override fun onResponse(call: Call<Breeds?>, response: Response<Breeds?>) {
-                val breeds = response.body()
-                if (breeds != null) {
-                    updateBreeds(breeds.breeds)
-                } else {
-
-                }
-            }
-        })
+        repository.fetch(animal)
     }
 
     private fun showResults() {
@@ -233,9 +221,9 @@ class PetFragment : BaseFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_pet_search, container, false)
     }
