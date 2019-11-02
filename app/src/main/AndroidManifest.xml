@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:networkSecurityConfig="@xml/network_security_config"
         android:name=".BaseApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher_round"
@@ -16,12 +17,13 @@
         android:theme="@style/PetFinderTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".activity.ResultActivity" />
+        <activity android:name=".activity.PetResultActivity" />
         <activity android:name=".activity.PetActivity" />
-        <activity android:name=".activity.ImageViewerActivity" />
+        <activity android:name=".activity.GalleryActivity" />
         <activity android:name=".activity.ShelterResultActivity" />
         <activity
             android:name=".activity.HomeActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity-alias

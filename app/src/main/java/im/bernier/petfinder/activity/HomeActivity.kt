@@ -14,18 +14,15 @@
 package im.bernier.petfinder.activity
 
 import android.os.Bundle
-import android.util.SparseArray
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import butterknife.BindView
-import butterknife.ButterKnife
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.mikepenz.aboutlibraries.LibsBuilder
 import im.bernier.petfinder.Analytics
 import im.bernier.petfinder.R
 import im.bernier.petfinder.R.id.*
-import im.bernier.petfinder.view.PetSearchViewTab
-import im.bernier.petfinder.view.ShelterSearchViewTab
+import im.bernier.petfinder.fragment.PetFragment
+import im.bernier.petfinder.fragment.ShelterFragment
+import kotlinx.android.synthetic.main.activity_home.*
 
 /**
  * Created by Michael on 2016-10-22.
@@ -33,55 +30,69 @@ import im.bernier.petfinder.view.ShelterSearchViewTab
 
 class HomeActivity : BaseActivity() {
 
-    @BindView(R.id.bottom_navigation)
-    lateinit var bottomNavigationView: BottomNavigationView
-
-    @BindView(R.id.content)
-    lateinit var content: FrameLayout
-
-    private lateinit var viewGroups: SparseArray<ViewGroup>
     private val analytics = Analytics
+
+    private lateinit var activeFragment: Fragment
+
+    private lateinit var fm: FragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        ButterKnife.bind(this)
+        fm = supportFragmentManager
 
-        viewGroups = SparseArray()
-        viewGroups.append(action_search, PetSearchViewTab(this@HomeActivity))
-        content.addView(viewGroups.get(action_search))
+        activeFragment = if (fm.fragments.isEmpty()) {
+            val ft = fm.beginTransaction()
+            val petFragment = PetFragment.getInstance()
+            ft.add(R.id.frameLayoutHomeContent, petFragment, "pet").commit()
+            petFragment
+        } else {
+            fm.findFragmentByTag("pet")!!
+        }
 
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+        bottomNavigationViewHome.setOnNavigationItemSelectedListener { item ->
+            val fragmentTransaction = fm.beginTransaction()
             when (item.itemId) {
                 action_search -> {
-                    content.removeAllViews()
-                    if (viewGroups.get(action_search) == null) {
-                        viewGroups.append(action_search, PetSearchViewTab(this@HomeActivity))
+                    val petFragment = fm.findFragmentByTag("pet") ?: PetFragment.getInstance()
+                    if (fm.findFragmentByTag("pet") == null) {
+                        fragmentTransaction.hide(activeFragment)
+                            .hide(activeFragment)
+                            .add(R.id.frameLayoutHomeContent, petFragment, "pet").commit()
+                    } else {
+                        fragmentTransaction.hide(activeFragment).show(petFragment).commit()
                     }
-                    content.addView(viewGroups.get(action_search))
-                    content.requestLayout()
-
+                    activeFragment = petFragment
                     analytics.track("home_pet_search_click")
                 }
                 action_shelter -> {
-                    content.removeAllViews()
-                    if (viewGroups.get(action_shelter) == null) {
-                        viewGroups.append(action_shelter, ShelterSearchViewTab(this@HomeActivity))
+                    val shelterFragment =
+                        fm.findFragmentByTag("shelter") ?: ShelterFragment.getInstance()
+                    if (fm.findFragmentByTag("shelter") == null) {
+                        fragmentTransaction.hide(activeFragment)
+                            .hide(activeFragment)
+                            .add(R.id.frameLayoutHomeContent, shelterFragment, "shelter")
+                            .show(shelterFragment).commit()
+                    } else {
+                        fragmentTransaction.hide(activeFragment).show(shelterFragment).commit()
                     }
-                    content.addView(viewGroups.get(action_shelter))
-                    content.requestLayout()
+                    activeFragment = shelterFragment
                     analytics.track("home_shelter_search_click")
                 }
                 action_about -> {
-                    content.removeAllViews()
-                    val fragment = LibsBuilder()
-                            .withAboutIconShown(true)
-                            .withAboutVersionShown(true)
-                            .withAboutDescription(getString(R.string.app_description))
-                            .supportFragment()
-
-                    val fragmentTransaction = supportFragmentManager.beginTransaction()
-                    fragmentTransaction.add(R.id.content, fragment).commit()
+                    val aboutFragment = fm.findFragmentByTag("about") ?: LibsBuilder()
+                        .withAboutIconShown(true)
+                        .withAboutVersionShown(true)
+                        .withAboutDescription(getString(R.string.app_description))
+                        .supportFragment()
+                    if (fm.findFragmentByTag("about") == null) {
+                        fragmentTransaction.hide(activeFragment)
+                            .hide(activeFragment)
+                            .add(R.id.frameLayoutHomeContent, aboutFragment, "about").commit()
+                    } else {
+                        fragmentTransaction.hide(activeFragment).show(aboutFragment).commit()
+                    }
+                    activeFragment = aboutFragment
                     analytics.track("home_about_click")
                 }
             }

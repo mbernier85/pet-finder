@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/appbarLayoutPet"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_pet_image_view_height"
         android:fitsSystemWindows="true"
@@ -23,15 +23,16 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/pet_image_view"
+                android:id="@+id/imageViewPet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/pet_image_content_descriptor"
                 android:fitsSystemWindows="true"
                 android:src="@drawable/ic_broken_image_black_24dp"
                 app:layout_collapseMode="parallax" />
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/pet_toolbar"
+                android:id="@+id/toolbarPet"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin" />
@@ -47,15 +48,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:fitsSystemWindows="true"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin">
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pet_breed"
+                android:id="@+id/textViewPetBreed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -63,25 +64,25 @@
                 tools:text="Breed" />
 
             <TextView
-                android:id="@+id/pet_age_sex"
+                android:id="@+id/textViewPetAgeSex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 tools:text="Young, M" />
 
             <TextView
-                android:id="@+id/pet_description"
+                android:id="@+id/textViewPetDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textIsSelectable="true"
                 android:layout_marginTop="8dp"
-                android:lineSpacingExtra="4dp" />
+                android:lineSpacingExtra="4dp"
+                android:textIsSelectable="true" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
                 android:text="@string/contact_information"
                 android:textSize="@dimen/header2"
                 android:textStyle="bold" />

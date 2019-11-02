@@ -21,4 +21,11 @@ import java.util.*
  */
 
 @Root(name = "petfinder", strict = false)
-data class ShelterResult(@field:Attribute @field:Namespace(reference = "http://www.w3.org/2001/XMLSchema-instance", prefix = "xsi") private var noNamespaceSchemaLocation: String = "", @field:ElementList(required = false) var shelters: ArrayList<Shelter>? = null, @field:Element var header: ErrorHeader? = null)
+data class ShelterResult(
+    @field:Attribute @field:Namespace(
+        reference = "http://www.w3.org/2001/XMLSchema-instance",
+        prefix = "xsi"
+    ) private var noNamespaceSchemaLocation: String = "",
+    @field:ElementList(required = false) var shelters: ArrayList<Shelter>? = null,
+    @field:Element var header: ErrorHeader? = null
+)

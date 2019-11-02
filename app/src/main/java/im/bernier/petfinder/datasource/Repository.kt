@@ -13,14 +13,13 @@
 
 package im.bernier.petfinder.datasource
 
-import im.bernier.petfinder.model.Breeds
-import im.bernier.petfinder.model.Search
-import im.bernier.petfinder.model.SearchResult
-import im.bernier.petfinder.model.ShelterResult
-import im.bernier.petfinder.model.ShelterSearch
+import androidx.lifecycle.MutableLiveData
+import im.bernier.petfinder.model.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
@@ -28,10 +27,9 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory
  * Created by Michael on 2016-07-09.
  */
 
-class Repository private constructor() {
+object Repository {
 
     private val service: Service
-    private object Holder { val INSTANCE = Repository() }
 
     init {
         val logging = HttpLoggingInterceptor()
@@ -40,7 +38,7 @@ class Repository private constructor() {
                 .addInterceptor(logging)
                 .build()
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://api.petfinder.com")
+                .baseUrl("https://api.petfinder.com")
                 .client(client)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .build()
@@ -48,19 +46,47 @@ class Repository private constructor() {
     }
 
     fun petFind(search: Search): Call<SearchResult> {
-        return service.petFind(search.location, search.animal?.key, search.breed, search.sex, search.age)
+        return service.petFind(
+                search.location,
+                search.animal?.key,
+                search.breed,
+                search.sex,
+                search.age
+        )
     }
 
-    fun loadBreeds(animal: String): Call<Breeds> {
-        return service.getBreeds(animal)
+    val liveData: MutableLiveData<Breeds> = MutableLiveData()
+    val networkState: MutableLiveData<NetworkState> = MutableLiveData();
+
+    fun getBreeds(): Listing<Breeds> {
+        return Listing(
+                liveData,
+                networkState,
+                retry = {
+
+                }
+        )
+    }
+
+    fun fetch(animal: String) {
+        service.getBreeds(animal).enqueue(object : Callback<Breeds?> {
+            override fun onFailure(call: Call<Breeds?>, t: Throwable) {
+                networkState.postValue(NetworkState.error(t.localizedMessage))
+            }
+
+            override fun onResponse(call: Call<Breeds?>, response: Response<Breeds?>) {
+                val breeds = response.body()
+                if (breeds != null) {
+                    networkState.postValue(NetworkState.LOADED)
+                    liveData.postValue(breeds)
+                } else {
+                    networkState.postValue(NetworkState.error(response.errorBody().toString()))
+                }
+            }
+        })
     }
 
     fun shelterFind(shelterSearch: ShelterSearch): Call<ShelterResult> {
         return service.shelterFind(shelterSearch.location!!, shelterSearch.name!!)
     }
-
-    companion object {
-        val instance: Repository by lazy { Holder.INSTANCE }
-    }
-
 }

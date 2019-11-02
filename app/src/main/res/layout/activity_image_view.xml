@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <im.bernier.petfinder.view.CustomViewPager
-        android:id="@+id/activity_image_view_pager"
+        android:id="@+id/viewPagerGallery"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center" />

@@ -19,8 +19,8 @@ import im.bernier.petfinder.model.Pet
 import im.bernier.petfinder.mvp.view.PetView
 
 /**
-* Created by Michael Bernier on 2016-07-09.
-*/
+ * Created by Michael Bernier on 2016-07-09.
+ */
 
 class PetPresenter : Presenter {
 
@@ -38,7 +38,7 @@ class PetPresenter : Presenter {
     }
 
     override fun onAttach() {
-        pet = Storage.instance.pet.takeIf { it != null } ?: Pet()
+        pet = Storage.pet.takeIf { it != null } ?: Pet()
 
         view?.updateUi(pet)
     }

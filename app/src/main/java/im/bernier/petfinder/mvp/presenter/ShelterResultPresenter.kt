@@ -34,7 +34,7 @@ class ShelterResultPresenter(private val view: ShelterResultView) : Presenter {
     private val analytics = Analytics
 
     override fun onAttach() {
-        val shelterSearch = Storage.instance.shelterSearch
+        val shelterSearch = Storage.shelterSearch
         if (shelterSearch == null) {
             view.doFinish()
             return
@@ -44,7 +44,7 @@ class ShelterResultPresenter(private val view: ShelterResultView) : Presenter {
 
     private fun getShelters(shelterSearch: ShelterSearch) {
         view.showProgress()
-        Repository.instance.shelterFind(shelterSearch).enqueue(object : Callback<ShelterResult> {
+        Repository.shelterFind(shelterSearch).enqueue(object : Callback<ShelterResult> {
             override fun onResponse(call: Call<ShelterResult>, response: Response<ShelterResult>) {
                 val bundle = Bundle()
                 if (response.isSuccessful && response.body()?.shelters != null) {

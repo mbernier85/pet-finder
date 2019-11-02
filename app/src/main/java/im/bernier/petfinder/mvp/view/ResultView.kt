@@ -13,9 +13,8 @@
 
 package im.bernier.petfinder.mvp.view
 
-import java.util.ArrayList
-
 import im.bernier.petfinder.model.Pet
+import java.util.*
 
 /**
  * Created by Michael on 2016-07-09.

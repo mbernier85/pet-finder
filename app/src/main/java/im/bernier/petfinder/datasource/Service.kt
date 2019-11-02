@@ -27,7 +27,12 @@ import retrofit2.http.Query
 
 internal interface Service {
     @GET("/pet.find?key=d38cdfc784c61ba739980f34d1748ae2&format=xml")
-    fun petFind(@Query("location") location: String?, @Query("animal") animal: String?, @Query("breed") breed: String?, @Query("sex") sex: String?, @Query("age") age: String?): Call<SearchResult>
+    fun petFind(
+        @Query("location") location: String?,
+        @Query("animal") animal: String?,
+        @Query("breed") breed: String?,
+        @Query("sex") sex: String?, @Query("age") age: String?
+    ): Call<SearchResult>
 
     @GET("/pet.get?key=d38cdfc784c61ba739980f34d1748ae2&format=xml")
     fun getPet(@Query("id") id: String): Call<Pet>
@@ -36,5 +41,8 @@ internal interface Service {
     fun getBreeds(@Query("animal") animal: String): Call<Breeds>
 
     @GET("/shelter.find?key=d38cdfc784c61ba739980f34d1748ae2&format=xml")
-    fun shelterFind(@Query("location") location: String, @Query("name") name: String): Call<ShelterResult>
+    fun shelterFind(
+        @Query("location") location: String,
+        @Query("name") name: String
+    ): Call<ShelterResult>
 }

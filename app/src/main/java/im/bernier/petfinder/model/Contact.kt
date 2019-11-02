@@ -24,7 +24,16 @@ import org.simpleframework.xml.Root
  */
 
 @Root(name = "contact", strict = false)
-data class Contact(@field:Element(required = false) var name: String? = null, @field:Element(required = false) var address1: String? = null, @field:Element(required = false) var address2: String? = null, @field:Element(required = false) var city: String? = null, @field:Element(required = false) var state: String? = null, @field:Element(required = false) var zip: String? = null, @field:Element(required = false) var phone: String? = null, @field:Element(required = false) var email: String? = null) {
+data class Contact(
+    @field:Element(required = false) var name: String? = null,
+    @field:Element(required = false) var address1: String? = null,
+    @field:Element(required = false) var address2: String? = null,
+    @field:Element(required = false) var city: String? = null,
+    @field:Element(required = false) var state: String? = null,
+    @field:Element(required = false) var zip: String? = null,
+    @field:Element(required = false) var phone: String? = null,
+    @field:Element(required = false) var email: String? = null
+) {
 
     val address: String
         get() {

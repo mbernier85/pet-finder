@@ -18,33 +18,21 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
-import butterknife.ButterKnife
 import im.bernier.petfinder.R
 import im.bernier.petfinder.adapter.ShelterAdapter
 import im.bernier.petfinder.model.Shelter
 import im.bernier.petfinder.mvp.presenter.ShelterResultPresenter
 import im.bernier.petfinder.mvp.view.ShelterResultView
+import kotlinx.android.synthetic.main.activity_shelter_result.*
 
 /**
  * Created by Michael on 2016-10-30.
  */
 
 class ShelterResultActivity : BaseActivity(), ShelterResultView {
-
-    @BindView(R.id.activity_shelter_recycler_view)
-    lateinit var shelterRecyclerView: androidx.recyclerview.widget.RecyclerView
-
-    @BindView(R.id.activity_shelter_progress_bar)
-    lateinit var progressBar: ProgressBar
-
-    @BindView(R.id.activity_shelter_no_results_text_view)
-    lateinit var noResultsTextView: TextView
 
     lateinit var presenter: ShelterResultPresenter
     lateinit var adapter: ShelterAdapter
@@ -56,12 +44,13 @@ class ShelterResultActivity : BaseActivity(), ShelterResultView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shelter_result)
-        ButterKnife.bind(this)
 
         if (isTablet) {
-            shelterRecyclerView.layoutManager = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
+            recyclerViewShelter.layoutManager =
+                    GridLayoutManager(this, 2, RecyclerView.VERTICAL, false)
         } else {
-            shelterRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+            recyclerViewShelter.layoutManager =
+                    LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         }
         adapter = ShelterAdapter(object : ShelterAdapter.ShelterItemListener {
             override fun itemClick(shelter: Shelter) {
@@ -84,13 +73,24 @@ class ShelterResultActivity : BaseActivity(), ShelterResultView {
             }
 
             override fun directionClick(shelter: Shelter) {
-                val intent = Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse(String.format("http://maps.google.com/maps?daddr=%s, %s", shelter.city, shelter.zip)))
-                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity")
+                val intent = Intent(
+                    android.content.Intent.ACTION_VIEW,
+                    Uri.parse(
+                        String.format(
+                            "http://maps.google.com/maps?daddr=%s, %s",
+                            shelter.city,
+                            shelter.zip
+                        )
+                    )
+                )
+                intent.setClassName(
+                    "com.google.android.apps.maps",
+                    "com.google.android.maps.MapsActivity"
+                )
                 startActivity(intent)
             }
         })
-        shelterRecyclerView.adapter = adapter
+        recyclerViewShelter.adapter = adapter
 
         presenter = ShelterResultPresenter(this)
     }
@@ -106,25 +106,29 @@ class ShelterResultActivity : BaseActivity(), ShelterResultView {
     }
 
     override fun showError(error: String) {
-        com.google.android.material.snackbar.Snackbar.make(shelterRecyclerView, error, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
-        progressBar.visibility = View.GONE
+        com.google.android.material.snackbar.Snackbar.make(
+            recyclerViewShelter,
+            error,
+            com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+        ).show()
+        progressBarShelter.visibility = View.GONE
     }
 
     override fun showProgress() {
-        progressBar.visibility = View.VISIBLE
-        shelterRecyclerView.visibility = View.GONE
-        noResultsTextView.visibility = View.GONE
+        progressBarShelter.visibility = View.VISIBLE
+        recyclerViewShelter.visibility = View.GONE
+        textViewShelterMessage.visibility = View.GONE
     }
 
     override fun showResults(shelters: List<Shelter>) {
-        progressBar.visibility = View.GONE
+        progressBarShelter.visibility = View.GONE
         adapter.setShelters(shelters)
         if (shelters.isEmpty()) {
-            noResultsTextView.visibility = View.VISIBLE
-            shelterRecyclerView.visibility = View.GONE
+            textViewShelterMessage.visibility = View.VISIBLE
+            recyclerViewShelter.visibility = View.GONE
         } else {
-            noResultsTextView.visibility = View.GONE
-            shelterRecyclerView.visibility = View.VISIBLE
+            textViewShelterMessage.visibility = View.GONE
+            recyclerViewShelter.visibility = View.VISIBLE
         }
     }
 

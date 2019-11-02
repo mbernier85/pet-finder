@@ -37,7 +37,7 @@ class PetResultPresenter : Presenter {
     private val analytics = Analytics
 
     override fun onAttach() {
-        val search = Storage.instance.search
+        val search = Storage.search
         if (search == null) {
             view?.doFinish()
             return
@@ -54,12 +54,12 @@ class PetResultPresenter : Presenter {
     }
 
     fun onPetClick(pet: Pet) {
-        Storage.instance.pet = pet
+        Storage.pet = pet
         view?.openPet(pet)
     }
 
     private fun findPet(search: Search) {
-        val searchResultCall = Repository.instance.petFind(search)
+        val searchResultCall = Repository.petFind(search)
         searchResultCall.enqueue(object : Callback<SearchResult> {
             override fun onResponse(call: Call<SearchResult>, response: Response<SearchResult>) {
                 val bundle = Bundle()

@@ -21,11 +21,20 @@ import org.simpleframework.xml.Root
 import java.util.*
 
 /**
-* Created by Michael Bernier on 2016-07-09.
-*/
+ * Created by Michael Bernier on 2016-07-09.
+ */
 
 @Root(name = "pet", strict = false)
-data class Pet(@field:Element var id: String? = null, @field:Element var name: String? = null, @field:Element var age: String? = null, @field:Element var sex: String? = null, @field:Element(required = false) var description: String? = null, @field:Element(required = false) var media: Media? = null, @field:Element var contact: Contact? = null, @field:ElementList(required = false) var breeds: ArrayList<String> = ArrayList()) {
+data class Pet(
+    @field:Element var id: String? = null,
+    @field:Element var name: String? = null,
+    @field:Element var age: String? = null,
+    @field:Element var sex: String? = null,
+    @field:Element(required = false) var description: String? = null,
+    @field:Element(required = false) var media: Media? = null,
+    @field:Element var contact: Contact? = null,
+    @field:ElementList(required = false) var breeds: ArrayList<String> = ArrayList()
+) {
 
     val breed: String
         get() {

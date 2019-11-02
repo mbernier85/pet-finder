@@ -21,4 +21,11 @@ import java.util.*
  */
 
 @Root(name = "petfinder", strict = false)
-data class SearchResult(@field:Attribute @field:Namespace(reference = "http://www.w3.org/2001/XMLSchema-instance", prefix = "xsi") private var noNamespaceSchemaLocation: String? = null, @field:ElementList(required = false) var pets: ArrayList<Pet>? = null, @field:Element var header: ErrorHeader? = null)
+data class SearchResult(
+    @field:Attribute @field:Namespace(
+        reference = "http://www.w3.org/2001/XMLSchema-instance",
+        prefix = "xsi"
+    ) private var noNamespaceSchemaLocation: String? = null,
+    @field:ElementList(required = false) var pets: ArrayList<Pet>? = null,
+    @field:Element var header: ErrorHeader? = null
+)

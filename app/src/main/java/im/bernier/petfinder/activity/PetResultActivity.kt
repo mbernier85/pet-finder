@@ -16,51 +16,40 @@ package im.bernier.petfinder.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
-import butterknife.ButterKnife
 import im.bernier.petfinder.R
 import im.bernier.petfinder.adapter.PetAdapter
 import im.bernier.petfinder.model.Pet
 import im.bernier.petfinder.mvp.presenter.PetResultPresenter
 import im.bernier.petfinder.mvp.view.ResultView
+import kotlinx.android.synthetic.main.activity_pet_result.*
 import java.util.*
 
-class ResultActivity : BaseActivity(), ResultView {
-
-    @BindView(R.id.result_recycler_view)
-    lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
-
-    @BindView(R.id.activity_result_progress_bar)
-    lateinit var progressbar: ProgressBar
-
-    @BindView(R.id.activity_result_text_view)
-    lateinit var textView: TextView
+class PetResultActivity : BaseActivity(), ResultView {
 
     lateinit var presenter: PetResultPresenter
     private lateinit var petAdapter: PetAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_result)
-        ButterKnife.bind(this)
+        setContentView(R.layout.activity_pet_result)
         presenter = PetResultPresenter()
         presenter.setView(this)
         presenter.onAttach()
 
         if (isTablet) {
-            recyclerView.layoutManager = GridLayoutManager(this, 3, RecyclerView.VERTICAL, false)
+            recyclerViewPets.layoutManager =
+                    GridLayoutManager(this, 3, RecyclerView.VERTICAL, false)
         } else {
-            recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+            recyclerViewPets.layoutManager =
+                    LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         }
-        recyclerView.setHasFixedSize(true)
+        recyclerViewPets.setHasFixedSize(true)
         petAdapter = PetAdapter()
-        recyclerView.adapter = petAdapter
-        petAdapter.setPetClick(object: PetAdapter.PetClick {
+        recyclerViewPets.adapter = petAdapter
+        petAdapter.setPetClick(object : PetAdapter.PetClick {
             override fun onClick(pet: Pet) {
                 presenter.onPetClick(pet)
             }
@@ -72,7 +61,11 @@ class ResultActivity : BaseActivity(), ResultView {
     }
 
     override fun showError(error: String) {
-        com.google.android.material.snackbar.Snackbar.make(recyclerView, error, com.google.android.material.snackbar.Snackbar.LENGTH_LONG).show()
+        com.google.android.material.snackbar.Snackbar.make(
+            recyclerViewPets,
+            error,
+            com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+        ).show()
     }
 
     override fun openPet(pet: Pet) {
@@ -80,13 +73,13 @@ class ResultActivity : BaseActivity(), ResultView {
     }
 
     override fun updateResults(pets: ArrayList<Pet>) {
-        progressbar.visibility = View.GONE
+        progressBarPets.visibility = View.GONE
         if (pets.size > 0) {
-            recyclerView.visibility = View.VISIBLE
-            textView.visibility = View.GONE
+            recyclerViewPets.visibility = View.VISIBLE
+            textViewPets.visibility = View.GONE
         } else {
-            recyclerView.visibility = View.GONE
-            textView.visibility = View.VISIBLE
+            recyclerViewPets.visibility = View.GONE
+            textViewPets.visibility = View.VISIBLE
         }
         petAdapter.setPets(pets)
     }
